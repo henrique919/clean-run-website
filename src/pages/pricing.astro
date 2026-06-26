@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'CleanRun IQ',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: [
+    { '@type': 'Offer', name: 'Starter', price: '89', priceCurrency: 'AUD' },
+    { '@type': 'Offer', name: 'Professional', price: '229', priceCurrency: 'AUD' },
+  ],
+  description: 'Photo-first construction defect management, punch list and handover software.',
+  url: 'https://cleanruniq.com/pricing/',
+};
+
+const starterFeatures = [
+  'Up to 5 active projects',
+  'Unlimited users per project',
+  'Photo evidence chain (3 photos/item)',
+  'Defect + Incomplete + Client item types',
+  'Subcontractor browser access',
+  'Handover reports (standard)',
+  'Mobile-first browser app',
+  'Email support',
+];
+const proFeatures = [
+  'Up to 20 active projects',
+  'Full audit trail export',
+  'Role-based access controls',
+  'Advanced handover reports',
+  'Portfolio-wide dashboard',
+  'Priority email + chat support',
+];
+const enterpriseFeatures = [
+  'Unlimited active projects',
+  'API access for integrations',
+  'Custom report branding',
+  'Dedicated account manager',
+  'SLA guarantee',
+  'Custom onboarding & training',
+];
+
+const faqs = [
+  { q: 'Do you offer a free trial?', a: 'We offer a live demo with real sample project data \u2014 not a time-limited trial where you have to do everything yourself. Book a demo and we\u2019ll walk you through everything on a real project.' },
+  { q: 'What counts as an active project?', a: 'An active project is any project you\u2019re currently managing defect items in. Completed projects remain in your account and do not count toward your active project limit. Archive a project when it reaches handover.' },
+  { q: 'Can I add more projects mid-plan?', a: 'Yes. You can upgrade at any time and project access is pro-rated for the remainder of your billing period. Need a one-off project beyond your plan? Contact us and we\u2019ll sort it.' },
+  { q: 'How does subcontractor access work?', a: 'Subcontractors access CleanRun IQ through a browser link \u2014 no account, no download. Their access is project-scoped and item-scoped. Included in all plans at no extra cost per user.' },
+  { q: 'Is there a lock-in contract?', a: 'No. Annual plans are billed upfront for 12 months at the discounted rate. Monthly plans can be cancelled anytime. We do not lock you into multi-year contracts.' },
+];
+
+const check = '<svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke="#20C55E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+---
+<BaseLayout
+  title="Pricing"
+  description="Simple, transparent pricing for construction defect management. Starter, Professional and Enterprise plans in AUD. No lock-in contract. Book a demo."
+  schema={productSchema}
+>
+  {/* HERO + TOGGLE */}
+  <section class="bg-navy px-8 pt-[130px] pb-18 text-center relative overflow-hidden">
+    <div class="absolute inset-0 grid-overlay pointer-events-none"></div>
+    <div class="relative z-10 max-w-[680px] mx-auto">
+      <div class="inline-flex items-center gap-2 bg-brand/[0.08] border border-brand/[0.22] rounded-full px-3.5 py-1.5 mb-5.5">
+        <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Pricing</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[54px] tracking-[-1.5px] text-white mb-4 leading-[1.05]">Simple, transparent pricing.</h1>
+      <p class="text-lg text-[#6B7280] mb-8 leading-relaxed">For construction teams who need photo-first defect closeout without the enterprise bloat. Priced in AUD.</p>
+      <div class="inline-flex items-center bg-white/[0.05] border border-white/[0.08] rounded-full p-1 gap-0.5">
+        <button id="bill-annual" class="text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors bg-brand text-navy">Annual <span class="text-[9px] font-bold px-1 py-px rounded-sm bg-navy/25 ml-1">Save 20%</span></button>
+        <button id="bill-monthly" class="text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors text-[#6B7280]">Monthly</button>
+      </div>
+    </div>
+  </section>
+
+  {/* CARDS */}
+  <section class="bg-navy px-8 pb-20">
+    <div class="max-w-[1100px] mx-auto grid lg:grid-cols-3 gap-4.5 items-start">
+
+      {/* Starter */}
+      <div class="bg-navy-card border border-white/[0.08] rounded-2xl overflow-hidden">
+        <div class="p-6.5 pb-6">
+          <div class="font-heading text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2.5">Starter</div>
+          <div class="flex items-baseline gap-1 mb-1.5"><span class="font-heading text-[44px] font-extrabold text-white tracking-[-2px]" data-annual="$89" data-monthly="$109">$89</span><span class="text-sm text-[#4B5563]">/month</span></div>
+          <div class="text-xs text-[#4B5563] mb-5.5 bill-note">AUD, billed annually</div>
+          <a href="/demo/" class="block text-center border-[1.5px] border-white/[0.15] text-[#E5E7EB] py-2.5 rounded-lg text-sm font-semibold font-heading hover:border-brand hover:text-brand transition-colors">Get started</a>
+        </div>
+        <div class="border-t border-white/[0.06] p-6.5 pt-5.5">
+          <div class="font-heading text-[10px] font-bold text-[#4B5563] uppercase tracking-wider mb-3.5">What's included</div>
+          <div class="flex flex-col gap-2.5">
+            {starterFeatures.map((f) => (
+              <div class="flex items-start gap-2.5"><div class="w-[15px] h-[15px] rounded-full bg-brand/10 flex items-center justify-center shrink-0 mt-0.5"><Fragment set:html={check} /></div><span class="text-[13px] text-[#9CA3AF]">{f}</span></div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Professional */}
+      <div class="bg-navy-card border-2 border-brand rounded-2xl overflow-hidden relative lg:-translate-y-2">
+        <div class="absolute top-0 inset-x-0 bg-brand text-center py-1.5"><span class="font-heading text-[10px] font-extrabold text-navy uppercase tracking-wider">Most Popular</span></div>
+        <div class="p-6.5 pt-9.5 pb-6">
+          <div class="font-heading text-[11px] font-bold text-brand uppercase tracking-wider mb-2.5">Professional</div>
+          <div class="flex items-baseline gap-1 mb-1.5"><span class="font-heading text-[44px] font-extrabold text-white tracking-[-2px]" data-annual="$229" data-monthly="$279">$229</span><span class="text-sm text-[#4B5563]">/month</span></div>
+          <div class="text-xs text-[#4B5563] mb-5.5 bill-note">AUD, billed annually</div>
+          <a href="/demo/" class="block text-center bg-brand text-navy py-3 rounded-lg text-sm font-bold font-heading">Book a Demo</a>
+        </div>
+        <div class="border-t border-white/[0.06] p-6.5 pt-5.5">
+          <div class="font-heading text-[10px] font-bold text-[#4B5563] uppercase tracking-wider mb-3.5">Everything in Starter, plus</div>
+          <div class="flex flex-col gap-2.5">
+            {proFeatures.map((f) => (
+              <div class="flex items-start gap-2.5"><div class="w-[15px] h-[15px] rounded-full bg-brand/[0.15] flex items-center justify-center shrink-0 mt-0.5"><Fragment set:html={check} /></div><span class="text-[13px] text-[#CBD5E1] font-medium">{f}</span></div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Enterprise */}
+      <div class="bg-navy-card border border-white/[0.08] rounded-2xl overflow-hidden">
+        <div class="p-6.5 pb-6">
+          <div class="font-heading text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2.5">Enterprise</div>
+          <div class="flex items-baseline gap-1 mb-1.5"><span class="font-heading text-[34px] font-extrabold text-white tracking-[-1px]">Custom</span></div>
+          <div class="text-xs text-[#4B5563] mb-5.5">Tailored to your portfolio</div>
+          <a href="/contact/" class="block text-center border-[1.5px] border-white/[0.15] text-[#E5E7EB] py-2.5 rounded-lg text-sm font-semibold font-heading hover:border-brand hover:text-brand transition-colors">Talk to us</a>
+        </div>
+        <div class="border-t border-white/[0.06] p-6.5 pt-5.5">
+          <div class="font-heading text-[10px] font-bold text-[#4B5563] uppercase tracking-wider mb-3.5">Everything in Professional, plus</div>
+          <div class="flex flex-col gap-2.5">
+            {enterpriseFeatures.map((f) => (
+              <div class="flex items-start gap-2.5"><div class="w-[15px] h-[15px] rounded-full bg-brand/10 flex items-center justify-center shrink-0 mt-0.5"><Fragment set:html={check} /></div><span class="text-[13px] text-[#9CA3AF]">{f}</span></div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="text-center text-[13px] text-[#374151] mt-7 max-w-[640px] mx-auto">All prices shown in AUD. No credit card required for demo. <a href="/contact/" class="text-brand font-medium">Contact us</a> to confirm current plans and availability.</p>
+  </section>
+
+  {/* FAQ */}
+  <section class="bg-navy-card px-8 py-18 border-t border-white/[0.05]">
+    <div class="max-w-[760px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[34px] tracking-[-0.8px] text-white mb-9 text-center">Pricing questions.</h2>
+      <div class="flex flex-col gap-1">
+        {faqs.map((f) => (
+          <div class="faq-item bg-white/[0.03] border border-white/[0.07] rounded-[10px] overflow-hidden">
+            <button class="faq-head w-full flex items-start justify-between gap-3 px-5.5 py-4.5 text-left">
+              <span class="font-heading text-sm font-bold text-[#CBD5E1] leading-snug">{f.q}</span>
+              <svg class="faq-arrow shrink-0 mt-0.5 text-[#4B5563] transition-transform" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="faq-body grid grid-rows-[0fr] transition-all duration-300"><div class="overflow-hidden"><p class="text-sm leading-relaxed text-[#6B7280] px-5.5 pb-4.5">{f.a}</p></div></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Building at scale? Let's talk."
+    body="If you're managing multiple projects, a large team or a commercial portfolio, we'll build a plan around your operation, not a generic tier."
+    note="Annual plans billed upfront at the discounted rate. Monthly plans cancel anytime."
+  />
+
+  <script is:inline>
+    (function () {
+      // Billing toggle
+      var annualBtn = document.getElementById('bill-annual');
+      var monthlyBtn = document.getElementById('bill-monthly');
+      var prices = document.querySelectorAll('[data-annual]');
+      var notes = document.querySelectorAll('.bill-note');
+      function setMode(annual) {
+        prices.forEach(function (el) { el.textContent = annual ? el.dataset.annual : el.dataset.monthly; });
+        notes.forEach(function (el) { el.textContent = annual ? 'AUD, billed annually' : 'AUD, billed monthly'; });
+        if (annual) {
+          annualBtn.className = 'text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors bg-brand text-navy';
+          monthlyBtn.className = 'text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors text-[#6B7280]';
+        } else {
+          monthlyBtn.className = 'text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors bg-brand text-navy';
+          annualBtn.className = 'text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors text-[#6B7280]';
+        }
+      }
+      annualBtn.addEventListener('click', function () { setMode(true); });
+      monthlyBtn.addEventListener('click', function () { setMode(false); });
+
+      // FAQ accordion
+      document.querySelectorAll('.faq-item').forEach(function (item) {
+        var head = item.querySelector('.faq-head');
+        var body = item.querySelector('.faq-body');
+        var arrow = item.querySelector('.faq-arrow');
+        head.addEventListener('click', function () {
+          var open = body.style.gridTemplateRows === '1fr';
+          body.style.gridTemplateRows = open ? '0fr' : '1fr';
+          arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+          arrow.style.color = open ? '#4B5563' : '#20C55E';
+        });
+      });
+    })();
+  </script>
+</BaseLayout>

@@ -1,12 +1,18 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
+// https://astro.build/config
 export default defineConfig({
-  // Canonical public domain.
+  // Canonical public domain — drives sitemap + canonical URLs.
   site: 'https://cleanruniq.com',
   integrations: [
     tailwind(),
+    sitemap({
+      // Keep app/internal routes out of the sitemap.
+      filter: (page) => !page.includes('/api/'),
+    }),
     mdx(),
   ],
   output: 'static',
