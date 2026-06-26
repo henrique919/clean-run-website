@@ -1,7 +1,19 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+
+export default defineConfig({
+  site: 'https://cleanruniq.com',
+  integrations: [
+    tailwind(),
+    mdx(),
+  ],
+  output: 'static',
+  trailingSlash: 'always',
+  build: {
+    inlineStylesheets: 'auto',
+  },
+});
 
 // https://astro.build/config
 export default defineConfig({
