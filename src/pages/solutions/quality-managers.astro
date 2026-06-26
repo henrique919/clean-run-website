@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const sees = [
+  { icon: 'eye', title: 'A consistent standard', body: 'The same capture, review and sign-off steps on every unit — so quality does not depend on who happened to do the walk.' },
+  { icon: 'camera', title: 'The photo on every item', body: 'Each item carries its original and rectification photo, so you can check the fix against the issue without a site visit for every one.' },
+  { icon: 'shield', title: 'Control over what closes', body: 'Items only close once the rectification has been reviewed. Reject anything thin and send it back with a reason.' },
+];
+const points = [
+  'Set the expectation that no item closes without a photo behind it',
+  'Catch repeat issues by trade or location before they spread across the job',
+  'Hand the builder and client a record that reads the same on every project',
+];
+---
+<BaseLayout
+  title="CleanRun IQ for Quality Managers"
+  description="Hold a consistent quality standard across the job. CleanRun IQ keeps defect capture, review and sign-off the same on every unit, with the photo record on each item."
+>
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1000px] mx-auto relative z-10">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions/' }, { label: 'Quality Managers' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+        <Icon name="eye" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">For quality managers</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05] max-w-[720px]">One quality standard, applied the same way every time.</h1>
+      <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[560px] mb-8">CleanRun IQ keeps capture, review and sign-off consistent across every unit, so the quality of your record does not depend on who did the walk that day.</p>
+      <div class="flex items-center gap-3 flex-wrap">
+        <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+        <a href="/features/photo-evidence/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-5.5 py-3.5 rounded-lg text-[15px] font-medium border border-white/[0.12] hover:border-brand/40 transition-colors">See the photo record</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[560px]">What a quality manager gets.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {sees.map((s) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={s.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{s.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-8 py-16 border-t border-[#E2E5E9]">
+    <div class="max-w-[820px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025] mb-7">Where it makes the difference.</h2>
+      <div class="flex flex-col gap-3">
+        {points.map((t) => (
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-md bg-brand/[0.1] flex items-center justify-center shrink-0 mt-0.5"><Icon name="check" size={13} class="text-[#0C7733]" width={2.4} /></div><span class="text-[15px] text-[#374151] leading-snug">{t}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Hold the line on quality, unit after unit." body="Book a short walkthrough and see how the review and sign-off steps keep closeout consistent across the whole job." />
+</BaseLayout>

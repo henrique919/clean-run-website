@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Practical Guide to Construction Defect Management',
+  description: 'How to capture, assign, evidence and close construction defects from the final walk through to handover and the defects liability period.',
+  author: { '@type': 'Organization', name: 'CleanRun IQ' },
+  publisher: { '@type': 'Organization', name: 'CleanRun IQ' },
+};
+
+const sections = [
+  { id: 'what', n: '01', h: 'What defect management actually covers', p: 'Defect management is the process of finding the work that is not right, getting it in front of the responsible trade, confirming the fix and keeping a record you can stand behind later. On most jobs it covers three kinds of item: genuine defects, incomplete works, and items the client raises after they move in.' },
+  { id: 'capture', n: '02', h: 'Capture the item properly the first time', p: 'A good record starts on the walk. Photograph the item as found, before anything is touched. Note the exact location — building, level, unit and room — not just “bathroom”. Pick the item type, and assign the trade before you leave the room. An item with no owner is an item nobody fixes.' },
+  { id: 'assign', n: '03', h: 'Make the trade responsible, with a date', p: 'Issue each item to the trade with a clear description and a due date tied to your handover timeline. The point is not to be heavy-handed; it is so that an overdue item is visible to everyone, instead of quietly sitting until it surfaces at the worst time.' },
+  { id: 'evidence', n: '04', h: 'Ask for the photo, not the word', p: '“It’s done” is not a record. A rectification photo from the trade is. Keep the original and the fix together on the item, with the date and the person attached. That is what protects you when a client questions the work or a claim lands during the defects liability period.' },
+  { id: 'close', n: '05', h: 'Review before you close', p: 'Someone with authority should check the fix against the issue and either close the item or send it back. Self-certification — where the same person raises and closes — is how thin records creep in. For waterproofing, structural or concealed work, verify on site rather than by photo alone.' },
+  { id: 'report', h: 'Produce the handover record from the live list', n: '06', p: 'The handover report should come straight out of your register, with every item and its photo — not be rebuilt from messages and folders the night before practical completion. Archive it where it can be found, because defects liability questions can arrive months later.' },
+];
+const mistakes = [
+  'Tracking the list but never the proof',
+  'Leaving items unassigned “for now”',
+  'Closing on a verbal “yeah it’s done”',
+  'Compiling the report from scratch at the last minute',
+];
+---
+<BaseLayout title="The Practical Guide to Construction Defect Management" description="How to capture, assign, evidence and close construction defects from the final walk through to handover and DLP — a practical guide for builders and site teams." schema={articleSchema}>
+  <section class="bg-navy pt-[112px] pb-14 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[820px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Resources', href: '/resources/' }, { label: 'Defect Management Guide' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-4.5">
+        <Icon name="report" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Guide</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(30px,3.4vw,46px)] tracking-[-1px] text-white mb-4 leading-[1.07]">The practical guide to construction defect management</h1>
+      <p class="text-[16px] text-[#A8B0BB] leading-relaxed max-w-[620px]">From the final walk through to handover and the defects liability period — how to run defects so the record holds up when it matters.</p>
+    </div>
+  </section>
+
+  <article class="bg-white px-8 py-16">
+    <div class="max-w-[760px] mx-auto flex flex-col gap-10">
+      {sections.map((s) => (
+        <div id={s.id} class="scroll-mt-24">
+          <div class="flex items-baseline gap-3 mb-3">
+            <span class="font-heading text-[13px] font-extrabold text-brand">{s.n}</span>
+            <h2 class="font-heading text-[22px] md:text-[26px] font-extrabold text-[#1B2025] tracking-[-0.5px] leading-tight">{s.h}</h2>
+          </div>
+          <p class="text-[16px] leading-[1.7] text-[#525A66]">{s.p}</p>
+        </div>
+      ))}
+
+      <div class="bg-[#F3F4F6] border border-[#E2E5E9] rounded-xl p-6">
+        <h3 class="font-heading text-[16px] font-bold text-[#1B2025] mb-4">Common mistakes to avoid</h3>
+        <div class="flex flex-col gap-2.5">
+          {mistakes.map((m) => (
+            <div class="flex items-start gap-2.5"><span class="text-[#B42318] shrink-0 text-[15px] leading-none mt-0.5">&times;</span><span class="text-[14px] text-[#374151] leading-snug">{m}</span></div>
+          ))}
+        </div>
+      </div>
+
+      <div class="bg-navy rounded-xl px-6 py-6">
+        <h3 class="font-heading text-[17px] font-bold text-white mb-2">Run this process live in CleanRun IQ</h3>
+        <p class="text-[14px] text-[#A8B0BB] leading-relaxed mb-4">Everything in this guide — capture, assignment, the photo on each item, review and the handover report — runs as one workflow.</p>
+        <div class="flex flex-wrap gap-2.5">
+          <a href="/demo/" class="inline-flex items-center gap-1.5 bg-brand text-navy px-4 py-2.5 rounded-lg text-[13px] font-bold font-heading">Book a walkthrough <Icon name="arrow" size={13} width={2} /></a>
+          <a href="/resources/defect-closeout-checklist/" class="inline-flex items-center gap-1.5 bg-white/[0.06] border border-white/[0.12] text-[#E5E7EB] px-4 py-2.5 rounded-lg text-[13px] font-medium">Get the closeout checklist</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <CTASection heading="See defect management as one workflow." body="Book a short walkthrough and we'll show capture, assignment, the photo record, review and the handover report on a realistic project." />
+</BaseLayout>

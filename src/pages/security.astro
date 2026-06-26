@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Icon from '../components/Icon.astro';
+
+const points = [
+  { icon: 'shield', h: 'Your project data is yours', p: 'The defects, photos and records you capture belong to you. We hold them to run the service for you — not to sell or share. You can request an export of your project records.' },
+  { icon: 'camera', h: 'Evidence stays tied to the item', p: 'Capture, rectification and closeout photos are stored against the defect they belong to, with the date and the person who added them, so the record holds up later.' },
+  { icon: 'users', h: 'Access is by project and role', p: 'People see the projects and items they’re given access to. Subcontractors only see the items assigned to them — not the whole register.' },
+  { icon: 'layers', h: 'Sensible, modern hosting', p: 'The app and marketing site run on managed cloud infrastructure with encryption in transit. The public website is static, which keeps its attack surface small.' },
+  { icon: 'report', h: 'Records you can take with you', p: 'Handover packs and item history can be exported, so your closeout evidence isn’t locked inside a tool you can’t get it back out of.' },
+  { icon: 'clock', h: 'Honest about our stage', p: 'We’re early, and we’re building security practices up as we grow with our first builders. If you have specific requirements for a commercial project, talk to us — we’ll be straight with you about what we do and don’t have yet.' },
+];
+---
+<BaseLayout
+  title="Security & Data"
+  description="How CleanRun IQ handles your defect records, photo evidence and access. Your project data is yours, evidence stays tied to the item, and records are exportable."
+>
+  <section class="bg-navy pt-[110px] pb-16 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[820px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Security & Data' }]} /></div>
+      <h1 class="font-heading font-extrabold text-[40px] md:text-[44px] tracking-[-1.2px] text-white mb-4 leading-[1.08]">Your defect records, handled sensibly.</h1>
+      <p class="text-[16px] text-[#B6BEC8] leading-relaxed max-w-[600px]">Defect closeout is evidence. Here's how CleanRun IQ treats the data, photos and records you capture — in plain terms.</p>
+    </div>
+  </section>
+
+  <section class="bg-white px-8 py-16">
+    <div class="max-w-[900px] mx-auto grid md:grid-cols-2 gap-x-8 gap-y-9">
+      {points.map((pt) => (
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center shrink-0 text-[#0C7733]"><Icon name={pt.icon} size={19} /></div>
+          <div>
+            <h2 class="font-heading text-[16px] font-bold text-[#1B2025] mb-1.5">{pt.h}</h2>
+            <p class="text-[13.5px] leading-relaxed text-[#525A66]">{pt.p}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="max-w-[900px] mx-auto mt-12 pt-8 border-t border-[#E2E5E9] text-center">
+      <p class="text-[14px] text-[#6B7280] mb-4">Specific security or data questions for a commercial project?</p>
+      <a href="/contact/" class="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-lg text-[14px] font-bold font-heading">Talk to the team <Icon name="arrow" size={14} width={2} /></a>
+    </div>
+  </section>
+</BaseLayout>

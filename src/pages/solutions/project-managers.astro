@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import DefectRegisterMockup from '../../components/DefectRegisterMockup.astro';
+
+const sees = [
+  { icon: 'table', title: 'One register across the job', body: 'Open, issued, in-review and closed items in a single list you can filter by trade, level or status — no chasing five spreadsheets.' },
+  { icon: 'clock', title: 'Where closeout actually stands', body: 'See how many items are still open, how long they have been sitting, and which trades are holding things up — before the client asks.' },
+  { icon: 'report', title: 'A record you can stand behind', body: 'Each closed item carries its photo and history, so the handover pack and any later DLP query are straightforward to answer.' },
+];
+const stops = [
+  'Rebuilding the defect list from messages and emails the week before PC',
+  'Asking the site manager “what’s the real number?” and getting a different answer each time',
+  'Finding out a trade went quiet on an item only when it shows up at handover',
+  'Hunting for the photo that proves an item was fixed when a claim lands months later',
+];
+---
+<BaseLayout
+  title="CleanRun IQ for Project Managers"
+  description="Give project managers one defect register across the job — real closeout status, trade accountability and a handover record that holds up at PC and during DLP."
+>
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10 grid lg:grid-cols-[1fr_0.9fr] gap-12 items-center">
+      <div>
+        <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions/' }, { label: 'Project Managers' }]} /></div>
+        <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+          <Icon name="clipboard" size={12} class="text-brand" />
+          <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">For project managers</span>
+        </div>
+        <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05]">Know exactly where defect closeout stands.</h1>
+        <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[520px] mb-8">CleanRun IQ gives project managers one register across the whole job — real status, clear trade ownership and a record you can rely on at practical completion and during the defects liability period.</p>
+        <div class="flex items-center gap-3 flex-wrap">
+          <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+          <a href="/features/handover-reports/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-5.5 py-3.5 rounded-lg text-[15px] font-medium border border-white/[0.12] hover:border-brand/40 transition-colors">See handover reports</a>
+        </div>
+      </div>
+      <div class="hidden lg:block"><DefectRegisterMockup /></div>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1100px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[560px]">What a project manager sees.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {sees.map((s) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={s.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{s.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy px-8 py-16">
+    <div class="max-w-[900px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[28px] md:text-[32px] tracking-[-0.8px] text-white mb-8">What you stop doing.</h2>
+      <div class="flex flex-col gap-2.5">
+        {stops.map((t) => (
+          <div class="flex items-start gap-3 bg-navy-card border border-white/[0.07] rounded-lg px-5 py-3.5">
+            <Icon name="check" size={15} class="text-brand shrink-0 mt-0.5" width={2.2} />
+            <span class="text-[14px] text-[#C2C9D2] leading-snug">{t}</span>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 flex flex-wrap gap-2.5">
+        <a href="/solutions/site-managers/" class="inline-flex items-center gap-1.5 bg-white/[0.05] border border-white/[0.1] text-[#C2C9D2] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />For site managers</a>
+        <a href="/features/defect-management/" class="inline-flex items-center gap-1.5 bg-white/[0.05] border border-white/[0.1] text-[#C2C9D2] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Defect management</a>
+        <a href="/pricing/" class="inline-flex items-center gap-1.5 bg-white/[0.05] border border-white/[0.1] text-[#C2C9D2] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="See the register a PM can actually trust."
+    body="Book a short walkthrough and we'll show you closeout status, trade accountability and the handover pack on a realistic project."
+  />
+</BaseLayout>

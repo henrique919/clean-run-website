@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import MobileCaptureMockup from '../../components/MobileCaptureMockup.astro';
+
+const points = [
+  { icon: 'table', title: 'A live list, not a frozen sheet', body: 'The punch list updates as items move. Everyone is looking at the same status, not a copy that was right last Tuesday.' },
+  { icon: 'camera', title: 'A photo on every line', body: 'Each item carries the picture that raised it and the one that closed it — so the list is something you can defend.' },
+  { icon: 'tools', title: 'Sorted by trade and location', body: 'Filter the list to a trade for their walk, or to a level for yours. No scrolling a thousand-row spreadsheet.' },
+];
+---
+<BaseLayout title="Construction Punch List Software" description="Run your construction punch list as a live, photo-backed register instead of a frozen spreadsheet — items sorted by trade and location, updated as they close.">
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10 grid lg:grid-cols-[1fr_0.8fr] gap-12 items-center">
+      <div>
+        <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Features', href: '/features/' }, { label: 'Punch List Software' }]} /></div>
+        <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+          <Icon name="checklist" size={12} class="text-brand" />
+          <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Punch list software</span>
+        </div>
+        <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05]">Your punch list, live and photo-backed.</h1>
+        <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[500px] mb-8">The final defect run does not belong in a frozen spreadsheet. Run it as a live list where items carry a photo, sit with the right trade and update as they close.</p>
+        <div class="flex items-center gap-3 flex-wrap">
+          <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+          <a href="/resources/punch-list-template/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-5.5 py-3.5 rounded-lg text-[15px] font-medium border border-white/[0.12] hover:border-brand/40 transition-colors">Free template</a>
+        </div>
+      </div>
+      <div class="flex justify-center"><MobileCaptureMockup width={270} /></div>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[540px]">Where the spreadsheet falls short.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {points.map((p) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={p.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{p.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{p.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-2.5">
+        <a href="/features/defect-management/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Defect management</a>
+        <a href="/resources/punch-list-template/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="clipboard" size={11} class="text-brand" />Punch list template</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Take the punch list off the spreadsheet." body="Book a short walkthrough and see the final defect run as a live, photo-backed list your whole team works from." />
+</BaseLayout>

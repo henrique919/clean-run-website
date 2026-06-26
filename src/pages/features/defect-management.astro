@@ -2,18 +2,19 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
 
 const pains = [
-  { icon: '\u{1F4CA}', title: 'Spreadsheets with no accountability', body: 'Rows of defects with no photos, no assignments and no way to prove what was actually fixed.' },
-  { icon: '\u{1F4AC}', title: 'Trades that go quiet', body: 'Defect assignment via text message with no follow-up system. Trades say it\u2019s done. You have no proof.' },
-  { icon: '\u{1F525}', title: 'Last-minute handover panic', body: 'Compiling evidence the night before PC. Chasing trades for photos they never took. Reports that aren\u2019t defensible.' },
+  { icon: 'table', title: 'Spreadsheets with no accountability', body: 'Rows of defects with no photos, no assignments and no way to prove what was actually fixed.' },
+  { icon: 'message', title: 'Trades that go quiet', body: 'Defect assignment via text message with no follow-up system. Trades say it’s done. You have no proof.' },
+  { icon: 'alert', title: 'Last-minute handover panic', body: 'Compiling evidence the night before PC. Chasing trades for photos they never took. Reports that aren’t defensible.' },
 ];
 
 const capabilities = [
-  { title: 'Photo-first capture, always', body: 'A defect cannot be logged without a photo. Required at capture, rectification and closeout \u2014 enforced by the system.' },
+  { title: 'Photo-first capture, always', body: 'A defect cannot be logged without a photo. Required at capture, rectification and closeout — enforced by the system.' },
   { title: 'Trade assignment with due dates', body: 'Every defect is issued to a named trade and subcontractor. Due dates are tracked. Overdue items are visible to everyone.' },
   { title: 'Evidence review and approval', body: 'The site manager reviews rectification evidence, approves or rejects, and controls closeout. No self-certification allowed.' },
-  { title: 'Full audit trail, locked per item', body: 'Every action \u2014 creation, assignment, rectification, approval, closeout \u2014 is logged with name, date and time.' },
+  { title: 'Full audit trail, locked per item', body: 'Every action — creation, assignment, rectification, approval, closeout — is logged with name, date and time.' },
 ];
 
 const steps = [
@@ -25,16 +26,16 @@ const steps = [
 ];
 
 const roles = [
-  { emoji: '\u{1F477}', title: 'Site Managers', body: 'Capture on mobile. Assign instantly. Review evidence without chasing. Close with proof.', href: '/solutions/site-managers/' },
-  { emoji: '\u{1F4CB}', title: 'Project Managers', body: 'Full visibility across all projects. Track closeout velocity. Know what\u2019s open before the client asks.', href: '/solutions/project-managers/' },
-  { emoji: '\u{1F50D}', title: 'Quality Managers', body: 'Enforce evidence standards. Control what passes inspection. Export compliance-ready reports.', href: '/solutions/quality-managers/' },
-  { emoji: '\u{1F527}', title: 'Subcontractors', body: 'See exactly what\u2019s assigned. Upload evidence from any phone. No app download, no training.', href: '/solutions/subcontractors/' },
+  { icon: 'hardhat', title: 'Site Managers', body: 'Capture on mobile. Assign instantly. Review evidence without chasing. Close with proof.', href: '/solutions/site-managers/' },
+  { icon: 'clipboard', title: 'Project Managers', body: 'Full visibility across all projects. Track closeout velocity. Know what’s open before the client asks.', href: '/solutions/project-managers/' },
+  { icon: 'eye', title: 'Quality Managers', body: 'Enforce evidence standards. Control what passes inspection. Export compliance-ready reports.', href: '/solutions/quality-managers/' },
+  { icon: 'tools', title: 'Subcontractors', body: 'See exactly what’s assigned. Upload evidence from any phone. No app download, no training.', href: '/solutions/subcontractors/' },
 ];
 
 const faqs = [
   { q: 'What types of defect items can I track in CleanRun IQ?', a: 'CleanRun IQ tracks three item types: Defects (work completed below standard), Incomplete Works (work not yet started or finished) and Client Defects (items raised by the client post-handover). Each follows the same photo evidence workflow.' },
   { q: 'How does the three-photo evidence chain work?', a: 'Every item requires a capture photo when logged. Rectification requires the subcontractor to upload at least one photo before the item moves to Review. Closeout requires site manager approval. The chain is enforced by the system and cannot be bypassed.' },
-  { q: 'Can subcontractors use CleanRun IQ without downloading an app?', a: 'Yes. Subcontractors access their assigned items through a browser link \u2014 no download, no account setup. They see only the items assigned to them and upload rectification photos from any phone or tablet.' },
+  { q: 'Can subcontractors use CleanRun IQ without downloading an app?', a: 'Yes. Subcontractors access their assigned items through a browser link — no download, no account setup. They see only the items assigned to them and upload rectification photos from any phone or tablet.' },
   { q: 'How do I generate a handover report?', a: 'From the project defect register, select the items to include and click Generate Report. CleanRun IQ produces a structured PDF with all defect details, evidence photos and closeout status in seconds.' },
   { q: 'Is CleanRun IQ suitable for small residential builders?', a: 'Yes. CleanRun IQ scales from small residential builds to large commercial and apartment projects. The workflow is consistent regardless of project size, making it easy to manage your whole portfolio the same way.' },
 ];
@@ -57,7 +58,7 @@ const relatedLinks = [
 ---
 <BaseLayout
   title="Construction Defect Management Software"
-  description="Capture, assign and close construction defects with photo evidence \u2014 without spreadsheet chaos. Evidence-first defect tracking built for Australian site teams."
+  description="Capture, assign and close construction defects with the photo record on every item. Evidence-first defect tracking built for Australian site teams."
   schema={faqSchema}
 >
   {/* HERO */}
@@ -72,17 +73,23 @@ const relatedLinks = [
           <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Core Feature</span>
         </div>
         <h1 class="font-heading font-extrabold leading-[1.06] tracking-[-1.5px] text-white mb-5 text-[clamp(36px,3.8vw,58px)]">Construction Defect Management Software</h1>
-        <p class="text-lg leading-relaxed text-[#9CA3AF] mb-3 max-w-[480px]">Capture, assign and close every defect with photo evidence \u2014 without the spreadsheet chaos.</p>
-        <p class="text-sm leading-relaxed text-[#4B5563] mb-8 max-w-[440px]">Evidence-first defect tracking built for Australian construction teams. Every item. Every photo. Every trade. One clean handover report.</p>
+        <p class="text-lg leading-relaxed text-[#9CA3AF] mb-3 max-w-[480px]">Capture the issue, assign the trade, collect the rectification photo, review the fix and close the item — with a full history behind it.</p>
+        <p class="text-sm leading-relaxed text-[#8A93A0] mb-8 max-w-[440px]">Evidence-first defect tracking built for Australian construction teams. Every item. Every photo. Every trade. One clean handover report.</p>
         <div class="flex items-center gap-3 flex-wrap mb-4.5">
-          <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3 rounded-lg text-[15px] font-bold font-heading">Book a Demo <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="https://app.cleanruniq.com/" class="inline-flex items-center gap-2 bg-white/[0.05] text-[#E5E7EB] px-5.5 py-3 rounded-lg text-[15px] font-medium border border-white/10">View Live Demo</a>
+          <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3 rounded-lg text-[15px] font-bold font-heading">Book a 20-minute walkthrough <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#register" class="inline-flex items-center gap-2 bg-white/[0.05] text-[#E5E7EB] px-5.5 py-3 rounded-lg text-[15px] font-medium border border-white/10 hover:border-brand/40 transition-colors">See sample register</a>
         </div>
-        <a href="/resources/defect-closeout-checklist/" class="inline-flex items-center gap-1.5 text-[13px] text-[#4B5563] hover:text-[#9CA3AF] transition-colors"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4.5h9M2 7.5h9M2 10.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Download Free Defect Closeout Checklist</a>
+        <a href="/resources/defect-closeout-checklist/" class="inline-flex items-center gap-1.5 text-[13px] text-[#8A93A0] hover:text-brand transition-colors"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4.5h9M2 7.5h9M2 10.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Download Free Defect Closeout Checklist</a>
       </div>
 
-      {/* Register mockup */}
-      <div class="relative">
+      {/* Register mockup — real app screenshot */}
+      <div class="relative scroll-mt-24 flex justify-center lg:justify-end" id="register">
+        <div class="w-[300px] bg-navy-card border border-white/[0.12] rounded-[32px] p-1.5 shadow-[0_28px_80px_rgba(0,0,0,0.5)]">
+          <img src="/images/app/app-items.webp" alt="CleanRun IQ defect register — INC items with status, trade and due date" width="447" height="900" loading="lazy" decoding="async" class="w-full rounded-[26px] block" />
+        </div>
+      </div>
+      {/* legacy mockup retained below, hidden */}
+      <div class="hidden">
         <div class="bg-white rounded-[10px] overflow-hidden shadow-[0_28px_80px_rgba(0,0,0,0.5)]">
           <div class="bg-[#F3F4F6] px-3 py-1.5 flex items-center gap-1.5 border-b border-[#DDE1E5]">
             <div class="flex gap-1"><div class="w-2 h-2 rounded-full bg-[#EF4444]"></div><div class="w-2 h-2 rounded-full bg-[#F59E0B]"></div><div class="w-2 h-2 rounded-full bg-[#22C55E]"></div></div>
@@ -96,10 +103,10 @@ const relatedLinks = [
             <span class="text-[8px] font-bold text-[#6B7280] uppercase tracking-wide">Ref</span><span class="text-[8px] font-bold text-[#6B7280] uppercase tracking-wide">Description</span><span class="text-[8px] font-bold text-[#6B7280] uppercase tracking-wide">Trade</span><span class="text-[8px] font-bold text-[#6B7280] uppercase tracking-wide">Status</span>
           </div>
           {[
-            { ref: 'DEF-019', d: 'Ceiling crack \u2013 Apt 201', tr: 'Plasterer', st: 'CLOSED', cls: 'bg-[#E1F7E9] text-[#0C7733]', row: '' },
-            { ref: 'DEF-020', d: 'Incomplete grout \u2013 Apt 202', tr: 'Tiler', st: 'ISSUED', cls: 'bg-[#FFF4D6] text-[#B45309]', row: 'bg-[#FFF7DB]/40' },
-            { ref: 'DEF-021', d: 'Door not closing \u2013 Unit 203', tr: 'Carpenter', st: 'OPEN', cls: 'bg-[#FEE4E2] text-[#B42318]', row: '' },
-            { ref: 'DEF-022', d: 'Paint bleed \u2013 L2 corridor', tr: 'Painter', st: 'REVIEW', cls: 'bg-[#F3F4F6] text-[#374151] border border-[#DDE1E5]', row: '' },
+            { ref: 'DEF-019', d: 'Ceiling crack – Apt 201', tr: 'Plasterer', st: 'CLOSED', cls: 'bg-[#E1F7E9] text-[#0C7733]', row: '' },
+            { ref: 'DEF-020', d: 'Incomplete grout – Apt 202', tr: 'Tiler', st: 'ISSUED', cls: 'bg-[#FFF4D6] text-[#B45309]', row: 'bg-[#FFF7DB]/40' },
+            { ref: 'DEF-021', d: 'Door not closing – Unit 203', tr: 'Carpenter', st: 'OPEN', cls: 'bg-[#FEE4E2] text-[#B42318]', row: '' },
+            { ref: 'DEF-022', d: 'Paint bleed – L2 corridor', tr: 'Painter', st: 'REVIEW', cls: 'bg-[#F3F4F6] text-[#374151] border border-[#DDE1E5]', row: '' },
           ].map((r) => (
             <div class={`grid grid-cols-[64px_1fr_72px_84px] px-3 py-2 border-b border-[#F3F4F6] items-center ${r.row}`}>
               <span class="text-[9px] font-extrabold text-[#1B2025] font-heading">{r.ref}</span>
@@ -128,14 +135,14 @@ const relatedLinks = [
       <div class="text-center mb-11 max-w-[500px] mx-auto">
         <div class="inline-flex items-center gap-2 bg-[#B42318]/[0.08] border border-[#B42318]/20 rounded-full px-3.5 py-1.5 mb-4"><span class="text-[11px] font-bold text-[#F87171] tracking-wider uppercase font-heading">The problem today</span></div>
         <h2 class="font-heading font-extrabold text-[38px] tracking-[-1px] text-white mb-3 leading-[1.1]">Defects don't fail handovers.<br />Defect management does.</h2>
-        <p class="text-[15px] text-[#6B7280] leading-relaxed">Most builders track defects. Few can prove they were fixed \u2014 with photo evidence, a named person and a timestamp.</p>
+        <p class="text-[15px] text-[#6B7280] leading-relaxed">Most builders track defects. Few can prove they were fixed — with photo evidence, a named person and a timestamp.</p>
       </div>
       <div class="grid md:grid-cols-3 gap-3.5">
         {pains.map((p) => (
           <div class="bg-white/[0.03] border border-white/[0.06] border-t-2 border-t-[#B42318]/[0.4] rounded-[10px] p-6">
-            <div class="text-xl mb-3">{p.icon}</div>
+            <div class="w-10 h-10 rounded-lg bg-[#B42318]/[0.1] border border-[#B42318]/20 flex items-center justify-center mb-3.5 text-[#F87171]"><Icon name={p.icon} size={19} /></div>
             <h3 class="font-heading text-[15px] font-bold text-[#E5E7EB] mb-1.5">{p.title}</h3>
-            <p class="text-[13px] leading-relaxed text-[#4B5563]">{p.body}</p>
+            <p class="text-[13px] leading-relaxed text-[#9CA3AF]">{p.body}</p>
           </div>
         ))}
       </div>
@@ -190,7 +197,7 @@ const relatedLinks = [
           <div class={`rounded-[10px] px-4 py-5 text-center ${i === 4 ? 'bg-brand/[0.05] border border-brand/[0.25]' : 'bg-white/[0.03] border border-white/[0.07]'}`}>
             <div class="font-heading text-[11px] font-bold text-brand mb-2.5">{s.num}</div>
             <div class={`font-heading text-[13px] font-bold mb-1.5 ${i === 4 ? 'text-brand' : 'text-white'}`}>{s.label}</div>
-            <p class="text-[11px] leading-snug text-[#4B5563]">{s.body}</p>
+            <p class="text-[11px] leading-snug text-[#8A93A0]">{s.body}</p>
           </div>
         ))}
       </div>
@@ -207,10 +214,10 @@ const relatedLinks = [
       <div class="grid md:grid-cols-2 gap-3.5">
         {roles.map((r) => (
           <div class="bg-white/[0.03] border border-white/[0.07] rounded-[10px] p-5.5 flex gap-4 items-start">
-            <div class="w-10 h-10 bg-navy rounded-lg flex items-center justify-center shrink-0 text-lg">{r.emoji}</div>
+            <div class="w-10 h-10 bg-navy rounded-lg flex items-center justify-center shrink-0 text-brand"><Icon name={r.icon} size={18} /></div>
             <div>
               <h3 class="font-heading text-sm font-bold text-white mb-1.5">{r.title}</h3>
-              <p class="text-xs leading-snug text-[#4B5563] mb-2">{r.body}</p>
+              <p class="text-xs leading-snug text-[#9CA3AF] mb-2">{r.body}</p>
               <a href={r.href} class="inline-flex items-center gap-1 text-[11px] font-bold text-brand font-heading">See workflow <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M5 2l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
           </div>
@@ -240,7 +247,7 @@ const relatedLinks = [
   {/* INTERNAL LINKS */}
   <section class="bg-navy-card px-8 py-12 border-t border-white/[0.05]">
     <div class="max-w-[1200px] mx-auto">
-      <div class="font-heading text-[10px] font-bold text-[#4B5563] uppercase tracking-wider mb-5">Also worth reading</div>
+      <div class="font-heading text-[10px] font-bold text-[#8A93A0] uppercase tracking-wider mb-5">Also worth reading</div>
       <div class="flex flex-wrap gap-2.5">
         {relatedLinks.map((l) => (
           <a href={l.href} class="inline-flex items-center gap-1.5 bg-white/[0.04] border border-white/[0.08] text-[#CBD5E1] px-3.5 py-2 rounded-md text-[13px] font-medium hover:border-brand/30 transition-colors"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="#20C55E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>{l.label}</a>

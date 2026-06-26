@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const features = [
+  { icon: 'table', title: 'Defect Management', body: 'Capture, assign and close every defect with photo evidence in one register.', href: '/features/defect-management/', live: true },
+  { icon: 'checklist', title: 'Punch List Software', body: 'Run your final defect list as a live, photo-backed register.', href: '/features/punch-list-software/', live: true },
+  { icon: 'camera', title: 'Photo Evidence', body: 'The original, rectification and closeout photo on every item.', href: '/features/photo-evidence/', live: true },
+  { icon: 'pen', title: 'Image Markup', body: 'Draw arrows, rings and notes straight onto the defect photo as you capture it.', href: '/features/photo-evidence/#markup', live: true },
+  { icon: 'tools', title: 'Subcontractor Closeout', body: 'Trades respond and upload the rectification photo from any phone — no app.', href: '/features/subcontractor-closeout/', live: true },
+  { icon: 'report', title: 'Handover Reports', body: 'Produce a clean handover pack with the photo on each item.', href: '/features/handover-reports/', live: true },
+  { icon: 'eye', title: 'QA Inspections', body: 'Inspections that feed the same register, with a consistent standard.', href: '/features/qa-inspections/', live: true },
+];
+---
+<BaseLayout
+  title="Features"
+  description="Everything in CleanRun IQ: defect management, punch lists, photo evidence, subcontractor closeout, handover reports and QA inspections for construction teams."
+>
+  <section class="bg-navy pt-[120px] pb-16 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Features' }]} /></div>
+      <h1 class="font-heading font-extrabold text-[44px] md:text-[52px] tracking-[-1.5px] text-white mb-4 leading-[1.05] max-w-[760px]">The defect workflow, end to end.</h1>
+      <p class="text-[17px] text-[#A8B0BB] leading-relaxed max-w-[560px]">From the defect walk to the handover pack — each part of CleanRun IQ is built around capturing, assigning and closing defects with proof.</p>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1100px] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {features.map((f) => (
+        <a href={f.href} class="bg-white rounded-xl border border-[#E2E5E9] p-6 hover:border-brand/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all group flex flex-col">
+          <div class="w-11 h-11 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={f.icon} size={20} /></div>
+          <div class="flex items-center gap-2 mb-2">
+            <h2 class="font-heading text-[16px] font-bold text-[#1B2025]">{f.title}</h2>
+            {!f.live && <span class="text-[9px] font-bold uppercase tracking-wide text-[#B45309] bg-[#FFF4D6] px-1.5 py-0.5 rounded-sm">Soon</span>}
+          </div>
+          <p class="text-[13px] leading-relaxed text-[#6B7280] flex-1 mb-3">{f.body}</p>
+          <span class="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-[#0C7733] font-heading">{f.live ? 'Explore' : 'Preview'} <Icon name="arrow" size={12} width={2} /></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    heading="Want to see the workflow on a real project?"
+    body="Book a short walkthrough and we'll show you capture, trade response, review and the handover pack using realistic construction data."
+    note="No credit card. No hard sell. Just a practical walkthrough."
+  />
+</BaseLayout>

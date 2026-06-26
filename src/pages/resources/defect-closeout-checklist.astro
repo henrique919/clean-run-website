@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Icon from '../../components/Icon.astro';
+
+const DEMO_ENDPOINT = import.meta.env.PUBLIC_DEMO_FORM_ENDPOINT || '';
+const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL || 'hello@cleanruniq.com';
+
+const phases = [
+  { tag: 'Phase 1', title: 'Before the defect walk', items: [
+    'Confirm the contract scope so you know what counts as a defect and what doesn’t.',
+    'Check the relevant trades have finished their primary works before you start closeout.',
+    'Open a clean project in your register with the building, levels and units set up.',
+    'Brief whoever is walking with you on the three item types: defect, incomplete works, client defect.',
+  ]},
+  { tag: 'Phase 2', title: 'During defect capture', items: [
+    'Photograph the defect as found, before anything is touched.',
+    'Record the exact location — building, level, unit and room — not just “bathroom”.',
+    'Classify the item type so it’s tracked and evidenced the right way.',
+    'Assign the responsible trade before you leave the room. An unassigned defect is an invisible defect.',
+    'Set a realistic due date tied to your handover timeline.',
+  ]},
+  { tag: 'Phase 3', title: 'Trade assignment and follow-up', items: [
+    'Issue each item to the responsible subcontractor with the photo, location and a clear description.',
+    'Require a rectification photo — “I fixed it” is not evidence.',
+    'Check overdue items daily in the last two weeks before PC, and call rather than message.',
+  ]},
+  { tag: 'Phase 4', title: 'Evidence review and approval', items: [
+    'Compare each rectification photo against the original defect.',
+    'Reject items with unclear or insufficient evidence — don’t close them — and log the reason.',
+    'Verify complex defects (waterproofing, structural, concealed work) on site, not just by photo.',
+  ]},
+  { tag: 'Phase 5', title: 'Closeout sign-off', items: [
+    'Confirm every item is closed or has a documented, client-agreed deferral.',
+    'Lock the evidence on closed items so the record can’t be quietly changed later.',
+    'Flag DLP items separately and keep them after handover.',
+  ]},
+  { tag: 'Phase 6', title: 'Handover pack', items: [
+    'Produce the closeout report before the handover meeting — surprises are your problem, not the client’s.',
+    'Check every evidence photo is included and legible.',
+    'Archive the final pack with your project records so it’s findable years later at DLP.',
+  ]},
+];
+
+const inputCls = 'w-full bg-[#F9FAFB] border border-[#DDE1E5] rounded-md px-3 py-2.5 text-sm text-[#1B2025] placeholder:text-[#9CA3AF] focus:outline-none focus:border-brand';
+const labelCls = 'text-[11px] font-bold text-[#6B7280] uppercase tracking-wide block mb-1.5';
+---
+<BaseLayout
+  title="Defect Closeout Checklist for Construction Site Teams"
+  description="A free, field-ready defect closeout checklist for construction site teams — six phases from the defect walk to the handover pack. Download the PDF."
+>
+  <section class="bg-navy pt-[104px] pb-14 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[1000px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Resources', href: '/resources/' }, { label: 'Defect Closeout Checklist' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-4.5">
+        <Icon name="checklist" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Free resource</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(30px,3.4vw,44px)] tracking-[-1px] text-white mb-3.5 leading-[1.08] max-w-[680px]">Defect closeout checklist for the site team</h1>
+      <p class="text-[16px] text-[#A8B0BB] leading-relaxed max-w-[560px]">Six phases, from the defect walk to the handover pack. The practical steps for closing defects properly — built for real sites, not theory.</p>
+    </div>
+  </section>
+
+  <div class="bg-[#F3F4F6] px-8 py-14">
+    <div class="max-w-[1000px] mx-auto grid lg:grid-cols-[1fr_320px] gap-9 items-start">
+
+      {/* Checklist */}
+      <div class="flex flex-col gap-3">
+        {phases.map((ph) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] overflow-hidden">
+            <div class="bg-navy px-5 py-3 flex items-center gap-2.5">
+              <span class="bg-brand/[0.15] text-brand font-heading text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wide">{ph.tag}</span>
+              <span class="font-heading text-[13px] font-bold text-white">{ph.title}</span>
+            </div>
+            <div class="p-4 flex flex-col gap-2">
+              {ph.items.map((it) => (
+                <div class="flex items-start gap-2.5 px-3 py-2 bg-[#F9FAFB] rounded-lg border border-[#E2E5E9]">
+                  <div class="w-4 h-4 rounded border-[1.5px] border-[#C9CFD6] bg-white shrink-0 mt-0.5"></div>
+                  <span class="text-[13px] text-[#374151] leading-snug">{it}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div class="bg-navy rounded-xl px-6 py-5 flex items-center justify-between flex-wrap gap-4 mt-1">
+          <div>
+            <div class="font-heading text-[14px] font-bold text-white mb-1">Running this manually?</div>
+            <p class="text-[13px] text-[#A8B0BB] leading-snug max-w-[400px]">See how CleanRun IQ turns this checklist into a live register — every item photo-backed and closed with proof.</p>
+          </div>
+          <a href="/demo/" class="inline-flex items-center gap-1.5 bg-brand text-navy px-4 py-2.5 rounded-lg text-[13px] font-bold font-heading shrink-0">Book a walkthrough <Icon name="arrow" size={13} width={2} /></a>
+        </div>
+      </div>
+
+      {/* Sticky download */}
+      <div class="lg:sticky lg:top-[84px]">
+        <div class="bg-white rounded-xl border border-[#E2E5E9] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
+          <div class="bg-navy px-5 py-4">
+            <div class="font-heading text-[13px] font-bold text-white mb-0.5">Download the checklist</div>
+            <div class="text-[11px] text-[#8A93A0]">Free PDF — sent to your inbox</div>
+          </div>
+          <div class="p-5">
+            <form id="lead-form" novalidate class="flex flex-col gap-2.5">
+              <div><label class={labelCls} for="l-first">First name *</label><input id="l-first" name="first_name" type="text" required placeholder="James" class={inputCls} /></div>
+              <div><label class={labelCls} for="l-email">Work email *</label><input id="l-email" name="email" type="email" required placeholder="james@buildco.com.au" class={inputCls} /></div>
+              <div><label class={labelCls} for="l-role">Your role *</label>
+                <select id="l-role" name="role" required class={inputCls + ' appearance-none'}>
+                  <option value="">Select…</option><option>Site Manager</option><option>Project Manager</option><option>Quality Manager</option><option>Builder / Director</option><option>Other</option>
+                </select>
+              </div>
+              <div id="lead-error" class="hidden text-[12px] leading-snug text-[#B42318] bg-[#FEE4E2] border border-[#F5B5AE] rounded-md px-3 py-2"></div>
+              <button type="submit" id="lead-submit" class="bg-brand text-navy rounded-lg py-3 text-sm font-bold font-heading mt-0.5 disabled:opacity-60">Send me the checklist</button>
+              <p class="text-[11px] text-[#9CA3AF] text-center leading-snug">No spam. We'll send one email about CleanRun IQ — unsubscribe anytime.</p>
+            </form>
+            <div id="lead-success" class="hidden text-center py-3">
+              <div class="w-11 h-11 bg-brand/[0.1] rounded-full flex items-center justify-center mx-auto mb-3"><Icon name="check" size={20} class="text-[#0C7733]" width={2.4} /></div>
+              <div class="font-heading text-[15px] font-bold text-[#1B2025] mb-1.5">Check your inbox</div>
+              <p class="text-[13px] text-[#6B7280] leading-snug mb-3.5">The checklist is on its way. While you wait, see it running live in CleanRun IQ.</p>
+              <a href="/demo/" class="block bg-navy text-white py-2.5 rounded-lg text-[13px] font-bold font-heading">Book a walkthrough</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3.5 bg-white rounded-xl border border-[#E2E5E9] p-4">
+          <div class="font-heading text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related</div>
+          <div class="flex flex-col gap-2.5">
+            <a href="/resources/punch-list-template/" class="flex items-center gap-2 text-[13px] text-[#374151] font-medium hover:text-[#0C7733] transition-colors"><Icon name="arrow" size={12} class="text-brand" width={2} />Punch list template</a>
+            <a href="/features/defect-management/" class="flex items-center gap-2 text-[13px] text-[#374151] font-medium hover:text-[#0C7733] transition-colors"><Icon name="arrow" size={12} class="text-brand" width={2} />Defect management feature</a>
+            <a href="/solutions/site-managers/" class="flex items-center gap-2 text-[13px] text-[#374151] font-medium hover:text-[#0C7733] transition-colors"><Icon name="arrow" size={12} class="text-brand" width={2} />CleanRun IQ for site managers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ DEMO_ENDPOINT, CONTACT_EMAIL }}>
+    (function () {
+      var form = document.getElementById('lead-form');
+      if (!form) return;
+      var err = document.getElementById('lead-error');
+      var btn = document.getElementById('lead-submit');
+      function showErr(m) { err.textContent = m; err.classList.remove('hidden'); }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        err.classList.add('hidden');
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        if (!DEMO_ENDPOINT) {
+          showErr('Our download form isn’t connected yet. Please email ' + CONTACT_EMAIL + ' and we’ll send you the checklist.');
+          return;
+        }
+        btn.disabled = true; btn.textContent = 'Sending…';
+        var data = Object.fromEntries(new FormData(form).entries());
+        data._resource = 'defect-closeout-checklist';
+        fetch(DEMO_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
+          .then(function (res) {
+            if (!res.ok) throw new Error('bad');
+            if (window.gtag) window.gtag('event', 'generate_lead', { event_label: 'defect_closeout_checklist' });
+            form.classList.add('hidden');
+            document.getElementById('lead-success').classList.remove('hidden');
+          })
+          .catch(function () {
+            btn.disabled = false; btn.textContent = 'Send me the checklist';
+            showErr('Something went wrong. Please email ' + CONTACT_EMAIL + ' and we’ll send it across.');
+          });
+      });
+    })();
+  </script>
+</BaseLayout>

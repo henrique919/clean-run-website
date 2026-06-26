@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import VoiceCaptureDemo from '../../components/VoiceCaptureDemo.astro';
+
+const sees = [
+  { icon: 'tools', title: 'Only what is assigned to you', body: 'No wading through the whole register. You see the items issued to your trade, with the photo, location and what needs doing.' },
+  { icon: 'camera', title: 'Upload the fix from your phone', body: 'Do the work, take the rectification photo, send it back. No app to install, no account to set up.' },
+  { icon: 'clock', title: 'No more “did you get my message?”', body: 'Once you submit, the item moves to review. Everyone can see it is done and waiting — nothing gets lost in a thread.' },
+];
+---
+<BaseLayout
+  title="CleanRun IQ for Subcontractors"
+  description="Subcontractors see only the defect items assigned to their trade, upload the rectification photo from any phone and send it back — no app, no account, no chasing."
+>
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 left-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top left,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10 grid lg:grid-cols-[1fr_0.8fr] gap-12 items-center">
+      <div>
+        <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions/' }, { label: 'Subcontractors' }]} /></div>
+        <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+          <Icon name="tools" size={12} class="text-brand" />
+          <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">For subcontractors</span>
+        </div>
+        <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05]">See your items. Fix them. Send the photo back.</h1>
+        <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[500px] mb-8">No app to download, no login to chase up. Open the link, see the items issued to your trade, upload the rectification photo from your phone and you are done.</p>
+        <div class="flex items-center gap-3 flex-wrap">
+          <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+          <a href="/features/subcontractor-closeout/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-5.5 py-3.5 rounded-lg text-[15px] font-medium border border-white/[0.12] hover:border-brand/40 transition-colors">How closeout works</a>
+        </div>
+      </div>
+      <div class="relative flex justify-center">
+        <div class="relative w-full max-w-[360px]">
+          <img src="/images/people/person-phone-3.webp" alt="Tradesperson checking an assigned defect on a phone" loading="lazy" decoding="async" class="w-full h-[320px] object-cover rounded-2xl" />
+          <VoiceCaptureDemo width={190} class="absolute -bottom-5 -right-5 shadow-[0_30px_70px_rgba(0,0,0,0.6)]" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[560px]">Built so trades will actually use it.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {sees.map((s) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={s.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{s.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Make closeout painless for your trades." body="Book a short walkthrough and see how a subcontractor picks up an item, uploads the fix and sends it back — all from a phone." />
+</BaseLayout>

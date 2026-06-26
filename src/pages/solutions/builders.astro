@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const points = [
+  { icon: 'building', title: 'The same process on every job', body: 'From a single home to a full apartment build, defects run the same way — so a new project does not mean a new spreadsheet to invent.' },
+  { icon: 'table', title: 'A view across your projects', body: 'See where each job stands without ringing around. Open items, closeout progress and handover readiness in one place.' },
+  { icon: 'shield', title: 'A record that protects the business', body: 'Photo-backed items and a kept history are what answer a client dispute or a defects liability claim cleanly.' },
+];
+---
+<BaseLayout title="CleanRun IQ for Builders" description="Run the same defect process on every project — from a single home to a full apartment build. CleanRun IQ gives builders a consistent, photo-backed handover record.">
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1000px] mx-auto relative z-10">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions/' }, { label: 'Builders' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+        <Icon name="building" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">For builders</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05] max-w-[720px]">One defect process across every project you run.</h1>
+      <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[560px] mb-8">Whether it is one house or a hundred units, CleanRun IQ keeps defects, sign-off and the handover record consistent — so quality does not slip when the next job starts.</p>
+      <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[520px]">What it gives the business.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {points.map((p) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={p.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{p.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Run every job to the same standard." body="Book a short walkthrough and see how the defect process stays consistent from your smallest job to your biggest." />
+</BaseLayout>

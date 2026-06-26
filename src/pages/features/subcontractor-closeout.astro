@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import VoiceCaptureDemo from '../../components/VoiceCaptureDemo.astro';
+
+const flow = [
+  { n: '1', t: 'Item issued to the trade', b: 'The site team assigns the defect to the responsible trade with the photo, location and what needs doing.' },
+  { n: '2', t: 'Trade opens a link', b: 'No app, no account. The subcontractor opens a link and sees only the items issued to them.' },
+  { n: '3', t: 'Fix uploaded', b: 'They do the work and upload the rectification photo from their phone. The item moves to review.' },
+  { n: '4', t: 'Reviewed and closed', b: 'The site team checks the fix against the issue and closes it — or sends it back with a reason.' },
+];
+const benefits = [
+  { icon: 'tools', title: 'No app to roll out', body: 'Getting trades onto new software is usually the hard part. Here there is nothing to install — just a link.' },
+  { icon: 'camera', title: 'Proof, not a promise', body: 'The rectification photo lands on the item, so “it’s done” comes with the picture that backs it up.' },
+  { icon: 'clock', title: 'Nothing lost in a thread', body: 'Once submitted, the item is visibly in review. No more wondering whether a message was seen.' },
+];
+---
+<BaseLayout title="Subcontractor Defect Closeout" description="Subcontractors pick up assigned defects from a link, upload the rectification photo from any phone and send it back for review — no app, no account, no chasing.">
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 left-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top left,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10 grid lg:grid-cols-[1fr_0.8fr] gap-12 items-center">
+      <div>
+        <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Features', href: '/features/' }, { label: 'Subcontractor Closeout' }]} /></div>
+        <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+          <Icon name="tools" size={12} class="text-brand" />
+          <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Subcontractor closeout</span>
+        </div>
+        <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05]">Closeout the trades will actually do.</h1>
+        <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[500px] mb-8">Assign the item, the trade opens a link, fixes it and uploads the photo. No app to install, no login to chase — which is exactly why it gets used.</p>
+        <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+      </div>
+      <div class="relative flex justify-center">
+        <div class="relative w-full max-w-[360px]">
+          <img src="/images/people/person-phone-2.webp" alt="Site supervisor reviewing a defect item on a phone" loading="lazy" decoding="async" class="w-full h-[320px] object-cover rounded-2xl" />
+          <VoiceCaptureDemo width={190} class="absolute -bottom-5 -right-5 shadow-[0_30px_70px_rgba(0,0,0,0.6)]" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[520px]">How a trade closes an item.</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {flow.map((s) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-5">
+            <div class="w-8 h-8 rounded-lg bg-navy text-brand font-heading font-extrabold text-[13px] flex items-center justify-center mb-3.5">{s.n}</div>
+            <h3 class="font-heading text-[14px] font-bold text-[#1B2025] mb-1.5">{s.t}</h3>
+            <p class="text-[12.5px] leading-relaxed text-[#6B7280]">{s.b}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-8 py-16 border-t border-[#E2E5E9]">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[28px] md:text-[32px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[520px]">Why it works on site.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {benefits.map((w) => (
+          <div class="bg-[#F3F4F6] rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-white border border-[#E2E5E9] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={w.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{w.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{w.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-2.5">
+        <a href="/solutions/subcontractors/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />For subcontractors</a>
+        <a href="/features/defect-management/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Defect management</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="See subcontractor closeout end to end." body="Book a short walkthrough and watch an item go out to a trade and come back with the photo, ready to close." />
+</BaseLayout>

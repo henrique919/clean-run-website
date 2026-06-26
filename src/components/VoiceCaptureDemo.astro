@@ -1,0 +1,141 @@
+---
+// Animated voice-to-defect capture, full sequence:
+// photo capture → camera flash → voice note → auto-structured fields → saved.
+// Pure CSS keyframes (Astro-scoped), no JS, no libraries. Loops on a ~10s timeline.
+import PhoneFrame from './PhoneFrame.astro';
+export interface Props { width?: number; class?: string; }
+const { width = 280, class: cls = '' } = Astro.props;
+const bars = Array.from({ length: 20 }, (_, i) => i);
+const fields = [
+  { k: 'Title', v: 'Cracked tile below vanity', cls: 'f1' },
+  { k: 'Location', v: 'Unit 207 · Ensuite', cls: 'f2' },
+  { k: 'Trade', v: 'Tiler', cls: 'f3' },
+];
+---
+<div class={`vcd ${cls}`}>
+  <PhoneFrame width={width}>
+    <div class="relative">
+      {/* Camera flash overlay */}
+      <div class="vcd-flash absolute inset-0 bg-white z-30 pointer-events-none"></div>
+
+      <div class="px-4 pb-4 pt-1">
+        {/* Step label */}
+        <div class="flex items-center gap-2 mb-2.5 h-[18px]">
+          <span class="vcd-step-1 text-[9px] font-bold text-brand uppercase tracking-wide font-heading">1 · Capturing photo</span>
+          <span class="vcd-step-2 text-[9px] font-bold text-brand uppercase tracking-wide font-heading absolute">2 · Recording note</span>
+          <span class="vcd-step-3 text-[9px] font-bold text-brand uppercase tracking-wide font-heading absolute">3 · Filling the item</span>
+        </div>
+
+        {/* Photo capture frame */}
+        <div class="relative rounded-lg overflow-hidden mb-3 h-[124px] bg-[#0C1115] border border-white/[0.08]">
+          <img src="/images/defects/cracked-tile.webp" alt="Cracked floor tile captured on site" loading="lazy" decoding="async" class="vcd-photo absolute inset-0 w-full h-full object-cover" />
+          {/* viewfinder before capture */}
+          <div class="vcd-viewfinder absolute inset-0 flex items-center justify-center">
+            <div class="absolute inset-3 border border-white/30 rounded"></div>
+            <div class="w-10 h-10 rounded-full border-2 border-white/70 flex items-center justify-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 9a2 2 0 0 1 2-2h.93a2 2 0 0 0 1.664-.89l.812-1.22A2 2 0 0 1 10.07 4h3.86a2 2 0 0 1 1.664.89l.812 1.22A2 2 0 0 0 18.07 7H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3"/></svg>
+            </div>
+          </div>
+          {/* captured tag */}
+          <span class="vcd-tag absolute top-2 right-2 bg-[#FEE4E2] text-[#B42318] text-[7px] font-bold px-1.5 py-0.5 rounded-sm uppercase">Defect</span>
+        </div>
+
+        {/* Voice row */}
+        <div class="vcd-voice flex items-center gap-2.5 mb-3">
+          <div class="vcd-mic w-7 h-7 rounded-full bg-brand flex items-center justify-center shrink-0">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0C1115" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg>
+          </div>
+          <div class="flex items-center gap-[2.5px] h-[22px] flex-1">
+            {bars.map((i) => (
+              <span class="vcd-bar w-[3px] rounded-full bg-brand" style={`animation-delay:${(i % 7) * 90}ms`}></span>
+            ))}
+          </div>
+        </div>
+
+        {/* Transcript */}
+        <div class="vcd-transcript bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 mb-3">
+          <div class="text-[7px] font-bold text-[#6B7280] uppercase tracking-wide mb-0.5">Heard</div>
+          <div class="text-[9.5px] text-[#CBD5E1] leading-snug">"Cracked tile below the vanity in unit 207 ensuite, give it to the tiler, high priority."</div>
+        </div>
+
+        {/* Fields */}
+        <div class="flex flex-col gap-1.5">
+          {fields.map((f) => (
+            <div class={`vcd-field ${f.cls} flex items-center justify-between bg-brand/[0.05] border border-brand/[0.14] rounded-md px-2.5 py-1.5`}>
+              <span class="text-[8px] text-[#6B7280] uppercase tracking-wide font-bold">{f.k}</span>
+              <span class="text-[9.5px] text-[#E5E7EB] font-semibold">{f.v}</span>
+            </div>
+          ))}
+          <div class="vcd-field f4 flex items-center justify-between bg-[#B45309]/[0.08] border border-[#B45309]/25 rounded-md px-2.5 py-1.5">
+            <span class="text-[8px] text-[#6B7280] uppercase tracking-wide font-bold">Priority</span>
+            <span class="text-[9.5px] text-[#F59E0B] font-bold">High</span>
+          </div>
+        </div>
+
+        {/* Saved confirmation */}
+        <div class="vcd-saved mt-2.5 flex items-center justify-center gap-1.5 bg-brand text-navy rounded-lg py-2">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0C1115" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>
+          <span class="text-[10.5px] font-extrabold font-heading">Defect saved &amp; assigned</span>
+        </div>
+      </div>
+    </div>
+  </PhoneFrame>
+</div>
+
+<style>
+  /* 10s master timeline. Phases: photo 0-14%, flash ~10%, voice 18-36%, fill 40-66%, saved 72-96% */
+
+  /* Step labels */
+  .vcd-step-1, .vcd-step-2, .vcd-step-3 { opacity: 0; animation: 10s linear infinite; }
+  .vcd-step-1 { animation-name: vcd-s1; }
+  .vcd-step-2 { animation-name: vcd-s2; }
+  .vcd-step-3 { animation-name: vcd-s3; }
+  @keyframes vcd-s1 { 0%,14% { opacity: 1; } 16%,100% { opacity: 0; } }
+  @keyframes vcd-s2 { 0%,16% { opacity: 0; } 18%,38% { opacity: 1; } 40%,100% { opacity: 0; } }
+  @keyframes vcd-s3 { 0%,40% { opacity: 0; } 42%,100% { opacity: 1; } }
+
+  /* Photo: dim/grey before capture, full after the flash */
+  .vcd-photo { filter: grayscale(0.6) brightness(0.7); transform: scale(1.06); animation: vcd-photo 10s ease-out infinite; }
+  @keyframes vcd-photo {
+    0%, 9% { filter: grayscale(0.6) brightness(0.7); transform: scale(1.06); }
+    14%, 100% { filter: none; transform: scale(1); }
+  }
+  .vcd-viewfinder { animation: vcd-vf 10s ease-out infinite; }
+  @keyframes vcd-vf { 0%,9% { opacity: 1; } 13%,100% { opacity: 0; } }
+  .vcd-tag { opacity: 0; animation: vcd-tag 10s ease-out infinite; }
+  @keyframes vcd-tag { 0%,13% { opacity: 0; } 16%,100% { opacity: 1; } }
+
+  /* Camera flash at the capture moment */
+  .vcd-flash { opacity: 0; animation: vcd-flash 10s ease-out infinite; }
+  @keyframes vcd-flash { 0%,9% { opacity: 0; } 11% { opacity: 0.95; } 16% { opacity: 0; } 100% { opacity: 0; } }
+
+  /* Voice row + waveform live during the recording phase */
+  .vcd-voice { opacity: 0; animation: vcd-voice 10s ease-out infinite; }
+  @keyframes vcd-voice { 0%,17% { opacity: 0; } 20%,100% { opacity: 1; } }
+  .vcd-bar { height: 6px; animation: vcd-wave 0.85s ease-in-out infinite alternate; }
+  @keyframes vcd-wave { 0% { height: 5px; opacity: 0.5; } 100% { height: 20px; opacity: 1; } }
+  .vcd-mic { animation: vcd-pulse 1.3s ease-in-out infinite; }
+  @keyframes vcd-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(32,197,94,0.45); } 60% { box-shadow: 0 0 0 6px rgba(32,197,94,0); } }
+
+  /* Transcript */
+  .vcd-transcript { opacity: 0; animation: vcd-tr 10s ease-out infinite; }
+  @keyframes vcd-tr { 0%,25% { opacity: 0; } 32%,100% { opacity: 1; } }
+
+  /* Fields rise in, staggered, during the fill phase */
+  .vcd-field { opacity: 0; transform: translateY(6px); animation: vcd-rise 10s ease-out infinite; }
+  .vcd-field.f1 { animation-delay: 0s; }
+  .vcd-field.f2 { animation-delay: 0.3s; }
+  .vcd-field.f3 { animation-delay: 0.6s; }
+  .vcd-field.f4 { animation-delay: 0.9s; }
+  @keyframes vcd-rise { 0%,40% { opacity: 0; transform: translateY(6px); } 50%,100% { opacity: 1; transform: translateY(0); } }
+
+  /* Saved badge */
+  .vcd-saved { opacity: 0; transform: scale(0.96); animation: vcd-saved 10s ease-out infinite; }
+  @keyframes vcd-saved { 0%,68% { opacity: 0; transform: scale(0.96); } 74%,95% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.96); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vcd-bar, .vcd-mic, .vcd-flash, .vcd-photo, .vcd-viewfinder, .vcd-tag, .vcd-voice, .vcd-transcript, .vcd-field, .vcd-saved, .vcd-step-1, .vcd-step-2, .vcd-step-3 { animation: none; opacity: 1; transform: none; filter: none; }
+    .vcd-flash, .vcd-viewfinder, .vcd-step-2, .vcd-step-3 { display: none; }
+    .vcd-bar { height: 12px; }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+// Small handover-report preview card — floats over the hero composition.
+export interface Props { class?: string; }
+const { class: cls = '' } = Astro.props;
+---
+<div class={`bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-[#E2E5E9] w-[210px] overflow-hidden ${cls}`}>
+  <div class="bg-navy px-3.5 py-2.5 flex items-center gap-2">
+    <div class="w-6 h-6 rounded-md bg-brand/[0.16] flex items-center justify-center shrink-0">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#20C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+    </div>
+    <div><div class="text-[10.5px] font-bold text-white font-heading leading-tight">Handover report</div><div class="text-[8.5px] text-[#8A93A0]">Parkview &middot; Block B</div></div>
+  </div>
+  <div class="p-3">
+    <div class="flex items-center justify-between mb-2">
+      <span class="font-heading text-[10px] font-extrabold text-[#1B2025]">DEF-044</span>
+      <span class="text-[8px] font-bold px-2 py-0.5 rounded-sm bg-[#E1F7E9] text-[#0C7733]">Closed</span>
+    </div>
+    <div class="grid grid-cols-2 gap-1.5 mb-2.5">
+      <div class="aspect-[4/3] rounded-md bg-[#F3F4F6] border border-[#E2E5E9] flex flex-col items-center justify-center gap-0.5">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8"><path d="M3 9a2 2 0 0 1 2-2h.93a2 2 0 0 0 1.664-.89l.812-1.22A2 2 0 0 1 10.07 4h3.86a2 2 0 0 1 1.664.89l.812 1.22A2 2 0 0 0 18.07 7H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3"/></svg>
+        <span class="text-[6.5px] font-bold text-[#9CA3AF] uppercase">Original</span>
+      </div>
+      <div class="aspect-[4/3] rounded-md bg-brand/[0.07] border border-brand/25 flex flex-col items-center justify-center gap-0.5">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0C7733" stroke-width="1.8"><path d="M3 9a2 2 0 0 1 2-2h.93a2 2 0 0 0 1.664-.89l.812-1.22A2 2 0 0 1 10.07 4h3.86a2 2 0 0 1 1.664.89l.812 1.22A2 2 0 0 0 18.07 7H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3"/></svg>
+        <span class="text-[6.5px] font-bold text-[#0C7733] uppercase">Rectified</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5 text-[8.5px] text-[#6B7280]">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#0C7733" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+      Closed with photo &middot; 18 Jun
+    </div>
+  </div>
+</div>

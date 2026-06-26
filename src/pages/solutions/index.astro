@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const solutions = [
+  { icon: 'hardhat', title: 'Site Managers', body: 'Capture on the defect walk, assign the trade and check rectification without working through messages.', href: '/solutions/site-managers/', live: true },
+  { icon: 'clipboard', title: 'Project Managers', body: 'See what is open across the job and hold a record you can rely on at PC and DLP.', href: '/solutions/project-managers/', live: true },
+  { icon: 'eye', title: 'Quality Managers', body: 'Keep capture, review and sign-off consistent across every unit.', href: '/solutions/quality-managers/', live: true },
+  { icon: 'building', title: 'Builders', body: 'Give every project the same defect process — from a single home to a full apartment build.', href: '/solutions/builders/', live: false },
+  { icon: 'tools', title: 'Subcontractors', body: 'See what is assigned, upload the rectification photo and send it back — from any phone.', href: '/solutions/subcontractors/', live: true },
+];
+---
+<BaseLayout
+  title="Solutions by role"
+  description="CleanRun IQ for site managers, project managers, quality managers, builders and subcontractors. One defect register every role on the project can work from."
+>
+  <section class="bg-navy pt-[120px] pb-16 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Solutions' }]} /></div>
+      <h1 class="font-heading font-extrabold text-[44px] md:text-[52px] tracking-[-1.5px] text-white mb-4 leading-[1.05] max-w-[760px]">One register. Every role on the project.</h1>
+      <p class="text-[17px] text-[#A8B0BB] leading-relaxed max-w-[560px]">CleanRun IQ gives each role the view they need — and nothing they don't. Here's how it works for your part of the job.</p>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1100px] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {solutions.map((s) => (
+        <a href={s.href} class="bg-white rounded-xl border border-[#E2E5E9] p-6 hover:border-brand/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all flex flex-col">
+          <div class="w-11 h-11 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={s.icon} size={20} /></div>
+          <div class="flex items-center gap-2 mb-2">
+            <h2 class="font-heading text-[16px] font-bold text-[#1B2025]">{s.title}</h2>
+            {!s.live && <span class="text-[9px] font-bold uppercase tracking-wide text-[#B45309] bg-[#FFF4D6] px-1.5 py-0.5 rounded-sm">Soon</span>}
+          </div>
+          <p class="text-[13px] leading-relaxed text-[#6B7280] flex-1 mb-3">{s.body}</p>
+          <span class="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-[#0C7733] font-heading">View workflow <Icon name="arrow" size={12} width={2} /></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    heading="See how it fits the way your team works."
+    body="Book a short walkthrough and tell us how your projects run. We'll show you the parts that matter most for your role."
+    note="No credit card. No hard sell. Just a practical walkthrough."
+  />
+</BaseLayout>

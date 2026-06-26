@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const resources = [
+  { tag: 'Checklist', icon: 'checklist', title: 'Defect closeout checklist', body: 'The field steps for closing defects properly — from the defect walk to the handover pack.', href: '/resources/defect-closeout-checklist/', live: true },
+  { tag: 'Template', icon: 'clipboard', title: 'Punch list template', body: 'A practical punch list to run a final defect run, with guidance on moving it into a live register.', href: '/resources/punch-list-template/', live: true },
+  { tag: 'Guide', icon: 'report', title: 'Construction defect management guide', body: 'How to capture, assign, evidence and close defects across residential and commercial jobs.', href: '/resources/construction-defect-management-guide/', live: true },
+  { tag: 'Calculator', icon: 'clock', title: 'Defect admin cost calculator', body: 'Estimate what logging and chasing defect closeout is costing your team each year.', href: '/resources/defect-management-roi-calculator/', live: true },
+  { tag: 'Guide', icon: 'camera', title: 'Photo evidence in construction', body: 'Why photo-backed closeout protects you at handover, in disputes and during DLP.', href: '/resources/photo-evidence-in-construction/', live: false },
+];
+---
+<BaseLayout
+  title="Resources"
+  description="Free construction defect management resources: closeout checklists, punch list templates, guides and a defect admin cost calculator for builders and site teams."
+>
+  <section class="bg-navy pt-[120px] pb-16 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Resources' }]} /></div>
+      <h1 class="font-heading font-extrabold text-[44px] md:text-[52px] tracking-[-1.5px] text-white mb-4 leading-[1.05] max-w-[760px]">Practical resources for defect closeout.</h1>
+      <p class="text-[17px] text-[#A8B0BB] leading-relaxed max-w-[560px]">Checklists, templates and guides you can use on your next project — whether or not you ever use CleanRun IQ.</p>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1100px] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {resources.map((r) => (
+        <a href={r.href} class="bg-white rounded-xl border border-[#E2E5E9] p-6 hover:border-brand/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-11 h-11 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center text-[#0C7733]"><Icon name={r.icon} size={20} /></div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide font-heading bg-[#EEF2F6] text-[#374151] border border-[#E2E5E9]">{r.tag}</span>
+          </div>
+          <div class="flex items-center gap-2 mb-2">
+            <h2 class="font-heading text-[15.5px] font-bold text-[#1B2025] leading-tight">{r.title}</h2>
+            {!r.live && <span class="text-[9px] font-bold uppercase tracking-wide text-[#B45309] bg-[#FFF4D6] px-1.5 py-0.5 rounded-sm shrink-0">Soon</span>}
+          </div>
+          <p class="text-[13px] leading-relaxed text-[#6B7280] flex-1 mb-3">{r.body}</p>
+          <span class="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-[#0C7733] font-heading">{r.live ? 'Open resource' : 'Coming soon'} <Icon name="arrow" size={12} width={2} /></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    heading="Prefer to see it in action?"
+    body="Book a short walkthrough and we'll show you how these workflows run live in CleanRun IQ — capture, trade response, review and the handover pack."
+    note="No credit card. No hard sell. Just a practical walkthrough."
+  />
+</BaseLayout>
