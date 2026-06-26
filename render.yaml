@@ -30,3 +30,5 @@ services:
     domains:
       - cleanruniq.com
       - www.cleanruniq.com
+      - tanqo.co
+      - www.tanqo.co
