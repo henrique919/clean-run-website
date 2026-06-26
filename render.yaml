@@ -3,4 +3,4 @@ services:
     name: cleanruniq-website
     runtime: static
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    staticPublishPath: ./dist
