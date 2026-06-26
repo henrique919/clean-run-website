@@ -30,6 +30,15 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         heading: ['Archivo', 'sans-serif'],
       },
+      // Half-step + extra spacing used across the marketing pages
+      spacing: {
+        '4.5': '1.125rem', // 18px
+        '5.5': '1.375rem', // 22px
+        '6.5': '1.625rem', // 26px
+        '7.5': '1.875rem', // 30px
+        '13': '3.25rem',   // 52px
+        '18': '4.5rem',    // 72px
+      },
     },
   },
   plugins: [],

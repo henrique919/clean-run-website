@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'CleanRun IQ',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: { '@type': 'Offer', price: '89', priceCurrency: 'AUD' },
+  description:
+    'Photo-first construction defect management, punch list, QA and handover software for builders and site teams.',
+  url: 'https://cleanruniq.com',
+};
+
+const problems = [
+  { icon: '\u{1F4CA}', title: 'Spreadsheet chaos', body: 'Defect lists with no photos. No accountability. No proof. Just rows of unverifiable hope.' },
+  { icon: '\u{1F4AC}', title: 'WhatsApp & text', body: '"Can you fix that crack?" Lost. Untracked. Zero audit trail in a private messaging thread.' },
+  { icon: '\u{1F4F7}', title: 'Camera roll overload', body: '400 photos with no context. Which defect? Which trade? Which one got fixed?' },
+  { icon: '\u2709\uFE0F', title: 'Email thread nightmare', body: '30-reply chains. No single source of truth. Good luck finding sign-off when the solicitor asks.' },
+  { icon: '\u{1F4DD}', title: 'Site walk guesswork', body: 'Verbal agreements on paper. Nothing with a photo. Nothing you could show a subcontractor or solicitor.' },
+  { icon: '\u{1F525}', title: 'Handover panic', body: 'Scrambling to compile reports the night before PC. Chasing trades for photos they never took.' },
+];
+
+const steps = [
+  { num: '01', label: 'Capture', body: 'Photo-first defect logging from the field. Location, trade and type required. No photo, no record.' },
+  { num: '02', label: 'Assign', body: 'Issue the defect to the responsible trade or subcontractor with a due date and clear instructions.' },
+  { num: '03', label: 'Rectify', body: 'The trade uploads photo evidence of completed rectification work directly to the item.' },
+  { num: '04', label: 'Review', body: 'Site manager inspects evidence, rejects if insufficient, or marks it ready for closeout.' },
+  { num: '05', label: 'Close', body: 'Item closed with full evidence chain locked and timestamped. A permanent defensible record.' },
+  { num: '06', label: 'Report', body: 'Generate a clean handover report with all evidence in seconds \u2014 not a weekend of admin.' },
+];
+
+const features = [
+  { tag: 'Evidence-first', title: 'Photo Evidence Chain', body: 'Original, rectification and closeout photos locked to every item. Timestamped. Required before closeout.', href: '/features/photo-evidence/' },
+  { tag: 'Field-ready', title: 'Subcontractor Closeout', body: 'Trades log in, upload rectification evidence and respond to defects \u2014 no app download required.', href: '/features/subcontractor-closeout/' },
+  { tag: 'Real-time', title: 'Live Defect Register', body: 'Every open, in-progress and closed item at a glance. Filter by trade, location and status.', href: '/features/defect-management/' },
+  { tag: 'Automated', title: 'Handover Reports', body: 'Generate reports with full evidence chains in seconds. Not a weekend of admin before PC.', href: '/features/handover-reports/' },
+  { tag: 'Compliance', title: 'Full Audit Trail', body: 'Every action logged. Every approval timestamped. Defensible records for DLP and disputes.', href: '/features/defect-management/' },
+  { tag: 'Mobile-first', title: 'Field Mobile Capture', body: 'Works on phone, tablet and desktop. No app download. Optimised for on-site use in any conditions.', href: '/features/defect-management/' },
+];
+
+const roles = [
+  { emoji: '\u{1F4CB}', title: 'Project Managers', body: 'Full defect visibility across all projects. Track closeout velocity. Know what\u2019s open before the client asks.', href: '/solutions/project-managers/', accent: '#121619' },
+  { emoji: '\u{1F477}', title: 'Site Managers', body: 'Capture defects on site, assign instantly, verify rectification without chasing phone calls or messages.', href: '/solutions/site-managers/', accent: '#20C55E' },
+  { emoji: '\u{1F50D}', title: 'Quality Managers', body: 'Set inspection standards, enforce evidence requirements and generate compliance-ready handover reports.', href: '/solutions/quality-managers/', accent: '#6B7280' },
+  { emoji: '\u{1F527}', title: 'Subcontractors', body: 'Receive defect assignments, upload rectification photos and close out your items \u2014 from any phone.', href: '/solutions/subcontractors/', accent: '#20C55E' },
+];
+
+const trustItems = [
+  { t: 'Photo evidence required before closeout', d: 'No photo, no sign-off. Every item closes with documented proof.' },
+  { t: 'Every item has a full history', d: 'Creation, assignment, rectification and closeout \u2014 all logged and timestamped.' },
+  { t: 'Works on phone, tablet and desktop', d: 'No app download required. Mobile-first for field teams on any device.' },
+  { t: 'Export handover reports in seconds', d: 'All items, all evidence, one clean document. No weekend admin before PC.' },
+  { t: 'Role-based project access', d: 'PMs, site managers, QMs and subcontractors each see exactly what they need.' },
+];
+
+const resources = [
+  { tag: 'Free Download', tagCls: 'bg-[#E1F7E9] text-[#0C7733]', title: 'Defect Closeout Checklist', body: 'The practical field checklist for site teams \u2014 from first capture to final handover sign-off.', cta: 'Download Checklist', href: '/resources/defect-closeout-checklist/' },
+  { tag: 'Free Template', tagCls: 'bg-[#FFF4D6] text-[#B45309]', title: 'Construction Punch List Template', body: 'A ready-to-use punch list template with digital workflow guidance for builders and contractors.', cta: 'Get the Template', href: '/resources/punch-list-template/' },
+  { tag: 'Free Guide', tagCls: 'bg-[#F3F4F6] text-[#374151] border border-[#DDE1E5]', title: 'Construction Defect Management Guide', body: 'The complete guide to defect management. Evidence-focused. Handover-ready. Audit-safe.', cta: 'Read the Guide', href: '/resources/construction-defect-management-guide/' },
+];
+---
+<BaseLayout
+  title="Construction Defect & Handover Software"
+  description="CleanRun IQ helps construction teams capture defects, assign trades, collect photo evidence and close out handover items \u2014 without spreadsheet chaos. Book a demo."
+  schema={softwareSchema}
+>
+  {/* HERO */}
+  <section class="relative min-h-screen flex items-center bg-navy overflow-hidden pt-[66px]">
+    <div class="absolute inset-0 grid-overlay pointer-events-none"></div>
+    <div class="absolute top-[15%] right-0 w-1/2 h-[65%] pointer-events-none" style="background:radial-gradient(ellipse at right,rgba(32,197,94,0.07) 0%,transparent 65%)"></div>
+    <div class="max-w-[1200px] w-full mx-auto px-8 py-20 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-brand/[0.08] border border-brand/[0.22] rounded-full px-3.5 py-1.5 mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand animate-blink"></span>
+          <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Construction Defect &amp; Handover Software</span>
+        </div>
+        <h1 class="font-heading font-extrabold leading-[1.04] tracking-[-1.5px] text-white mb-5 text-[clamp(38px,4vw,62px)]">
+          Construction defect closeout,<br /><span class="text-brand">without the chaos.</span>
+        </h1>
+        <p class="text-lg leading-relaxed text-[#9CA3AF] mb-3.5 max-w-[500px]">CleanRun IQ helps site teams capture defects, assign trades, collect photo evidence and close out handover items faster.</p>
+        <p class="text-sm leading-relaxed text-[#4B5563] mb-9 max-w-[460px]">Built for construction teams sick of chasing photos, spreadsheets, messages and incomplete closeout records.</p>
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3 rounded-lg text-[15px] font-bold font-heading">
+            Book a Demo
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://app.cleanruniq.com/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-6 py-3 rounded-lg text-[15px] font-medium border border-white/10">View Live Demo</a>
+        </div>
+        <a href="/resources/defect-closeout-checklist/" class="inline-flex items-center gap-1.5 text-[13px] text-[#4B5563] hover:text-[#9CA3AF] transition-colors">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 4h9M2.5 7h9M2.5 10h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Download Free Defect Closeout Checklist
+        </a>
+      </div>
+
+      {/* Product register mockup */}
+      <div class="relative pb-10">
+        <div class="bg-white rounded-[10px] overflow-hidden shadow-[0_28px_80px_rgba(0,0,0,0.5)] relative z-10">
+          <div class="bg-[#F3F4F6] px-3.5 py-2 flex items-center gap-2 border-b border-[#DDE1E5]">
+            <div class="flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-[#EF4444]"></div><div class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]"></div><div class="w-2.5 h-2.5 rounded-full bg-[#22C55E]"></div></div>
+            <div class="flex-1 bg-[#DDE1E5] rounded h-[18px] flex items-center px-2.5"><span class="text-[9px] text-[#6B7280] font-mono">app.cleanruniq.com/riverside-apts</span></div>
+          </div>
+          <div class="bg-navy px-3.5 py-2.5 flex items-center justify-between">
+            <span class="font-heading text-[11px] font-bold text-[#E5E7EB]">Riverside Apartments &ndash; Block C</span>
+            <div class="flex gap-1.5">
+              <span class="bg-[#FEE4E2] text-[#B42318] text-[9px] font-bold px-1.5 py-0.5 rounded-sm">3 OPEN</span>
+              <span class="bg-[#FFF4D6] text-[#B45309] text-[9px] font-bold px-1.5 py-0.5 rounded-sm">2 ISSUED</span>
+              <span class="bg-[#E1F7E9] text-[#0C7733] text-[9px] font-bold px-1.5 py-0.5 rounded-sm">5 CLOSED</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-[72px_1fr_78px_98px_54px] px-3.5 py-2 bg-[#F9FAFB] border-b border-[#DDE1E5]">
+            <span class="text-[9px] font-bold text-[#6B7280] uppercase tracking-wide">Ref</span>
+            <span class="text-[9px] font-bold text-[#6B7280] uppercase tracking-wide">Item</span>
+            <span class="text-[9px] font-bold text-[#6B7280] uppercase tracking-wide">Trade</span>
+            <span class="text-[9px] font-bold text-[#6B7280] uppercase tracking-wide">Status</span>
+            <span class="text-[9px] font-bold text-[#6B7280] uppercase tracking-wide">Due</span>
+          </div>
+          <div class="grid grid-cols-[72px_1fr_78px_98px_54px] px-3.5 py-2.5 border-b border-[#F3F4F6] items-center">
+            <span class="text-[10px] font-extrabold text-[#1B2025] font-heading">DEF-041</span>
+            <span class="text-[11px] text-[#374151]">Cracked plasterboard &ndash; Apt 304</span>
+            <span class="text-[10px] text-[#6B7280]">Plasterer</span>
+            <span><span class="bg-[#E1F7E9] text-[#0C7733] text-[9px] font-bold px-1.5 py-0.5 rounded-sm">CLOSED</span></span>
+            <span class="text-[10px] text-[#9CA3AF]">21 Jun</span>
+          </div>
+          <div class="grid grid-cols-[72px_1fr_78px_98px_54px] px-3.5 py-2.5 border-b border-[#F3F4F6] items-center bg-[#FFF4C7]/20">
+            <span class="text-[10px] font-extrabold text-[#1B2025] font-heading">DEF-042</span>
+            <span class="text-[11px] text-[#374151]">Waterproofing gap &ndash; Apt 304 Bath</span>
+            <span class="text-[10px] text-[#6B7280]">Waterproofer</span>
+            <span><span class="bg-[#FFF4D6] text-[#B45309] text-[9px] font-bold px-1.5 py-0.5 rounded-sm">ISSUED</span></span>
+            <span class="text-[10px] text-[#B42318] font-bold">28 Jun</span>
+          </div>
+          <div class="grid grid-cols-[72px_1fr_78px_98px_54px] px-3.5 py-2.5 border-b border-[#F3F4F6] items-center">
+            <span class="text-[10px] font-extrabold text-[#1B2025] font-heading">DEF-043</span>
+            <span class="text-[11px] text-[#374151]">Cracked tiles &ndash; Apt 305 Entry</span>
+            <span class="text-[10px] text-[#6B7280]">Tiler</span>
+            <span><span class="bg-[#FEE4E2] text-[#B42318] text-[9px] font-bold px-1.5 py-0.5 rounded-sm">OPEN</span></span>
+            <span class="text-[10px] text-[#B42318] font-bold">30 Jun</span>
+          </div>
+          <div class="grid grid-cols-[72px_1fr_78px_98px_54px] px-3.5 py-2.5 items-center">
+            <span class="text-[10px] font-extrabold text-[#1B2025] font-heading">DEF-044</span>
+            <span class="text-[11px] text-[#374151]">Paint blistering &ndash; Lvl 4 Common</span>
+            <span class="text-[10px] text-[#6B7280]">Painter</span>
+            <span><span class="bg-[#F3F4F6] text-[#121619] text-[9px] font-bold px-1.5 py-0.5 rounded-sm border border-[#DDE1E5]">REVIEW</span></span>
+            <span class="text-[10px] text-[#6B7280]">25 Jun</span>
+          </div>
+        </div>
+        <div class="absolute top-2 -right-4 bg-navy-card border border-brand/30 rounded-lg px-3 py-2 flex items-center gap-2 shadow-[0_8px_24px_rgba(0,0,0,0.4)] z-20">
+          <div class="w-5 h-5 bg-brand/[0.12] rounded-full flex items-center justify-center shrink-0">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 5-5" stroke="#20C55E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div class="font-heading text-[10px] font-bold text-white whitespace-nowrap">DEF-041 Closed</div>
+            <div class="text-[9px] text-[#6B7280] whitespace-nowrap">Evidence verified &middot; just now</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* TRUST BAR */}
+  <section class="bg-navy-card border-y border-white/[0.05] px-8 py-5">
+    <div class="max-w-[1200px] mx-auto flex items-center justify-center gap-9 flex-wrap">
+      {['Photo-first capture','Full evidence chain per item','Subcontractor-ready workflow','Handover reports in seconds','Built for Australian construction'].map((t) => (
+        <div class="flex items-center gap-2.5">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#20C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="text-[13px] font-medium text-[#9CA3AF]">{t}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* PROBLEM */}
+  <section class="py-[88px] px-8 bg-navy">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-13 max-w-[560px] mx-auto">
+        <div class="inline-flex items-center gap-2 bg-[#B42318]/[0.08] border border-[#B42318]/20 rounded-full px-3.5 py-1.5 mb-4.5">
+          <span class="text-[11px] font-bold text-[#F87171] tracking-wider uppercase font-heading">Sound familiar?</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-white mb-3.5 leading-[1.1]">Your defects are living in five<br />different places at once.</h2>
+        <p class="text-base text-[#6B7280] leading-relaxed">Spreadsheets, WhatsApp threads, email chains, camera rolls and site walk notes &mdash; none of it connected, none of it defensible.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-3.5 mb-11">
+        {problems.map((p) => (
+          <div class="bg-white/[0.03] border border-white/[0.06] border-t-2 border-t-[#B42318]/[0.45] rounded-[10px] p-6">
+            <div class="text-[22px] mb-3">{p.icon}</div>
+            <h3 class="font-heading text-[15px] font-bold text-[#E5E7EB] mb-1.5">{p.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#4B5563]">{p.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="text-center">
+        <a href="/features/defect-management/" class="inline-flex items-center gap-1.5 text-sm font-bold text-brand font-heading">
+          See how CleanRun IQ solves this
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7.5 3l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* WORKFLOW */}
+  <section class="py-[88px] px-8 bg-navy-card border-t border-white/[0.05]">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 bg-brand/[0.07] border border-brand/[0.18] rounded-full px-3.5 py-1.5 mb-4.5">
+          <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">The CleanRun IQ workflow</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-white mb-3">Capture. Assign. Close &mdash; with proof.</h2>
+        <p class="text-base text-[#6B7280] max-w-[480px] mx-auto">Six steps. Every item. Every time.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5">
+        {steps.map((s) => (
+          <div class="bg-white/[0.03] border border-white/[0.06] border-l-[3px] border-l-transparent rounded-[10px] px-5 py-4.5 hover:border-l-brand hover:bg-brand/[0.05] transition-colors">
+            <div class="font-heading text-[10px] font-bold text-[#4B5563] tracking-wider mb-2">{s.num}</div>
+            <div class="font-heading text-[15px] font-bold text-[#E5E7EB] mb-1.5">{s.label}</div>
+            <div class="text-[12px] leading-[1.55] text-[#4B5563]">{s.body}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FEATURES */}
+  <section class="py-[88px] px-8 bg-[#F3F4F6]">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-13">
+        <div class="inline-flex items-center gap-2 bg-brand/[0.08] border border-brand/[0.15] rounded-full px-3.5 py-1.5 mb-4.5">
+          <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Core capabilities</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-[#1B2025] mb-3">Everything your team needs.<br />Nothing they don't.</h2>
+        <p class="text-base text-[#6B7280] max-w-[460px] mx-auto">Designed for field teams who need speed. Structured for managers who need proof.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4.5">
+        {features.map((f) => (
+          <div class="bg-white rounded-xl p-6.5 border border-[#DDE1E5] shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+            <span class="inline-block bg-[#E1F7E9] text-[#0C7733] text-[9px] font-bold px-1.5 py-0.5 rounded-sm uppercase tracking-wide mb-2.5 font-heading">{f.tag}</span>
+            <h3 class="font-heading text-base font-bold text-[#1B2025] mb-2">{f.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280] mb-3.5">{f.body}</p>
+            <a href={f.href} class="inline-flex items-center gap-1.5 text-[12px] font-bold text-brand font-heading">Learn more <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6.5 2l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ROLES */}
+  <section class="py-[88px] px-8 bg-navy border-t border-white/[0.05]">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-13">
+        <div class="inline-flex items-center gap-2 bg-brand/[0.07] border border-brand/[0.18] rounded-full px-3.5 py-1.5 mb-4.5">
+          <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Built for your role</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-white mb-3">One platform. Every role on the project.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4.5">
+        {roles.map((r) => (
+          <div class="bg-white/[0.03] border border-white/[0.07] rounded-xl p-7" style={`border-top:3px solid ${r.accent}`}>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-navy rounded-lg flex items-center justify-center shrink-0 text-lg">{r.emoji}</div>
+              <div>
+                <h3 class="font-heading text-lg font-extrabold text-white mb-2">{r.title}</h3>
+                <p class="text-[13px] leading-relaxed text-[#9CA3AF] mb-3">{r.body}</p>
+                <a href={r.href} class="inline-flex items-center gap-1.5 text-[12px] font-bold text-brand font-heading">See workflow <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6.5 2l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* TRUST */}
+  <section class="py-[88px] px-8 bg-navy-card border-t border-white/[0.05]">
+    <div class="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-18 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-brand/[0.07] border border-brand/[0.18] rounded-full px-3.5 py-1.5 mb-5.5">
+          <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Why CleanRun IQ</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[36px] tracking-[-1px] text-white mb-4 leading-[1.1]">Built for real sites.<br />Trusted for real handovers.</h2>
+        <p class="text-[15px] leading-relaxed text-[#6B7280] mb-7">CleanRun IQ is built from real construction site pain &mdash; not generic software with construction labels slapped on. Designed specifically for Australian builders, contractors and site teams.</p>
+        <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3 rounded-lg text-sm font-bold font-heading">
+          Book a Demo
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 6.5h10M7.5 3l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="flex flex-col gap-2.5">
+        {trustItems.map((item) => (
+          <div class="flex items-start gap-3 p-3.5 bg-white/[0.03] border border-white/[0.06] rounded-lg">
+            <div class="w-6 h-6 bg-brand/10 rounded-md flex items-center justify-center shrink-0 mt-0.5">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5l2.5 2.5 6.5-6.5" stroke="#20C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="font-heading text-[13px] font-bold text-[#E5E7EB] mb-0.5">{item.t}</div>
+              <div class="text-[12px] text-[#4B5563] leading-snug">{item.d}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ROI */}
+  <section class="py-[88px] px-8 bg-navy border-t border-white/[0.05]">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-13">
+        <div class="inline-flex items-center gap-2 bg-brand/[0.07] border border-brand/[0.18] rounded-full px-3.5 py-1.5 mb-4.5">
+          <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">ROI Calculator</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-white mb-3">How much is defect admin costing your team?</h2>
+        <p class="text-base text-[#6B7280] max-w-[500px] mx-auto">Estimate the cost of your current defect management process &mdash; and the savings with CleanRun IQ.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div class="bg-white/[0.03] border border-white/[0.07] rounded-xl p-7.5">
+          <div class="font-heading text-[11px] font-bold text-[#4B5563] uppercase tracking-wider mb-6">Your project profile</div>
+          <div class="flex flex-col gap-6">
+            <label class="block">
+              <div class="flex justify-between items-baseline mb-2.5"><span class="text-[13px] text-[#CBD5E1] font-medium">Projects per year</span><span class="font-heading text-xl font-extrabold text-brand" id="roi-projects-val">12</span></div>
+              <input type="range" id="roi-projects" min="1" max="50" value="12" class="roi-range" />
+            </label>
+            <label class="block">
+              <div class="flex justify-between items-baseline mb-2.5"><span class="text-[13px] text-[#CBD5E1] font-medium">Avg defects per project</span><span class="font-heading text-xl font-extrabold text-brand" id="roi-defects-val">45</span></div>
+              <input type="range" id="roi-defects" min="5" max="300" value="45" class="roi-range" />
+            </label>
+            <label class="block">
+              <div class="flex justify-between items-baseline mb-2.5"><span class="text-[13px] text-[#CBD5E1] font-medium">Mins chasing each closeout</span><span class="font-heading text-xl font-extrabold text-brand" id="roi-chase-val">25</span></div>
+              <input type="range" id="roi-chase" min="5" max="90" value="25" class="roi-range" />
+            </label>
+            <label class="block">
+              <div class="flex justify-between items-baseline mb-2.5"><span class="text-[13px] text-[#CBD5E1] font-medium">PM / site manager hourly rate</span><span class="font-heading text-xl font-extrabold text-brand"><span>$</span><span id="roi-rate-val">90</span></span></div>
+              <input type="range" id="roi-rate" min="40" max="200" value="90" class="roi-range" />
+            </label>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3.5">
+          <div class="bg-white/[0.03] border border-white/[0.07] rounded-xl p-6">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-[#4B5563] mb-1.5">Admin hours lost annually</div>
+            <div class="font-heading text-[44px] font-extrabold text-white tracking-[-2px] leading-none" id="roi-hours">540</div>
+            <div class="text-[12px] text-[#4B5563] mt-1.5">hours of PM and site manager time</div>
+          </div>
+          <div class="bg-[#B42318]/[0.06] border border-[#B42318]/[0.18] rounded-xl p-6">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-[#4B5563] mb-1.5">Estimated monthly cost</div>
+            <div class="font-heading text-[44px] font-extrabold text-[#F87171] tracking-[-2px] leading-none" id="roi-cost">$4,050</div>
+            <div class="text-[12px] text-[#4B5563] mt-1.5">in defect admin overhead each month</div>
+          </div>
+          <div class="bg-brand/[0.05] border border-brand/[0.22] rounded-xl p-6">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-brand mb-1.5">Projected annual savings with CleanRun IQ</div>
+            <div class="font-heading text-[44px] font-extrabold text-brand tracking-[-2px] leading-none" id="roi-save">$31,590</div>
+            <div class="text-[12px] text-[#4B5563] mt-1.5">estimated time and admin cost recovered</div>
+          </div>
+          <a href="/resources/defect-management-roi-calculator/" class="flex items-center justify-center gap-2 bg-brand/[0.08] border border-brand/[0.22] text-brand py-3.5 rounded-lg text-[13px] font-bold font-heading">
+            Get full ROI analysis
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* RESOURCES */}
+  <section class="py-[88px] px-8 bg-[#F3F4F6]">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-13">
+        <div class="inline-flex items-center gap-2 bg-brand/[0.07] border border-brand/[0.15] rounded-full px-3.5 py-1.5 mb-4.5">
+          <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Free resources</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-[#1B2025] mb-3">Start with the tools you can use today.</h2>
+        <p class="text-base text-[#6B7280] max-w-[440px] mx-auto">Free templates and guides for construction teams who want better defect management right now.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4.5">
+        {resources.map((r) => (
+          <div class="bg-white rounded-xl p-6.5 border border-[#DDE1E5] shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex flex-col">
+            <div class={`inline-block self-start text-[9px] font-bold px-1.5 py-0.5 rounded-sm uppercase tracking-wide mb-3 font-heading ${r.tagCls}`}>{r.tag}</div>
+            <h3 class="font-heading text-base font-bold text-[#1B2025] mb-2 leading-tight">{r.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280] flex-1 mb-4">{r.body}</p>
+            <a href={r.href} class="inline-flex items-center gap-1.5 text-[12px] font-bold text-brand font-heading">{r.cta} <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M6.5 2l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* FINAL CTA */}
+  <section class="py-[88px] px-8 bg-navy border-t border-white/[0.05] relative overflow-hidden">
+    <div class="max-w-[720px] mx-auto text-center relative z-10">
+      <h2 class="font-heading font-extrabold text-[46px] tracking-[-1.5px] text-white mb-4.5 leading-[1.05]">Ready for a clean handover?</h2>
+      <p class="text-lg text-[#6B7280] mb-9 leading-relaxed">Book a CleanRun IQ demo and see how site teams capture, assign and close defects &mdash; with full evidence, without the chaos.</p>
+      <div class="flex items-center justify-center gap-3 flex-wrap mb-5.5">
+        <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-7.5 py-3.5 rounded-lg text-base font-extrabold font-heading">
+          Book a Demo
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://app.cleanruniq.com/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-7 py-3.5 rounded-lg text-[15px] font-semibold border border-white/10">View Live Demo</a>
+      </div>
+      <p class="text-[13px] text-[#374151]">No credit card. No locked-in contract. No generic demo with your logo slapped on.</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var ids = ['projects', 'defects', 'chase', 'rate'];
+      var inputs = {};
+      ids.forEach(function (k) { inputs[k] = document.getElementById('roi-' + k); });
+      var fmt = function (n) { return n.toLocaleString('en-AU'); };
+      function update() {
+        var projects = +inputs.projects.value, defects = +inputs.defects.value,
+            chase = +inputs.chase.value, rate = +inputs.rate.value;
+        document.getElementById('roi-projects-val').textContent = projects;
+        document.getElementById('roi-defects-val').textContent = defects;
+        document.getElementById('roi-chase-val').textContent = chase;
+        document.getElementById('roi-rate-val').textContent = rate;
+        var annual = projects * defects;
+        var hrs = Math.round(annual * (8 + chase) / 60);
+        var cost = Math.round(hrs * rate / 12);
+        var save = Math.round(hrs * rate * 0.65);
+        document.getElementById('roi-hours').textContent = fmt(hrs);
+        document.getElementById('roi-cost').textContent = '$' + fmt(cost);
+        document.getElementById('roi-save').textContent = '$' + fmt(save);
+      }
+      ids.forEach(function (k) { inputs[k].addEventListener('input', update); });
+      update();
+    })();
+  </script>
+
+  <style is:global>
+    .roi-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: rgba(32,197,94,0.18); border-radius: 2px; outline: none; cursor: pointer; }
+    .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #20C55E; cursor: pointer; border: 2px solid #121619; box-shadow: 0 0 0 3px rgba(32,197,94,0.2); }
+    .roi-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #20C55E; cursor: pointer; border: 2px solid #121619; }
+  </style>
+</BaseLayout>
