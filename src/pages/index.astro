@@ -104,10 +104,11 @@ const toneMap: Record<string, string> = {
         />
 
         {/* Product composition: phone-first focal point, desktop support behind */}
-        <div class="relative flex items-start justify-center lg:justify-start">
-          {/* Primary: real app phone */}
-          <div class="relative z-10 w-[260px] bg-navy-card border border-white/[0.1] rounded-[30px] p-1.5 shadow-[0_24px_60px_rgba(0,0,0,0.5)]">
-            <img src="/images/app/app-home.webp" alt="CleanRun IQ app home screen" width="460" height="900" loading="eager" decoding="async" class="w-full rounded-[24px] block" />
+        <div class="relative flex items-start justify-center lg:justify-start min-h-[480px]">
+          {/* Primary phone: real items list */}
+          <div class="relative z-10 w-[248px] bg-navy-card border border-white/[0.1] rounded-[30px] p-1.5 shadow-[0_28px_70px_rgba(0,0,0,0.6)]">
+            <img src="/images/app/app-items-real.webp" alt="CleanRun IQ live defect register" width="416" height="900" loading="eager" decoding="async" class="w-full rounded-[24px] block" />
+          </div>
           </div>
           {/* Secondary: desktop admin, sits behind and to the right */}
           <div class="hidden lg:block absolute left-[220px] top-8 w-[380px] z-0 rounded-xl overflow-hidden border border-white/[0.09] shadow-[0_20px_60px_rgba(0,0,0,0.45)] opacity-90">
