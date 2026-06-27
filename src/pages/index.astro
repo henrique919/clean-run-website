@@ -103,19 +103,20 @@ const toneMap: Record<string, string> = {
           support="Built for the final stretch of a project, when defects move fast, trades come and go, and everyone needs a clear record of what has actually been fixed."
         />
 
-        {/* Product composition: phone (front) + dashboard (behind) + report card (floating) */}
-        <div class="relative pb-10 lg:pb-16 min-h-[460px]">
-          <div class="relative z-10 mx-auto lg:mx-0 w-[286px] bg-navy-card border border-white/[0.12] rounded-[32px] p-1.5 shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
-            <img src="/images/app/app-home.webp" alt="CleanRun IQ app home screen — closeout control room for Esplanade Apartments" width="460" height="900" loading="eager" decoding="async" class="w-full rounded-[26px] block" />
+        {/* Product composition: phone-first focal point, desktop support behind */}
+        <div class="relative flex items-start justify-center lg:justify-start">
+          {/* Primary: real app phone */}
+          <div class="relative z-10 w-[260px] bg-navy-card border border-white/[0.1] rounded-[30px] p-1.5 shadow-[0_24px_60px_rgba(0,0,0,0.5)]">
+            <img src="/images/app/app-home.webp" alt="CleanRun IQ app home screen" width="460" height="900" loading="eager" decoding="async" class="w-full rounded-[24px] block" />
           </div>
-          <div class="hidden lg:block absolute right-0 top-8 w-[540px] z-0 rounded-xl overflow-hidden border border-white/[0.12] shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
-            <div class="bg-[#EDEFF1] px-3 py-2 flex items-center gap-2 border-b border-[#DDE1E5]">
-              <div class="flex gap-1"><span class="w-2.5 h-2.5 rounded-full bg-[#C9CED3]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#C9CED3]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#C9CED3]"></span></div>
-              <div class="flex-1 bg-white rounded px-2 py-1 flex items-center gap-1.5"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="text-[10px] text-[#6B7280] font-mono">app.cleanruniq.com</span></div>
+          {/* Secondary: desktop admin, sits behind and to the right */}
+          <div class="hidden lg:block absolute left-[220px] top-8 w-[380px] z-0 rounded-xl overflow-hidden border border-white/[0.09] shadow-[0_20px_60px_rgba(0,0,0,0.45)] opacity-90">
+            <div class="bg-[#EDEFF1] px-3 py-1.5 flex items-center gap-2 border-b border-[#DDE1E5]">
+              <div class="flex gap-1"><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span></div>
+              <span class="text-[9px] text-[#6B7280] font-mono">app.cleanruniq.com</span>
             </div>
-            <img src="/images/app/app-desktop-setup.webp" alt="CleanRun IQ admin desktop — project setup with buildings, levels and units" width="1500" height="770" loading="eager" decoding="async" class="w-full block" />
+            <img src="/images/app/app-desktop-setup.webp" alt="CleanRun IQ admin desktop" width="1500" height="770" loading="eager" decoding="async" class="w-full block" />
           </div>
-          <ReportPreviewCard class="hidden lg:block absolute left-[130px] -bottom-2 z-30" />
         </div>
       </div>
     </div>
@@ -134,10 +135,10 @@ const toneMap: Record<string, string> = {
   </div>
 
   {/* ============ PROBLEM (light) ============ */}
-  <section class="bg-[#F3F4F6] px-8 py-[88px]">
+  <section class="bg-[#F3F4F6] px-8 py-[64px]">
     <div class="max-w-[1100px] mx-auto">
       <div class="max-w-[680px] mb-12">
-        <h2 class="font-heading font-extrabold text-[34px] md:text-[40px] tracking-[-1px] text-[#1B2025] mb-4 leading-[1.1]">Your defect information is scattered before the job is even ready to hand over.</h2>
+        <h2 class="font-heading font-extrabold text-[28px] md:text-[34px] tracking-[-1px] text-[#1B2025] mb-4 leading-[1.1]">Your defect information is scattered before the job is even ready to hand over.</h2>
         <p class="text-[16px] leading-relaxed text-[#525A66]">Spreadsheets track the list. Text threads carry the follow-up. Photos sit in someone's camera roll. Emails hold the decisions. Then someone has to pull the final report together by hand — and prove what was raised, who was told and what got fixed.</p>
       </div>
       <div class="grid md:grid-cols-3 gap-4 mb-10">
@@ -157,11 +158,11 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ HOW IT WORKS (white) ============ */}
-  <section class="bg-white px-8 py-[88px]">
+  <section class="bg-white px-8 py-[64px]">
     <div class="max-w-[1100px] mx-auto">
       <div class="mb-12 max-w-[560px]">
         <div class="text-[12px] font-bold text-[#0C7733] uppercase tracking-wider font-heading mb-3">How it works</div>
-        <h2 class="font-heading font-extrabold text-[34px] md:text-[38px] tracking-[-1px] text-[#1B2025] leading-[1.1]">The workflow your site team can actually follow.</h2>
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-1px] text-[#1B2025] leading-[1.1]">The workflow your site team can actually follow.</h2>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-9">
         {steps.map((s) => (
@@ -178,31 +179,28 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ VOICE CAPTURE (dark) ============ */}
-  <section class="bg-navy px-8 py-[88px] relative overflow-hidden border-t border-white/[0.05]">
-    <div class="absolute left-0 top-[8%] w-[44%] h-[72%] pointer-events-none" style="background:radial-gradient(ellipse at left,rgba(32,197,94,0.06) 0%,transparent 65%)"></div>
-    <div class="max-w-[1100px] mx-auto relative z-10 grid lg:grid-cols-2 gap-14 items-center">
+  <section class="relative bg-navy px-8 py-[56px] overflow-hidden border-t border-white/[0.05]">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('/images/people/person-phone.webp')"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(90deg,#121619 45%,rgba(12,17,21,0.88) 100%)"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10 grid lg:grid-cols-[1fr_auto] gap-14 items-center">
       <div>
-        <div class="text-[12px] font-bold text-brand uppercase tracking-wider font-heading mb-3">Capture, hands-free</div>
-        <h2 class="font-heading font-extrabold text-[34px] md:text-[40px] tracking-[-1px] text-white mb-4 leading-[1.08]">Talk it in. CleanRun IQ writes the defect.</h2>
-        <p class="text-[16px] leading-relaxed text-[#A8B0BB] mb-7 max-w-[480px]">On the walk with your hands full, just say what you see. CleanRun IQ turns plain speech into a structured item — title, location, trade and priority — and snaps the photo at the same time.</p>
-        <div class="flex flex-col gap-3.5">
-          <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-md bg-brand/[0.12] flex items-center justify-center shrink-0"><Icon name="check" size={13} class="text-brand" width={2.4} /></div><span class="text-[14px] text-[#C2C9D2]">Speak the defect — no typing on a dusty phone</span></div>
-          <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-md bg-brand/[0.12] flex items-center justify-center shrink-0"><Icon name="check" size={13} class="text-brand" width={2.4} /></div><span class="text-[14px] text-[#C2C9D2]">Photo and details land on the same item</span></div>
-          <div class="flex items-center gap-3"><div class="w-6 h-6 rounded-md bg-brand/[0.12] flex items-center justify-center shrink-0"><Icon name="check" size={13} class="text-brand" width={2.4} /></div><span class="text-[14px] text-[#C2C9D2]">Assigned to the trade before you reach the next room</span></div>
+        <div class="text-[11px] font-bold text-brand uppercase tracking-wider font-heading mb-3">Capture, hands-free</div>
+        <h2 class="font-heading font-extrabold text-[28px] md:text-[34px] tracking-[-0.8px] text-white mb-4 leading-[1.08]">Talk it in. CleanRun IQ writes the defect.</h2>
+        <p class="text-[15px] leading-relaxed text-[#A8B0BB] mb-6 max-w-[440px]">Say what you see on the walk. CleanRun IQ turns plain speech into a structured item — title, location, trade and priority — and snaps the photo at the same time.</p>
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-brand/[0.15] flex items-center justify-center shrink-0"><Icon name="check" size={11} class="text-brand" width={2.4} /></div><span class="text-[13px] text-[#C2C9D2]">Speak the defect — no typing on a dusty phone</span></div>
+          <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-brand/[0.15] flex items-center justify-center shrink-0"><Icon name="check" size={11} class="text-brand" width={2.4} /></div><span class="text-[13px] text-[#C2C9D2]">Photo and details land on the same item</span></div>
+          <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-brand/[0.15] flex items-center justify-center shrink-0"><Icon name="check" size={11} class="text-brand" width={2.4} /></div><span class="text-[13px] text-[#C2C9D2]">Assigned to the trade before you reach the next room</span></div>
         </div>
       </div>
-      <div class="relative flex justify-center lg:justify-end">
-        <div class="relative w-full max-w-[420px]">
-          <img src="/images/people/person-phone.webp" alt="Site supervisor on a call at a construction site" loading="lazy" decoding="async" class="w-full h-[360px] object-cover rounded-2xl" />
-          <div class="absolute inset-0 rounded-2xl" style="background:linear-gradient(180deg,rgba(12,17,21,0) 40%,rgba(12,17,21,0.5) 100%)"></div>
-          <VoiceCaptureDemo width={210} class="absolute -bottom-6 -left-6 shadow-[0_30px_70px_rgba(0,0,0,0.6)]" />
-        </div>
+      <div class="flex justify-center">
+        <VoiceCaptureDemo width={248} />
       </div>
     </div>
   </section>
 
   {/* ============ NO PHOTO, NO CLOSEOUT (light grey) ============ */}
-  <section class="bg-[#F3F4F6] px-8 py-[88px] border-t border-[#E2E5E9]">
+  <section class="bg-[#F3F4F6] px-8 py-[64px] border-t border-[#E2E5E9]">
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center max-w-[620px] mx-auto mb-12">
         <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-[#1B2025] mb-4">No photo, no closeout.</h2>
@@ -227,10 +225,10 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ BUILT AROUND REAL DEFECT CLOSEOUT (dark) ============ */}
-  <section class="bg-navy px-8 py-[88px]">
+  <section class="bg-navy px-8 py-[64px]">
     <div class="max-w-[1100px] mx-auto">
       <div class="max-w-[620px] mb-11">
-        <h2 class="font-heading font-extrabold text-[34px] md:text-[38px] tracking-[-1px] text-white mb-4 leading-[1.1]">Built around real defect closeout.</h2>
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-1px] text-white mb-4 leading-[1.1]">Built around real defect closeout.</h2>
         <p class="text-[16px] leading-relaxed text-[#A8B0BB]">Not another generic task board. CleanRun IQ is structured around the way defects actually move through a construction project — by location, trade, status and the evidence behind each one.</p>
       </div>
       <div class="grid md:grid-cols-2 gap-3.5">
@@ -261,9 +259,9 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ WHY IT MATTERS (white) ============ */}
-  <section class="bg-white px-8 py-[80px] border-t border-[#E2E5E9]">
+  <section class="bg-white px-8 py-[60px] border-t border-[#E2E5E9]">
     <div class="max-w-[900px] mx-auto text-center">
-      <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025] mb-3">When a defect is closed, four questions should be easy to answer.</h2>
+      <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025] mb-3">When a defect is closed, four questions should be easy to answer.</h2>
       <p class="text-[15px] text-[#6B7280] mb-10">That's what the register is built around.</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
@@ -282,10 +280,10 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ FEATURES (light grey) ============ */}
-  <section class="bg-[#F3F4F6] px-8 py-[88px]">
+  <section class="bg-[#F3F4F6] px-8 py-[64px]">
     <div class="max-w-[1100px] mx-auto">
       <div class="mb-11 max-w-[560px]">
-        <h2 class="font-heading font-extrabold text-[34px] md:text-[38px] tracking-[-1px] text-[#1B2025] mb-3 leading-[1.1]">The defect workflow stripped back to what site teams actually use.</h2>
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-1px] text-[#1B2025] mb-3 leading-[1.1]">The defect workflow stripped back to what site teams actually use.</h2>
         <p class="text-[15px] text-[#525A66] leading-relaxed">Enough structure to hold up at PC and DLP. Not so much that nobody on site bothers with it.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3.5">
@@ -304,10 +302,10 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ ROLES (dark, compact) ============ */}
-  <section class="bg-navy px-8 py-[80px]">
+  <section class="bg-navy px-8 py-[60px]">
     <div class="max-w-[1100px] mx-auto">
       <div class="mb-10 max-w-[600px]">
-        <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-white mb-3">One defect register that PMs, site teams and trades can all work from.</h2>
+        <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-white mb-3">One defect register that PMs, site teams and trades can all work from.</h2>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3.5">
         {roles.map((r) => (
@@ -323,10 +321,10 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ ROI (dark, focused) ============ */}
-  <section class="bg-[#0C1115] px-8 py-[72px] border-t border-white/[0.05]">
+  <section class="bg-[#0C1115] px-8 py-[56px] border-t border-white/[0.05]">
     <div class="max-w-[920px] mx-auto">
       <div class="text-center mb-9">
-        <h2 class="font-heading font-extrabold text-[28px] md:text-[32px] tracking-[-0.8px] text-white mb-2.5">What is defect admin costing the team?</h2>
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-0.8px] text-white mb-2.5">What is defect admin costing the team?</h2>
         <p class="text-[14px] text-[#A8B0BB] max-w-[460px] mx-auto">A rough estimate of the time spent logging and chasing closeout each year.</p>
       </div>
       <div class="bg-navy-card border border-white/[0.08] rounded-2xl p-7 grid lg:grid-cols-2 gap-8 items-center">
@@ -373,10 +371,10 @@ const toneMap: Record<string, string> = {
   </section>
 
   {/* ============ RESOURCES (light grey) ============ */}
-  <section class="bg-[#F3F4F6] px-8 py-[80px] border-t border-[#E2E5E9]">
+  <section class="bg-[#F3F4F6] px-8 py-[60px] border-t border-[#E2E5E9]">
     <div class="max-w-[1100px] mx-auto">
       <div class="mb-10 flex items-end justify-between flex-wrap gap-4">
-        <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-[#1B2025]">Practical resources you can use today.</h2>
+        <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025]">Practical resources you can use today.</h2>
         <a href="/resources/" class="text-[13px] font-bold text-[#0C7733] font-heading">All resources →</a>
       </div>
       <div class="grid md:grid-cols-3 gap-4">

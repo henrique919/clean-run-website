@@ -3,9 +3,9 @@
 const navLinks = [
   { href: '/features/', label: 'Features' },
   { href: '/solutions/', label: 'Solutions' },
-  { href: '/pricing/', label: 'Pricing' },
   { href: '/resources/', label: 'Resources' },
   { href: '/compare/', label: 'Compare' },
+  { href: '/pricing/', label: 'Pricing' },
 ];
 ---
 <nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b border-transparent">
@@ -26,7 +26,8 @@ const navLinks = [
 
     <div class="flex items-center gap-3 shrink-0">
       <a href="https://app.cleanruniq.com/" class="hidden sm:inline text-sm font-medium text-[#A8B0BB] hover:text-white transition-colors">Log in</a>
-      <a href="/demo/" class="bg-brand text-navy px-4 sm:px-5 py-2.5 rounded-lg text-[13px] sm:text-sm font-bold font-heading whitespace-nowrap hover:bg-brand-dark hover:text-white transition-colors">Book demo</a>
+      <a href="/demo/" class="bg-brand text-navy px-4 sm:px-5 py-2.5 rounded-lg text-[13px] sm:text-sm font-bold font-heading whitespace-nowrap hover:bg-brand-dark hover:text-white transition-colors hidden sm:inline">Book a 20-minute walkthrough</a>
+      <a href="/demo/" class="bg-brand text-navy px-4 py-2.5 rounded-lg text-[13px] font-bold font-heading whitespace-nowrap sm:hidden">Book demo</a>
       <button id="nav-toggle" type="button" class="md:hidden w-9 h-9 flex items-center justify-center rounded-md text-[#A8B0BB] hover:text-white hover:bg-white/[0.06] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg id="nav-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         <svg id="nav-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden"><path d="M6 6l12 12M18 6L6 18"/></svg>
