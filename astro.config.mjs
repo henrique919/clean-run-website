@@ -21,4 +21,9 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
+  vite: {
+    server: {
+      allowedHosts: ['devserver-main--clean-run-edit1.netlify.app'],
+    },
+  },
 });
