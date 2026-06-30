@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Why Photo Evidence Matters in Construction',
+  description: 'Why a photo-backed defect record protects builders at handover, in client disputes and during the defects liability period.',
+  author: { '@type': 'Organization', name: 'CleanRun IQ' },
+  publisher: { '@type': 'Organization', name: 'CleanRun IQ' },
+};
+const sections = [
+  { n: '01', h: 'A list says it existed. A photo says what happened.', p: 'A defect register tells you an item was raised. It does not, on its own, show the state it was in or that the fix was done properly. The photo is what turns a line on a list into something you can rely on later.' },
+  { n: '02', h: 'It settles disputes before they grow', p: 'When a client questions a finish months after they move in, a dated photo of the issue and the fix usually ends the conversation quickly. Without it, you are arguing from memory — and memory is not a strong position in a dispute.' },
+  { n: '03', h: 'It holds trades to the work', p: 'Asking for a rectification photo changes the conversation with a subcontractor. “It’s done” becomes a picture of the completed work, attached to the item. That is fairer to everyone and far easier to sign off.' },
+  { n: '04', h: 'It still works at DLP', p: 'Defects liability questions can arrive long after handover. A record where every closed item carries its photo and history is the difference between a five-minute answer and a week of digging through old folders.' },
+];
+---
+<BaseLayout title="Why Photo Evidence Matters in Construction" description="Why a photo-backed defect record protects builders at handover, in client disputes and during the defects liability period — and how to keep one without the admin." schema={articleSchema}>
+  <section class="bg-navy pt-[112px] pb-14 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[820px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Resources', href: '/resources/' }, { label: 'Photo Evidence in Construction' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-4.5">
+        <Icon name="camera" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Guide</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(30px,3.4vw,46px)] tracking-[-1px] text-white mb-4 leading-[1.07]">Why photo evidence matters in construction</h1>
+      <p class="text-[16px] text-[#A8B0BB] leading-relaxed max-w-[620px]">Handover protection, fewer disputes and a clean answer at DLP — what a photo-backed defect record actually does for a builder.</p>
+    </div>
+  </section>
+
+  <article class="bg-white px-8 py-16">
+    <div class="max-w-[760px] mx-auto flex flex-col gap-10">
+      {sections.map((s) => (
+        <div>
+          <div class="flex items-baseline gap-3 mb-3"><span class="font-heading text-[13px] font-extrabold text-brand">{s.n}</span><h2 class="font-heading text-[22px] md:text-[26px] font-extrabold text-[#1B2025] tracking-[-0.5px] leading-tight">{s.h}</h2></div>
+          <p class="text-[16px] leading-[1.7] text-[#525A66]">{s.p}</p>
+        </div>
+      ))}
+      <div class="bg-navy rounded-xl px-6 py-6">
+        <h3 class="font-heading text-[17px] font-bold text-white mb-2">Keep the record without the admin</h3>
+        <p class="text-[14px] text-[#A8B0BB] leading-relaxed mb-4">CleanRun IQ keeps the original, rectification and closeout photo on every item automatically — no separate folder to maintain.</p>
+        <a href="/features/photo-evidence/" class="inline-flex items-center gap-1.5 bg-brand text-navy px-4 py-2.5 rounded-lg text-[13px] font-bold font-heading">See how photo evidence works <Icon name="arrow" size={13} width={2} /></a>
+      </div>
+    </div>
+  </article>
+
+  <CTASection heading="Build a record you can stand behind." body="Book a short walkthrough and see how the photo on every item protects you at handover and during DLP." />
+</BaseLayout>

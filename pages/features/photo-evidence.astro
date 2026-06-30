@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import MarkupMockup from '../../components/MarkupMockup.astro';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Does every defect need a photo?', acceptedAnswer: { '@type': 'Answer', text: 'An item is captured with a photo, and the closeout photo is required before it can be marked closed. That way a closed item always has the picture that proves the fix sitting on it.' } },
+    { '@type': 'Question', name: 'What photos sit on an item?', acceptedAnswer: { '@type': 'Answer', text: 'The original issue photo, the rectification photo from the trade, and any closeout photo from the reviewer — each kept with the date and the person who added it.' } },
+    { '@type': 'Question', name: 'Can photos be changed after an item is closed?', acceptedAnswer: { '@type': 'Answer', text: 'The history of an item is kept, so you can see what was captured and when. That is what makes the record useful months later during the defects liability period.' } },
+  ],
+};
+
+// Three real captured defect photos → original / rectified states
+const chain = [
+  { img: '/images/defects/cracked-tile.webp', alt: 'Cracked floor tile captured on site', stage: 'Captured', tone: 'open', note: 'Cracked tile, Unit 207 ensuite. Photo taken on the walk.' },
+  { img: '/images/defects/cracked-wall.webp', alt: 'Cracked plaster wall', stage: 'Rectified', tone: 'issued', note: 'Trade uploads the fix. Item moves to review.' },
+  { img: '/images/defects/peeling-paint.webp', alt: 'Repainted wall surface', stage: 'Closed', tone: 'closed', note: 'Reviewer checks the photo against the issue and closes it.' },
+];
+const toneMap = {
+  open: 'bg-[#FEE4E2] text-[#B42318]',
+  issued: 'bg-[#FFF4D6] text-[#B45309]',
+  closed: 'bg-[#E1F7E9] text-[#0C7733]',
+};
+const why = [
+  { icon: 'shield', title: 'Protects you at handover', body: 'When a client questions an item, the picture that proves the fix is already attached — not somewhere in a camera roll.' },
+  { icon: 'tools', title: 'Holds trades accountable', body: 'A rectification photo is the difference between “it’s done” and proof it’s done. The trade uploads it against the item.' },
+  { icon: 'clock', title: 'Still there at DLP', body: 'Defects liability claims can land months later. The photo and the item history are kept, so the answer is easy to find.' },
+];
+---
+<BaseLayout title="Photo Evidence for Construction Defects | CleanRun IQ" description="Capture and organise construction defect photos so every issue, update and closeout has evidence attached." schema={faqSchema}>
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1000px] mx-auto relative z-10">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Features', href: '/features/' }, { label: 'Photo Evidence' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+        <Icon name="camera" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Photo evidence</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05] max-w-[720px]">The photo that proves the fix stays on the item.</h1>
+      <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[560px] mb-8">No photo, no closeout. CleanRun IQ keeps the original, rectification and closeout picture on every defect — so a closed item always carries the proof behind it.</p>
+      <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+    </div>
+  </section>
+
+  {/* Evidence chain with real photos */}
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025] mb-3">One item, the full picture.</h2>
+      <p class="text-[15px] text-[#525A66] mb-9 max-w-[560px]">Each defect carries its photos from first capture through to closeout — every step dated and tied to a person.</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        {chain.map((c) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] overflow-hidden">
+            <div class="aspect-[4/3] relative bg-[#0C1115]">
+              <img src={c.img} alt={c.alt} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+              <span class={`absolute top-2.5 left-2.5 text-[10px] font-bold px-2 py-0.5 rounded-sm ${toneMap[c.tone]}`}>{c.stage}</span>
+            </div>
+            <div class="p-4"><p class="text-[13px] leading-relaxed text-[#525A66]">{c.note}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="markup" class="bg-white px-8 py-16 border-t border-[#E2E5E9] scroll-mt-20">
+    <div class="max-w-[1000px] mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-brand/[0.08] border border-brand/[0.18] rounded-full px-3 py-1 mb-4">
+          <Icon name="pen" size={12} class="text-[#0C7733]" />
+          <span class="text-[10px] font-bold text-[#0C7733] tracking-wider uppercase font-heading">Image markup</span>
+        </div>
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-0.8px] text-[#1B2025] mb-4 leading-[1.1]">Mark up the photo so the trade sees exactly what you mean.</h2>
+        <p class="text-[15px] leading-relaxed text-[#525A66] mb-5">Draw an arrow, ring the problem and drop a short note straight onto the picture as you capture it. The trade opens the item and sees the issue circled — no guessing which crack, which tile, which corner.</p>
+        <div class="flex flex-col gap-2.5">
+          <div class="flex items-start gap-2.5"><div class="w-5 h-5 rounded-md bg-brand/[0.1] flex items-center justify-center shrink-0 mt-0.5"><Icon name="check" size={12} class="text-[#0C7733]" width={2.4} /></div><span class="text-[14px] text-[#374151] leading-snug">Arrows, highlight rings and text, right on the photo</span></div>
+          <div class="flex items-start gap-2.5"><div class="w-5 h-5 rounded-md bg-brand/[0.1] flex items-center justify-center shrink-0 mt-0.5"><Icon name="check" size={12} class="text-[#0C7733]" width={2.4} /></div><span class="text-[14px] text-[#374151] leading-snug">Annotations save to the item, not a separate file</span></div>
+          <div class="flex items-start gap-2.5"><div class="w-5 h-5 rounded-md bg-brand/[0.1] flex items-center justify-center shrink-0 mt-0.5"><Icon name="check" size={12} class="text-[#0C7733]" width={2.4} /></div><span class="text-[14px] text-[#374151] leading-snug">The marked-up photo carries through to the handover report</span></div>
+        </div>
+      </div>
+      <MarkupMockup />
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16 border-t border-[#E2E5E9]">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[520px]">Why the photo matters.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {why.map((w) => (
+          <div class="bg-[#F3F4F6] rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-white border border-[#E2E5E9] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={w.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{w.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{w.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-2.5">
+        <a href="/features/defect-management/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Defect management</a>
+        <a href="/features/handover-reports/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Handover reports</a>
+        <a href="/resources/defect-closeout-checklist/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="checklist" size={11} class="text-brand" />Closeout checklist</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="See the photo record on a real item." body="Book a short walkthrough and we'll show capture, rectification and closeout with the picture sitting on every defect." />
+</BaseLayout>

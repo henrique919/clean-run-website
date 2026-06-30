@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Icon from '../components/Icon.astro';
+
+const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL || 'hello@cleanruniq.com';
+---
+<BaseLayout
+  title="Contact"
+  description="Get in touch with the CleanRun IQ team about construction defect closeout, a walkthrough, pricing for commercial teams, or anything else."
+>
+  <section class="bg-navy pt-[120px] pb-20 px-8 min-h-[70vh] flex items-center">
+    <div class="max-w-[900px] mx-auto w-full">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} /></div>
+      <div class="grid md:grid-cols-[1fr_0.9fr] gap-12 items-start">
+        <div>
+          <h1 class="font-heading font-extrabold text-[32px] md:text-[38px] tracking-[-1.2px] text-white mb-4 leading-[1.08]">Talk to the team building it.</h1>
+          <p class="text-[16px] text-[#B6BEC8] leading-relaxed mb-6">Whether you want a walkthrough, you're weighing it up for a commercial team, or you just want to tell us how your defect closeout works today — we'd like to hear from you.</p>
+          <p class="text-[14px] text-[#8A93A0] leading-relaxed">We're working closely with our first builders, so a real person reads every message.</p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <a href="/demo/" class="bg-navy-card border border-white/[0.1] rounded-xl p-5 flex items-start gap-4 hover:border-brand/40 transition-colors group">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.12] flex items-center justify-center shrink-0 text-brand"><Icon name="clock" size={19} /></div>
+            <div>
+              <div class="font-heading text-[15px] font-bold text-white mb-1">Book a 20-minute walkthrough</div>
+              <div class="text-[13px] text-[#8A93A0] leading-snug">See capture, trade response, review and the handover pack on realistic data.</div>
+            </div>
+          </a>
+          <a href={`mailto:${CONTACT_EMAIL}`} class="bg-navy-card border border-white/[0.1] rounded-xl p-5 flex items-start gap-4 hover:border-brand/40 transition-colors">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.12] flex items-center justify-center shrink-0 text-brand"><Icon name="mail" size={19} /></div>
+            <div>
+              <div class="font-heading text-[15px] font-bold text-white mb-1">Email us</div>
+              <div class="text-[13px] text-brand">{CONTACT_EMAIL}</div>
+            </div>
+          </a>
+          <a href="/resources/defect-closeout-checklist/" class="bg-navy-card border border-white/[0.1] rounded-xl p-5 flex items-start gap-4 hover:border-brand/40 transition-colors">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.12] flex items-center justify-center shrink-0 text-brand"><Icon name="checklist" size={19} /></div>
+            <div>
+              <div class="font-heading text-[15px] font-bold text-white mb-1">Grab the defect closeout checklist</div>
+              <div class="text-[13px] text-[#8A93A0] leading-snug">Free field checklist — no walkthrough required.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

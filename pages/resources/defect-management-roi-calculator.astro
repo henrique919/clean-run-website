@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout
+  title="Defect Admin Cost Calculator"
+  description="Estimate what logging and chasing construction defect closeout costs your team each year. Adjust projects, defects, chase time and hourly rate to see the number."
+>
+  <section class="bg-navy pt-[112px] pb-14 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[1000px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Resources', href: '/resources/' }, { label: 'Defect Admin Cost Calculator' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-4.5">
+        <Icon name="clock" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Free calculator</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(30px,3.4vw,44px)] tracking-[-1px] text-white mb-3.5 leading-[1.08] max-w-[640px]">What is defect admin costing your team?</h1>
+      <p class="text-[16px] text-[#A8B0BB] leading-relaxed max-w-[560px]">A rough estimate of the time spent logging items and chasing closeout across a year. Move the sliders to match how your projects run.</p>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-14">
+    <div class="max-w-[1000px] mx-auto grid lg:grid-cols-2 gap-6 items-start">
+      <div class="bg-white border border-[#E2E5E9] rounded-2xl p-7">
+        <div class="font-heading text-[11px] font-bold text-[#8A8F98] uppercase tracking-wider mb-6">Your projects</div>
+        <div class="flex flex-col gap-6">
+          {[
+            { id: 'projects', label: 'Projects per year', min: 1, max: 50, val: 12, pre: '' },
+            { id: 'defects', label: 'Average defects per project', min: 5, max: 400, val: 60, pre: '' },
+            { id: 'log', label: 'Minutes to log each defect', min: 2, max: 30, val: 6, pre: '' },
+            { id: 'chase', label: 'Minutes chasing each closeout', min: 5, max: 90, val: 25, pre: '' },
+            { id: 'rate', label: 'PM / site manager hourly rate', min: 40, max: 220, val: 95, pre: '$' },
+          ].map((s) => (
+            <label class="block">
+              <div class="flex justify-between items-baseline mb-2"><span class="text-[13px] text-[#374151] font-medium">{s.label}</span><span class="font-heading text-[17px] font-extrabold text-[#0C7733]">{s.pre}<span id={`c-${s.id}-val`}>{s.val}</span></span></div>
+              <input type="range" id={`c-${s.id}`} min={s.min} max={s.max} value={s.val} class="roi-range" />
+            </label>
+          ))}
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-navy rounded-2xl px-6 py-6">
+          <div class="text-[11px] font-bold uppercase tracking-wide text-[#8A93A0] mb-1.5">Admin hours lost / year</div>
+          <div class="font-heading text-[44px] font-extrabold text-white tracking-[-1.5px] leading-none" id="c-hours">—</div>
+        </div>
+        <div class="bg-white border border-[#E2E5E9] rounded-2xl px-6 py-6">
+          <div class="text-[11px] font-bold uppercase tracking-wide text-[#8A8F98] mb-1.5">Estimated cost / year</div>
+          <div class="font-heading text-[44px] font-extrabold text-[#B42318] tracking-[-1.5px] leading-none" id="c-cost">—</div>
+        </div>
+        <div class="bg-brand/[0.08] border border-brand/25 rounded-2xl px-6 py-5">
+          <div class="text-[12px] text-[#374151] leading-relaxed">That is time your PMs and site managers spend on admin instead of running the job. CleanRun IQ is built to take most of it back.</div>
+          <a href="/demo/" class="inline-flex items-center gap-1.5 mt-3 text-[13px] font-bold text-[#0C7733] font-heading">See how in a walkthrough <Icon name="arrow" size={13} width={2} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Cut the defect admin, not the standard." body="Book a short walkthrough and we'll show you how capture, assignment and reporting take the chase out of closeout." />
+
+  <script is:inline>
+    (function () {
+      var ids = ['projects', 'defects', 'log', 'chase', 'rate'];
+      var inp = {};
+      ids.forEach(function (k) { inp[k] = document.getElementById('c-' + k); });
+      if (!inp.projects) return;
+      var fmt = function (n) { return n.toLocaleString('en-AU'); };
+      function update() {
+        var v = {}; ids.forEach(function (k) { v[k] = +inp[k].value; document.getElementById('c-' + k + '-val').textContent = inp[k].value; });
+        var mins = v.projects * v.defects * (v.log + v.chase);
+        var hrs = Math.round(mins / 60);
+        var cost = Math.round(hrs * v.rate);
+        document.getElementById('c-hours').textContent = fmt(hrs);
+        document.getElementById('c-cost').textContent = '$' + fmt(cost);
+      }
+      ids.forEach(function (k) { inp[k].addEventListener('input', update); });
+      update();
+    })();
+  </script>
+  <style is:global>
+    .roi-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: rgba(32,197,94,0.2); border-radius: 2px; outline: none; cursor: pointer; }
+    .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #20C55E; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    .roi-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #20C55E; cursor: pointer; border: 2px solid #fff; }
+  </style>
+</BaseLayout>

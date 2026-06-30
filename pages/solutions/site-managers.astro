@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const before = [
+  'Scrolling the camera roll for a site photo from last week.',
+  'Sending “is that fixed yet?” messages to trades with no record.',
+  'Updating a defect spreadsheet the PM doesn’t fully trust.',
+  'Compiling handover evidence the night before PC.',
+  'Trying to prove a defect was fixed when a client disputes it.',
+];
+const after = [
+  'Every photo tied to a defect, location and trade — always findable.',
+  'Items issued in CleanRun IQ with a due date and a clear owner.',
+  'The PM works from the live register, not a spreadsheet you maintain.',
+  'A handover pack produced when you need it, with evidence attached.',
+  'A rectification photo and timestamp on every closed item.',
+];
+const gets = [
+  { icon: 'camera', title: 'Capture on the walk', body: 'Photo, location, trade and type logged on a phone as you go — no writing it up later.' },
+  { icon: 'tools', title: 'Assign on the spot', body: 'Issue the item to the responsible subcontractor with a due date before you leave the room.' },
+  { icon: 'eye', title: 'Review without chasing', body: 'Trades upload rectification photos. You review and approve or send back — from your phone.' },
+  { icon: 'table', title: 'One live register', body: 'Open, issued, review and closed items in one place. Filter by trade, level or status.' },
+  { icon: 'report', title: 'Handover pack in clicks', body: 'Select the items, generate the report. Evidence on each one. No weekend of admin.' },
+  { icon: 'clock', title: 'A record that holds up', body: 'Who raised it, who fixed it, who closed it — each step dated, ready for PC and DLP.' },
+];
+---
+<BaseLayout
+  title="CleanRun IQ for Site Managers"
+  description="Capture defects on the walk, assign trades on the spot and review rectification without chasing. CleanRun IQ gives site managers one place to close defects with proof."
+>
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1000px] mx-auto relative z-10">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions/' }, { label: 'Site Managers' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+        <Icon name="hardhat" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">For site managers</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,54px)] tracking-[-1.4px] text-white mb-4 leading-[1.05] max-w-[720px]">Stop chasing trades. Start closing defects.</h1>
+      <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[540px] mb-8">One place to capture defects on site, assign the trade, check the rectification photo and close the item with proof — from the phone in your pocket.</p>
+      <div class="flex items-center gap-3 flex-wrap">
+        <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading">Book a 20-minute walkthrough <Icon name="arrow" size={15} width={2} /></a>
+        <a href="/features/defect-management/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-5.5 py-3.5 rounded-lg text-[15px] font-medium border border-white/[0.12] hover:border-brand/40 transition-colors">See the defect register</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Before / after */}
+  <section class="bg-navy-card px-8 py-16 border-b border-white/[0.05]">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-white mb-9 max-w-[560px]">The same defect walk, with the chasing taken out.</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-[#B42318]/[0.05] border border-[#B42318]/[0.16] rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-[#B42318]/[0.12]"><span class="font-heading text-[11px] font-bold text-[#F87171] uppercase tracking-wider">Without CleanRun IQ</span></div>
+          <div class="p-5 flex flex-col gap-3">
+            {before.map((t) => (
+              <div class="flex items-start gap-2.5"><span class="text-[#F87171] shrink-0 text-[15px] leading-none mt-0.5">&times;</span><span class="text-[13px] text-[#C2C9D2] leading-snug">{t}</span></div>
+            ))}
+          </div>
+        </div>
+        <div class="bg-brand/[0.05] border border-brand/[0.18] rounded-xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-brand/[0.14]"><span class="font-heading text-[11px] font-bold text-brand uppercase tracking-wider">With CleanRun IQ</span></div>
+          <div class="p-5 flex flex-col gap-3">
+            {after.map((t) => (
+              <div class="flex items-start gap-2.5"><Icon name="check" size={14} class="text-brand shrink-0 mt-0.5" width={2.2} /><span class="text-[13px] text-[#D4DAE2] leading-snug">{t}</span></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* What you get */}
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1100px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[520px]">Your workflow, on your phone.</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {gets.map((g) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={g.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{g.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{g.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 flex flex-wrap gap-2.5">
+        <a href="/features/photo-evidence/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Photo evidence</a>
+        <a href="/features/handover-reports/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="arrow" size={11} class="text-brand" width={2} />Handover reports</a>
+        <a href="/resources/defect-closeout-checklist/" class="inline-flex items-center gap-1.5 bg-white border border-[#E2E5E9] text-[#374151] px-3.5 py-2 rounded-lg text-[12.5px] font-medium hover:border-brand/40 transition-colors"><Icon name="checklist" size={11} class="text-brand" />Free closeout checklist</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="See it on a real defect walk."
+    body="Book a short walkthrough and we'll show you capture, assignment, review and the handover pack the way a site manager actually uses them."
+    note="No credit card. No hard sell. Just a practical walkthrough."
+  />
+</BaseLayout>

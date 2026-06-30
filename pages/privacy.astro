@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const sections = [
+  { h: 'Who we are', p: 'CleanRun IQ provides construction defect, punch list, QA and handover software. This policy covers the marketing website at cleanruniq.com and enquiries made through it. Use of the application at app.cleanruniq.com is covered by your service agreement.' },
+  { h: 'What we collect', p: 'When you book a walkthrough, download a resource or contact us, we collect the details you provide — typically your name, work email, company, role and what you tell us about your projects. The website also collects standard analytics data (such as pages visited and approximate location) to understand how the site is used.' },
+  { h: 'How we use it', p: 'We use your details to respond to your enquiry, arrange a walkthrough, send a resource you requested, and — where relevant — follow up about CleanRun IQ. We use analytics to improve the website. We do not sell your personal information.' },
+  { h: 'Where it is stored', p: 'Enquiry details are held in the tools we use to run the business (for example our email, form and CRM providers). Analytics is processed by the providers named in our cookie/analytics setup. These providers may store data outside Australia.' },
+  { h: 'Your choices', p: 'You can ask us what we hold about you, ask us to correct it, or ask us to delete it. You can unsubscribe from any follow-up email at any time. To make a request, email us using the address on our contact page.' },
+  { h: 'Cookies and analytics', p: 'The site uses privacy-respecting analytics to measure traffic and improve content. We avoid unnecessary tracking and do not run advertising pixels by default.' },
+];
+---
+<BaseLayout
+  title="Privacy Policy"
+  description="How CleanRun IQ handles enquiry details and website analytics. An early-stage policy provided as a starting point, pending formal legal review."
+  noindex={true}
+>
+  <section class="bg-navy pt-[110px] pb-16 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[760px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} /></div>
+      <h1 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-white mb-3">Privacy Policy</h1>
+      <p class="text-[15px] text-[#A8B0BB] leading-relaxed">How we handle the details you share with us through this website.</p>
+    </div>
+  </section>
+
+  <section class="bg-white px-8 py-16">
+    <div class="max-w-[760px] mx-auto">
+      <div class="bg-[#FFF7E6] border border-[#F0D9A8] rounded-xl px-5 py-4 mb-10">
+        <p class="text-[13px] text-[#7A5B1E] leading-relaxed"><strong>Note:</strong> This is a plain-English starting point for an early-stage business and is not legal advice. It should be reviewed and finalised by a qualified legal adviser before launch.</p>
+      </div>
+      <div class="flex flex-col gap-8">
+        {sections.map((s) => (
+          <div>
+            <h2 class="font-heading text-[18px] font-bold text-[#1B2025] mb-2.5">{s.h}</h2>
+            <p class="text-[14.5px] leading-relaxed text-[#525A66]">{s.p}</p>
+          </div>
+        ))}
+        <div>
+          <h2 class="font-heading text-[18px] font-bold text-[#1B2025] mb-2.5">Contact</h2>
+          <p class="text-[14.5px] leading-relaxed text-[#525A66]">Questions about this policy or your data? <a href="/contact/" class="text-[#0C7733] font-semibold">Get in touch</a>. This policy may be updated as the product and business develop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

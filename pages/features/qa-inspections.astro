@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const points = [
+  { icon: 'eye', title: 'Inspections that feed the register', body: 'Items raised on an inspection land in the same register as everything else — no separate system to reconcile later.' },
+  { icon: 'camera', title: 'The photo on every finding', body: 'A finding without a picture is hard to act on. Capture it on the spot and it travels with the item.' },
+  { icon: 'shield', title: 'A consistent standard', body: 'The same capture, review and sign-off on every inspection, so quality does not depend on who walked the area.' },
+];
+---
+<BaseLayout title="QA Inspections for Construction" description="Run quality inspections that feed straight into your defect register — findings captured with a photo, reviewed and closed with the same standard on every walk.">
+  <section class="bg-navy pt-[116px] pb-16 px-8 relative overflow-hidden border-b border-white/[0.05]">
+    <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.05) 0%,transparent 60%)"></div>
+    <div class="max-w-[1000px] mx-auto relative z-10">
+      <div class="mb-6"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Features', href: '/features/' }, { label: 'QA Inspections' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-5">
+        <Icon name="eye" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">QA inspections</span>
+        <span class="text-[9px] font-bold text-[#B45309] bg-[#FFF4D6] px-1.5 py-0.5 rounded-sm uppercase">In development</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(34px,3.8vw,52px)] tracking-[-1.4px] text-white mb-4 leading-[1.05] max-w-[720px]">Inspections that feed the same register.</h1>
+      <p class="text-[17px] text-[#B6BEC8] leading-relaxed max-w-[560px] mb-8">QA inspections in CleanRun IQ are built so findings go straight into the defect register — captured with a photo, reviewed and closed the same way as everything else, with no separate system to keep in step.</p>
+      <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3.5 rounded-lg text-[15px] font-bold font-heading hover:bg-white transition-colors">Talk to us about QA <Icon name="arrow" size={15} width={2} /></a>
+    </div>
+  </section>
+
+  <section class="bg-[#F3F4F6] px-8 py-16">
+    <div class="max-w-[1000px] mx-auto">
+      <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025] mb-9 max-w-[520px]">The approach.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {points.map((p) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={p.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{p.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Want QA built into the same register?" body="We're shaping QA inspections with the teams who'll use them. Book a walkthrough and tell us how your inspections run today." />
+</BaseLayout>
