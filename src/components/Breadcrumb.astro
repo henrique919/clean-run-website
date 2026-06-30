@@ -6,7 +6,7 @@ export interface Props {
   items: { label: string; href?: string }[];
 }
 const { items } = Astro.props;
-const site = 'https://cleanruniq.com';
+const site = (Astro.site ?? new URL('https://www.cleanruniq.com')).origin;
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',

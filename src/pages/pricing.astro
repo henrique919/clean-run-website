@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import CTASection from '../components/CTASection.astro';
 import Icon from '../components/Icon.astro';
 
@@ -14,7 +15,7 @@ const productSchema = {
     { '@type': 'Offer', name: 'Builder', price: '229', priceCurrency: 'AUD' },
   ],
   description: 'Construction defect, punch list and handover software. Early-builder pricing in AUD.',
-  url: 'https://cleanruniq.com/pricing/',
+  url: 'https://www.cleanruniq.com/pricing/',
 };
 
 const pilotFeatures = [
@@ -52,17 +53,18 @@ const faqs = [
 ];
 ---
 <BaseLayout
-  title="Pricing"
-  description="Straightforward CleanRun IQ pricing for builders getting defect closeout under control. Start on one project. AUD, no long lock-in. Book a walkthrough."
+  title="Pricing | CleanRun IQ"
+  description="View CleanRun IQ pricing options for Australian builders and construction teams."
   schema={productSchema}
 >
   {/* HERO + TOGGLE */}
   <section class="bg-navy px-8 pt-[128px] pb-16 text-center">
     <div class="max-w-[680px] mx-auto">
+      <div class="mb-6 flex justify-center"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Pricing' }]} /></div>
       <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3.5 py-1.5 mb-5.5">
         <span class="text-[11px] font-bold text-brand tracking-wider uppercase font-heading">Early-builder pricing</span>
       </div>
-      <h1 class="font-heading font-extrabold text-[34px] md:text-[44px] tracking-[-1.5px] text-white mb-4 leading-[1.05]">Simple pricing while we launch with early builders.</h1>
+      <h1 class="font-heading font-extrabold text-[clamp(32px,3.6vw,52px)] tracking-[-1.5px] text-white mb-4 leading-[1.05]">Simple pricing while we launch with early builders.</h1>
       <p class="text-[17px] text-[#A8B0BB] mb-8 leading-relaxed">Start defect closeout on one project, then add more as it fits the way your teams work. Prices in AUD.</p>
       <div class="inline-flex items-center bg-white/[0.06] border border-white/[0.1] rounded-full p-1 gap-0.5">
         <button id="bill-annual" class="text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors bg-brand text-navy">Annual <span class="text-[9px] font-bold px-1 py-px rounded-sm bg-navy/25 ml-1">Save 20%</span></button>
