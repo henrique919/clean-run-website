@@ -6,7 +6,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   // Canonical public domain — drives sitemap + canonical URLs.
-  site: 'https://cleanruniq.com',
+  site: 'https://www.cleanruniq.com',
   integrations: [
     tailwind(),
     sitemap({

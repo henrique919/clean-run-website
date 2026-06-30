@@ -16,8 +16,8 @@ const softwareSchema = {
   operatingSystem: 'Web, iOS, Android',
   offers: { '@type': 'Offer', price: '89', priceCurrency: 'AUD' },
   description:
-    'Construction defect, punch list, QA and handover software. Capture defects, assign trades, collect rectification photos and produce a clean handover record.',
-  url: 'https://cleanruniq.com',
+    'Construction defect management, quality closeout and handover reporting software for Australian builders and site teams.',
+  url: 'https://www.cleanruniq.com',
 };
 
 // Where defects get lost today
@@ -84,8 +84,9 @@ const toneMap: Record<string, string> = {
 };
 ---
 <BaseLayout
-  title="Construction Defect Management Software"
-  description="CleanRun IQ helps builders capture defects, assign trades, collect rectification photos and produce clean handover records — without chasing spreadsheets, messages and camera rolls."
+  title="Construction Defect Management Software Australia | CleanRun IQ"
+  description="CleanRun IQ helps Australian builders capture defects, assign trades, collect rectification photos and export PC/DLP-ready handover reports from one live register."
+  canonical="https://www.cleanruniq.com/"
   schema={softwareSchema}
 >
   {/* ============ HERO ============ */}
@@ -107,7 +108,7 @@ const toneMap: Record<string, string> = {
         <div class="relative flex items-start justify-center lg:justify-start min-h-[560px]">
           {/* Primary phone: real items list */}
           <div class="relative z-10 w-[248px] bg-navy-card border border-white/[0.1] rounded-[30px] p-1.5 shadow-[0_28px_70px_rgba(0,0,0,0.6)]">
-            <img src="/images/app/app-items-real.webp" alt="CleanRun IQ live defect register" width="416" height="900" loading="eager" decoding="async" class="w-full rounded-[24px] block" />
+            <img src="/images/app/app-items-real.webp" alt="CleanRun IQ live defect register" width="473" height="1024" loading="eager" decoding="async" class="w-full rounded-[24px] block" />
           </div>
 
           {/* Desktop: sits lower-right of the phone, away from the headline. */}
@@ -116,7 +117,7 @@ const toneMap: Record<string, string> = {
               <div class="flex gap-1"><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span></div>
               <span class="text-[9px] text-[#6B7280] font-mono">app.cleanruniq.com</span>
             </div>
-            <img src="/images/app/app-desktop-setup.webp" alt="CleanRun IQ admin desktop" width="1500" height="770" loading="eager" decoding="async" class="w-full block" />
+            <img src="/images/app/app-desktop-setup.webp" alt="CleanRun IQ admin desktop" width="1024" height="525" loading="eager" decoding="async" class="w-full block" />
           </div>
         </div>
       </div>
