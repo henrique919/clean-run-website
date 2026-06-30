@@ -1,0 +1,33 @@
+---
+// Reusable closing call-to-action. Edit once → updates every page that uses it.
+export interface Props {
+  heading?: string;
+  body?: string;
+  note?: string;
+}
+const {
+  heading = 'Ready for a cleaner handover?',
+  body = 'Book a short walkthrough and see how site teams capture, assign and close defect items — with the photo record sitting on every one.',
+  note = 'No credit card. No hard sell. Just a practical walkthrough.',
+} = Astro.props;
+---
+<section class="py-[64px] px-8 bg-navy border-t border-white/[0.05] relative overflow-hidden">
+  <div class="absolute -right-20 -bottom-16 opacity-[0.04] pointer-events-none">
+    <svg viewBox="0 0 100 100" width="400" height="400">
+      <path d="M26 28 L48 50 L26 72" fill="none" stroke="#20C55E" stroke-width="13" stroke-linecap="square" stroke-linejoin="miter"></path>
+      <path d="M50 28 L72 50 L50 72" fill="none" stroke="#20C55E" stroke-width="13" stroke-linecap="square" stroke-linejoin="miter"></path>
+    </svg>
+  </div>
+  <div class="max-w-[720px] mx-auto text-center relative z-10">
+    <h2 class="font-heading font-extrabold text-[30px] md:text-[34px] tracking-[-0.8px] text-white mb-4 leading-[1.1]">{heading}</h2>
+    <p class="text-lg text-[#6B7280] mb-9 leading-relaxed">{body}</p>
+    <div class="flex items-center justify-center gap-3 flex-wrap mb-5.5">
+      <a href="/demo/" class="inline-flex items-center gap-2 bg-brand text-navy px-7.5 py-3.5 rounded-lg text-base font-extrabold font-heading">
+        Book a 20-minute walkthrough
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/features/defect-management/" class="inline-flex items-center gap-2 bg-white/[0.06] text-[#E5E7EB] px-7 py-3.5 rounded-lg text-[15px] font-semibold border border-white/10 hover:border-brand/40 transition-colors">See sample defect register</a>
+    </div>
+    <p class="text-[13px] text-[#7A828E]">{note}</p>
+  </div>
+</section>

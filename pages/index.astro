@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
+import Icon from '../components/Icon.astro';
+import HeroCopy from '../components/HeroCopy.astro';
+import MobileCaptureMockup from '../components/MobileCaptureMockup.astro';
+import DefectRegisterMockup from '../components/DefectRegisterMockup.astro';
+import ReportPreviewCard from '../components/ReportPreviewCard.astro';
+import VoiceCaptureDemo from '../components/VoiceCaptureDemo.astro';
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'CleanRun IQ',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  offers: { '@type': 'Offer', price: '89', priceCurrency: 'AUD' },
+  description:
+    'Construction defect management, quality closeout and handover reporting software for Australian builders and site teams.',
+  url: 'https://www.cleanruniq.com',
+};
+
+// Where defects get lost today
+const sources = [
+  { icon: 'table', label: 'In a spreadsheet', body: 'A spreadsheet can tell you a defect exists. It usually can’t prove where it was, who fixed it, or whether it was actually closed.' },
+  { icon: 'message', label: 'In someone’s messages', body: 'A defect raised over text has no due date, no trade owner and no clear status. By next week, nobody can find it.' },
+  { icon: 'camera', label: 'In a camera roll', body: 'A photo with no location, trade or status attached doesn’t tell you which defect it is — or whether it has been rectified.' },
+];
+
+// How it works
+const steps = [
+  { n: '1', label: 'Capture the defect on site', body: 'Photo, project, building, level, unit, room, trade and type — logged on a phone as you walk.' },
+  { n: '2', label: 'Assign it to the right trade', body: 'Issue the item to the responsible subcontractor with a due date and a clear description.' },
+  { n: '3', label: 'Subcontractor uploads rectification', body: 'The trade does the work and uploads a rectification photo against the item.' },
+  { n: '4', label: 'Review the work', body: 'Site manager checks the evidence and either sends it back or marks it ready to close.' },
+  { n: '5', label: 'Close with a timestamped record', body: 'The item closes with the original photo, rectification photo and approval attached.' },
+  { n: '6', label: 'Export the handover report', body: 'Produce a handover pack with every item and its evidence when you need it.' },
+];
+
+// No photo, no closeout
+const evidenceSteps = [
+  { icon: 'camera', label: 'Original issue photo', body: 'The defect is captured on site with a photo, location and trade attached.' },
+  { icon: 'tools', label: 'Assigned to the trade', body: 'The item is issued to the responsible subcontractor with a due date.' },
+  { icon: 'check', label: 'Rectification photo uploaded', body: 'The subcontractor uploads proof of the completed work against the item.' },
+  { icon: 'shield', label: 'Reviewed and closed', body: 'The site manager reviews the evidence and closes it with a timestamped record.' },
+];
+
+// Real defect examples — img is the original site capture photo on the item
+const examples = [
+  { ref: 'DEF-288', desc: 'Paint blistering to corridor wall', loc: 'Level 4 — Common Area', trade: 'Painter', status: 'Review', tone: 'review', ev: 'Rectification photo under review', due: 'Due Wed', img: '/images/defect-paint-blister.jpg', alt: 'Blistering and peeling paint on a rendered wall' },
+  { ref: 'DEF-274', desc: 'Cracked plasterboard to entry', loc: 'Unit 207 — Entry', trade: 'Plasterer', status: 'Closed', tone: 'closed', ev: 'Closed with rectification photo', due: 'Closed 18 Jun', img: '/images/defect-plaster-crack.jpg', alt: 'Structural crack running through a painted plaster wall' },
+  { ref: 'DEF-311', desc: 'Cracked tile to ensuite floor', loc: 'Unit 211 — Ensuite', trade: 'Tiler', status: 'Issued', tone: 'issued', ev: 'Awaiting rectification photo', due: 'Due Thu', img: '/images/defect-tile-crack.jpg', alt: 'Crack running across white mosaic floor tiles' },
+  { ref: 'DEF-312', desc: 'Incomplete silicone to bath hob', loc: 'Unit 204 — Bathroom', trade: 'Waterproofer', status: 'Open', tone: 'open', ev: 'Original photo captured', due: 'Due Fri', img: null, alt: '' },
+];
+
+// Features — workflow stripped back
+const features = [
+  { icon: 'camera', title: 'Photo-backed items', body: 'Capture, rectification and closeout photos sit on the item. The closeout photo is required before it shuts.' },
+  { icon: 'tools', title: 'Trade responsibility', body: 'Every item is issued to a named trade and subcontractor with a due date. Overdue items are easy to spot.' },
+  { icon: 'table', title: 'One defect register', body: 'Open, issued, review and closed items in one place. Filter by trade, location or status.' },
+  { icon: 'report', title: 'Handover pack', body: 'Produce a defect report with the full evidence on each item — ready for PC and useful at DLP.' },
+  { icon: 'clock', title: 'Item history', body: 'Who raised it, who it went to, who rectified it and who closed it — each step dated.' },
+  { icon: 'hardhat', title: 'Works on a phone', body: 'Built for the defect walk. Phone, tablet or desktop, in the browser — no app to install for trades.' },
+];
+
+const roles = [
+  { icon: 'hardhat', title: 'Site managers', body: 'Capture on the walk, assign the trade and check rectification without working through messages.', href: '/solutions/site-managers/' },
+  { icon: 'clipboard', title: 'Project managers', body: 'See what’s open across the job and hold a record you can rely on at PC and DLP.', href: '/solutions/project-managers/' },
+  { icon: 'eye', title: 'Quality managers', body: 'Set the standard for evidence and keep closeout consistent across every unit.', href: '/solutions/quality-managers/' },
+  { icon: 'tools', title: 'Subcontractors', body: 'See what’s assigned, upload a rectification photo and send it back — from any phone.', href: '/solutions/subcontractors/' },
+];
+
+const resources = [
+  { tag: 'Checklist', title: 'Defect closeout checklist', body: 'The field steps for closing defects properly — from the defect walk to the handover pack.', cta: 'Download the checklist', href: '/resources/defect-closeout-checklist/' },
+  { tag: 'Template', title: 'Punch list template', body: 'A practical punch list to run a final defect run, with guidance on moving it into a live register.', cta: 'Get the template', href: '/resources/punch-list-template/' },
+  { tag: 'Guide', title: 'Defect management guide', body: 'How to capture, assign, evidence and close defects across residential, townhouse and commercial jobs.', cta: 'Read the guide', href: '/resources/construction-defect-management-guide/' },
+];
+
+const toneMap: Record<string, string> = {
+  open: 'bg-[#FEE4E2] text-[#B42318]',
+  issued: 'bg-[#FFF4D6] text-[#B45309]',
+  review: 'bg-[#EEF2F6] text-[#374151] border border-[#DDE1E5]',
+  closed: 'bg-[#E1F7E9] text-[#0C7733]',
+};
+---
+<BaseLayout
+  title="Construction Defect Management Software Australia | CleanRun IQ"
+  description="CleanRun IQ helps Australian builders capture defects, assign trades, collect rectification photos and export PC/DLP-ready handover reports from one live register."
+  canonical="https://www.cleanruniq.com/"
+  schema={softwareSchema}
+>
+  {/* ============ HERO ============ */}
+  <section class="relative bg-navy overflow-hidden pt-[120px] pb-20 px-8">
+    <div class="absolute inset-0 bg-cover bg-center opacity-[0.14] pointer-events-none" style="background-image:url('/images/hero-site-bg.webp')"></div>
+    <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(100deg,#121619 30%,rgba(18,22,25,0.55) 100%)"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-[70%] pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(32,197,94,0.08) 0%,transparent 60%)"></div>
+    <div class="max-w-[1200px] mx-auto relative z-10">
+      <div class="grid lg:grid-cols-[0.92fr_1.08fr] gap-14 items-center">
+        <HeroCopy
+          eyebrow="Defect, punch list &amp; handover software"
+          heading="Close out defects with evidence,"
+          highlight="not spreadsheets."
+          sub="CleanRun IQ gives construction teams one place to capture defects on site, assign the right trade, collect rectification photos and produce a handover-ready report — from one live register."
+          support="Built for the final stretch of a project, when defects move fast, trades come and go, and everyone needs a clear record of what has actually been fixed."
+        />
+
+        {/* Product composition: phone-first focal point, desktop support behind */}
+        <div class="relative flex items-start justify-center lg:justify-start min-h-[560px]">
+          {/* Primary phone: real items list */}
+          <div class="relative z-10 w-[248px] bg-navy-card border border-white/[0.1] rounded-[30px] p-1.5 shadow-[0_28px_70px_rgba(0,0,0,0.6)]">
+            <img src="/images/app/app-items-real.webp" alt="CleanRun IQ live defect register" width="416" height="900" loading="eager" decoding="async" class="w-full rounded-[24px] block" />
+          </div>
+
+          {/* Desktop: sits lower-right of the phone, away from the headline. */}
+          <div class="hidden lg:block absolute left-[188px] top-[204px] w-[675px] z-0 rounded-xl overflow-hidden border border-white/[0.08] shadow-[0_16px_50px_rgba(0,0,0,0.5)] opacity-75">
+            <div class="bg-[#EDEFF1] px-2.5 py-1.5 flex items-center gap-2 border-b border-[#DDE1E5]">
+              <div class="flex gap-1"><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span><span class="w-2 h-2 rounded-full bg-[#C9CED3]"></span></div>
+              <span class="text-[9px] text-[#6B7280] font-mono">app.cleanruniq.com</span>
+            </div>
+            <img src="/images/app/app-desktop-setup.webp" alt="CleanRun IQ admin desktop" width="1500" height="770" loading="eager" decoding="async" class="w-full block" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ TRUST STRIP ============ */}
+  <div class="bg-[#0C1115] border-y border-white/[0.06] px-8 py-4">
+    <div class="max-w-[1200px] mx-auto flex items-center justify-center gap-x-8 gap-y-2 flex-wrap">
+      {['Capture. Assign. Close — with proof.','No photo, no closeout','Works on the defect walk','Built for PC and DLP'].map((t, i) => (
+        <Fragment>
+          {i > 0 && <span class="w-1 h-1 rounded-full bg-white/[0.15] hidden sm:block"></span>}
+          <span class="text-[13px] font-medium text-[#A8B0BB]">{t}</span>
+        </Fragment>
+      ))}
+    </div>
+  </div>
+
+  {/* ============ PROBLEM (light) ============ */}
+  <section class="bg-[#F3F4F6] px-8 py-[64px]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="max-w-[680px] mb-12">
+        <h2 class="font-heading font-extrabold text-[28px] md:text-[34px] tracking-[-1px] text-[#1B2025] mb-4 leading-[1.1]">Your defect information is scattered before the job is even ready to hand over.</h2>
+        <p class="text-[16px] leading-relaxed text-[#525A66]">Spreadsheets track the list. Text threads carry the follow-up. Photos sit in someone's camera roll. Emails hold the decisions. Then someone has to pull the final report together by hand — and prove what was raised, who was told and what got fixed.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 mb-10">
+        {sources.map((s) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-[#F3F4F6] border border-[#E2E5E9] flex items-center justify-center mb-4 text-[#525A66]"><Icon name={s.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{s.label}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="bg-navy rounded-xl px-7 py-6 flex items-start gap-4">
+        <div class="w-9 h-9 rounded-lg bg-brand/[0.14] flex items-center justify-center shrink-0"><Icon name="layers" size={18} class="text-brand" /></div>
+        <p class="text-[16px] leading-relaxed text-[#E5E7EB] font-medium pt-1">CleanRun IQ puts the item, photo, trade, status and closeout evidence in <span class="text-brand">one place</span> — so the register is the single source of truth, not five.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ HOW IT WORKS (white) ============ */}
+  <section class="bg-white px-8 py-[64px]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="mb-12 max-w-[560px]">
+        <div class="text-[12px] font-bold text-[#0C7733] uppercase tracking-wider font-heading mb-3">How it works</div>
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-1px] text-[#1B2025] leading-[1.1]">The workflow your site team can actually follow.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-9">
+        {steps.map((s) => (
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-lg bg-navy text-brand font-heading font-extrabold text-[13px] flex items-center justify-center shrink-0">{s.n}</div>
+            <div>
+              <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-1.5">{s.label}</h3>
+              <p class="text-[13px] leading-relaxed text-[#6B7280]">{s.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ VOICE CAPTURE (dark) ============ */}
+  <section class="relative bg-navy px-8 py-[56px] overflow-hidden border-t border-white/[0.05]">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('/images/people/person-phone.webp')"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(90deg,#121619 45%,rgba(12,17,21,0.88) 100%)"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10 grid lg:grid-cols-[1fr_auto] gap-14 items-center">
+      <div>
+        <div class="text-[11px] font-bold text-brand uppercase tracking-wider font-heading mb-3">Capture, hands-free</div>
+        <h2 class="font-heading font-extrabold text-[28px] md:text-[34px] tracking-[-0.8px] text-white mb-4 leading-[1.08]">Talk it in. CleanRun IQ writes the defect.</h2>
+        <p class="text-[15px] leading-relaxed text-[#A8B0BB] mb-6 max-w-[440px]">Say what you see on the walk. CleanRun IQ turns plain speech into a structured item — title, location, trade and priority — and snaps the photo at the same time.</p>
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-brand/[0.15] flex items-center justify-center shrink-0"><Icon name="check" size={11} class="text-brand" width={2.4} /></div><span class="text-[13px] text-[#C2C9D2]">Speak the defect — no typing on a dusty phone</span></div>
+          <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-brand/[0.15] flex items-center justify-center shrink-0"><Icon name="check" size={11} class="text-brand" width={2.4} /></div><span class="text-[13px] text-[#C2C9D2]">Photo and details land on the same item</span></div>
+          <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-brand/[0.15] flex items-center justify-center shrink-0"><Icon name="check" size={11} class="text-brand" width={2.4} /></div><span class="text-[13px] text-[#C2C9D2]">Assigned to the trade before you reach the next room</span></div>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <VoiceCaptureDemo width={248} />
+      </div>
+    </div>
+  </section>
+
+  {/* ============ NO PHOTO, NO CLOSEOUT (light grey) ============ */}
+  <section class="bg-[#F3F4F6] px-8 py-[64px] border-t border-[#E2E5E9]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="text-center max-w-[620px] mx-auto mb-12">
+        <h2 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-[#1B2025] mb-4">No photo, no closeout.</h2>
+        <p class="text-[16px] leading-relaxed text-[#525A66]">CleanRun IQ is built around a simple rule: if a defect is closed, the evidence should be sitting right there with it.</p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-3 mb-9">
+        {evidenceSteps.map((s, i) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-5 relative">
+            <div class="flex items-center gap-2.5 mb-3">
+              <div class="w-8 h-8 rounded-lg bg-brand/[0.1] flex items-center justify-center text-[#0C7733]"><Icon name={s.icon} size={16} /></div>
+              <span class="font-heading text-[11px] font-extrabold text-[#9CA3AF]">0{i + 1}</span>
+            </div>
+            <h3 class="font-heading text-[13.5px] font-bold text-[#1B2025] mb-1.5">{s.label}</h3>
+            <p class="text-[12px] leading-relaxed text-[#6B7280]">{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="text-center">
+        <a href="/features/photo-evidence/" class="inline-flex items-center gap-2 text-[14px] font-bold text-[#0C7733] font-heading">See the photo evidence workflow <Icon name="arrow" size={14} width={2} /></a>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ BUILT AROUND REAL DEFECT CLOSEOUT (dark) ============ */}
+  <section class="bg-navy px-8 py-[64px]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="max-w-[620px] mb-11">
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-1px] text-white mb-4 leading-[1.1]">Built around real defect closeout.</h2>
+        <p class="text-[16px] leading-relaxed text-[#A8B0BB]">Not another generic task board. CleanRun IQ is structured around the way defects actually move through a construction project — by location, trade, status and the evidence behind each one.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-3.5">
+        {examples.map((ex) => (
+          <div class="bg-navy-card border border-white/[0.08] rounded-xl overflow-hidden flex">
+            {ex.img && (
+              <div class="w-[104px] shrink-0 relative bg-[#0C1115]">
+                <img src={ex.img} alt={ex.alt} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+              </div>
+            )}
+            <div class="p-5 flex-1 min-w-0">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-heading text-[11px] font-extrabold text-brand">{ex.ref}</span>
+                <span class={`text-[9px] font-bold px-2 py-0.5 rounded-sm ${toneMap[ex.tone]}`}>{ex.status}</span>
+              </div>
+              <h3 class="font-heading text-[15px] font-bold text-white mb-3 leading-snug">{ex.desc}</h3>
+              <div class="grid grid-cols-2 gap-y-2.5 gap-x-3">
+                <div><div class="text-[9px] uppercase tracking-wide text-[#6B7280] font-bold mb-0.5">Location</div><div class="text-[12px] text-[#C2C9D2]">{ex.loc}</div></div>
+                <div><div class="text-[9px] uppercase tracking-wide text-[#6B7280] font-bold mb-0.5">Trade</div><div class="text-[12px] text-[#C2C9D2]">{ex.trade}</div></div>
+                <div><div class="text-[9px] uppercase tracking-wide text-[#6B7280] font-bold mb-0.5">Evidence</div><div class="text-[12px] text-[#C2C9D2]">{ex.ev}</div></div>
+                <div><div class="text-[9px] uppercase tracking-wide text-[#6B7280] font-bold mb-0.5">Timing</div><div class="text-[12px] text-[#C2C9D2]">{ex.due}</div></div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ WHY IT MATTERS (white) ============ */}
+  <section class="bg-white px-8 py-[60px] border-t border-[#E2E5E9]">
+    <div class="max-w-[900px] mx-auto text-center">
+      <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025] mb-3">When a defect is closed, four questions should be easy to answer.</h2>
+      <p class="text-[15px] text-[#6B7280] mb-10">That's what the register is built around.</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          { q: 'What was the issue?', icon: 'alert' },
+          { q: 'Where was it?', icon: 'building' },
+          { q: 'Who was responsible?', icon: 'tools' },
+          { q: 'What proves it was fixed?', icon: 'camera' },
+        ].map((item) => (
+          <div class="bg-[#F3F4F6] rounded-xl border border-[#E2E5E9] p-5 text-left">
+            <div class="w-9 h-9 rounded-lg bg-white border border-[#E2E5E9] flex items-center justify-center mb-3 text-[#0C7733]"><Icon name={item.icon} size={17} /></div>
+            <div class="font-heading text-[14px] font-bold text-[#1B2025] leading-snug">{item.q}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ FEATURES (light grey) ============ */}
+  <section class="bg-[#F3F4F6] px-8 py-[64px]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="mb-11 max-w-[560px]">
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-1px] text-[#1B2025] mb-3 leading-[1.1]">The defect workflow stripped back to what site teams actually use.</h2>
+        <p class="text-[15px] text-[#525A66] leading-relaxed">Enough structure to hold up at PC and DLP. Not so much that nobody on site bothers with it.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        {features.map((f) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center mb-4 text-[#0C7733]"><Icon name={f.icon} size={19} /></div>
+            <h3 class="font-heading text-[15px] font-bold text-[#1B2025] mb-2">{f.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280]">{f.body}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-9">
+        <a href="/features/defect-management/" class="inline-flex items-center gap-2 text-[14px] font-bold text-[#0C7733] font-heading">Explore defect management <Icon name="arrow" size={14} width={2} /></a>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ ROLES (dark, compact) ============ */}
+  <section class="bg-navy px-8 py-[60px]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="mb-10 max-w-[600px]">
+        <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-white mb-3">One defect register that PMs, site teams and trades can all work from.</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        {roles.map((r) => (
+          <a href={r.href} class="block bg-navy-card border border-white/[0.08] rounded-xl p-5 hover:border-brand/30 transition-colors group">
+            <div class="w-9 h-9 rounded-lg bg-brand/[0.1] flex items-center justify-center mb-3.5 text-brand"><Icon name={r.icon} size={17} /></div>
+            <h3 class="font-heading text-[14px] font-bold text-white mb-1.5">{r.title}</h3>
+            <p class="text-[12px] leading-relaxed text-[#8A93A0] mb-3">{r.body}</p>
+            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-brand font-heading">View workflow <Icon name="arrow" size={11} width={2} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ ROI (dark, focused) ============ */}
+  <section class="bg-[#0C1115] px-8 py-[56px] border-t border-white/[0.05]">
+    <div class="max-w-[920px] mx-auto">
+      <div class="text-center mb-9">
+        <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-0.8px] text-white mb-2.5">What is defect admin costing the team?</h2>
+        <p class="text-[14px] text-[#A8B0BB] max-w-[460px] mx-auto">A rough estimate of the time spent logging and chasing closeout each year.</p>
+      </div>
+      <div class="bg-navy-card border border-white/[0.08] rounded-2xl p-7 grid lg:grid-cols-2 gap-8 items-center">
+        <div class="flex flex-col gap-5">
+          {[
+            { id: 'projects', label: 'Projects per year', min: 1, max: 50, val: 12, suf: '' },
+            { id: 'defects', label: 'Avg defects per project', min: 5, max: 300, val: 45, suf: '' },
+            { id: 'chase', label: 'Mins chasing each closeout', min: 5, max: 90, val: 25, suf: '' },
+            { id: 'rate', label: 'PM / site manager hourly rate', min: 40, max: 200, val: 90, pre: '$' },
+          ].map((s) => (
+            <label class="block">
+              <div class="flex justify-between items-baseline mb-2"><span class="text-[12.5px] text-[#C2C9D2] font-medium">{s.label}</span><span class="font-heading text-[17px] font-extrabold text-brand">{s.pre || ''}<span id={`roi-${s.id}-val`}>{s.val}</span></span></div>
+              <input type="range" id={`roi-${s.id}`} min={s.min} max={s.max} value={s.val} class="roi-range" />
+            </label>
+          ))}
+        </div>
+        <div class="grid grid-cols-1 gap-2.5">
+          <div class="bg-white/[0.03] border border-white/[0.07] rounded-xl px-5 py-4">
+            <div class="text-[10px] font-bold uppercase tracking-wide text-[#8A93A0] mb-1">Admin hours lost / year</div>
+            <div class="font-heading text-[34px] font-extrabold text-white tracking-[-1px] leading-none" id="roi-hours">540</div>
+          </div>
+          <div class="bg-white/[0.03] border border-white/[0.07] rounded-xl px-5 py-4">
+            <div class="text-[10px] font-bold uppercase tracking-wide text-[#8A93A0] mb-1">Estimated monthly cost</div>
+            <div class="font-heading text-[34px] font-extrabold text-[#F87171] tracking-[-1px] leading-none" id="roi-cost">$4,050</div>
+          </div>
+          <a href="/resources/defect-management-roi-calculator/" class="flex items-center justify-center gap-2 bg-brand/[0.1] border border-brand/[0.25] text-brand py-3 rounded-lg text-[13px] font-bold font-heading mt-1">Calculate defect admin cost <Icon name="arrow" size={13} width={2} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ OPERATOR CREDIBILITY (construction image band) ============ */}
+  <section class="relative px-8 py-[96px] overflow-hidden border-t border-white/[0.05]">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('/images/people/person-plans.webp')"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(90deg,#0C1115 18%,rgba(12,17,21,0.82) 55%,rgba(12,17,21,0.62) 100%)"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="max-w-[600px]">
+        <div class="inline-flex items-center gap-2 mb-5"><div class="w-8 h-8 rounded-md bg-brand/[0.15] border border-brand/25 flex items-center justify-center"><Icon name="hardhat" size={16} class="text-brand" /></div><span class="text-[12px] font-bold text-brand uppercase tracking-wider font-heading">Built from the site, not the office</span></div>
+        <h2 class="font-heading font-extrabold text-[30px] md:text-[36px] tracking-[-0.8px] text-white mb-5 leading-[1.1]">Shaped with the people who do the defect walk.</h2>
+        <p class="text-[16px] leading-relaxed text-[#C2C9D2] mb-4">CleanRun IQ is being built with direct input from commercial construction teams who deal with defects, subcontractor sign-off, PC pressure and handover reporting every week.</p>
+        <p class="text-[16px] leading-relaxed text-[#A8B0BB]">The aim is simple: give site teams a fast way to capture and close items, and give project managers a record they can stand behind later.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ RESOURCES (light grey) ============ */}
+  <section class="bg-[#F3F4F6] px-8 py-[60px] border-t border-[#E2E5E9]">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="mb-10 flex items-end justify-between flex-wrap gap-4">
+        <h2 class="font-heading font-extrabold text-[26px] md:text-[30px] tracking-[-0.8px] text-[#1B2025]">Practical resources you can use today.</h2>
+        <a href="/resources/" class="text-[13px] font-bold text-[#0C7733] font-heading">All resources →</a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        {resources.map((r) => (
+          <div class="bg-white rounded-xl border border-[#E2E5E9] p-6 flex flex-col">
+            <span class="self-start text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wide mb-3.5 font-heading bg-[#EEF2F6] text-[#374151] border border-[#E2E5E9]">{r.tag}</span>
+            <h3 class="font-heading text-[16px] font-bold text-[#1B2025] mb-2 leading-tight">{r.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[#6B7280] flex-1 mb-4">{r.body}</p>
+            <a href={r.href} class="inline-flex items-center gap-1.5 text-[12.5px] font-bold text-[#0C7733] font-heading">{r.cta} <Icon name="arrow" size={12} width={2} /></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ FINAL CTA (dark) ============ */}
+  <CTASection
+    heading="Want to see how it would work on a real project?"
+    body="Book a short walkthrough and we'll show you the capture, trade response, review and report workflow using realistic construction data — not a polished sales deck."
+    note="No credit card. No hard sell. Just a practical walkthrough."
+  />
+
+  <script is:inline>
+    (function () {
+      var ids = ['projects', 'defects', 'chase', 'rate'];
+      var inp = {};
+      ids.forEach(function (k) { inp[k] = document.getElementById('roi-' + k); });
+      if (!inp.projects) return;
+      var fmt = function (n) { return n.toLocaleString('en-AU'); };
+      function update() {
+        var projects = +inp.projects.value, defects = +inp.defects.value, chase = +inp.chase.value, rate = +inp.rate.value;
+        document.getElementById('roi-projects-val').textContent = projects;
+        document.getElementById('roi-defects-val').textContent = defects;
+        document.getElementById('roi-chase-val').textContent = chase;
+        document.getElementById('roi-rate-val').textContent = rate;
+        var hrs = Math.round(projects * defects * (8 + chase) / 60);
+        var cost = Math.round(hrs * rate / 12);
+        document.getElementById('roi-hours').textContent = fmt(hrs);
+        document.getElementById('roi-cost').textContent = '$' + fmt(cost);
+      }
+      ids.forEach(function (k) { inp[k].addEventListener('input', update); });
+      update();
+    })();
+  </script>
+  <style is:global>
+    .roi-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: rgba(32,197,94,0.18); border-radius: 2px; outline: none; cursor: pointer; }
+    .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #20C55E; cursor: pointer; border: 2px solid #0C1115; box-shadow: 0 0 0 3px rgba(32,197,94,0.2); }
+    .roi-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #20C55E; cursor: pointer; border: 2px solid #0C1115; }
+  </style>
+</BaseLayout>

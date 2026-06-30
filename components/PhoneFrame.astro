@@ -1,0 +1,14 @@
+---
+// Reusable phone bezel. Drop any screen content into the default slot.
+export interface Props {
+  width?: number;
+  class?: string;
+}
+const { width = 300, class: cls = '' } = Astro.props;
+---
+<div class={`bg-navy-card border border-white/[0.12] rounded-[30px] p-2 shadow-[0_30px_80px_rgba(0,0,0,0.55)] ${cls}`} style={`width:${width}px`}>
+  <div class="bg-[#0C1115] rounded-[24px] overflow-hidden">
+    <div class="h-5 flex items-center justify-center"><div class="w-16 h-1.5 rounded-full bg-black/80"></div></div>
+    <slot />
+  </div>
+</div>
