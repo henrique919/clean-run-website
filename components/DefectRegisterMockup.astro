@@ -1,0 +1,48 @@
+---
+// Desktop defect register / portfolio dashboard mockup (browser chrome + dashboard).
+export interface Props { class?: string; }
+const { class: cls = '' } = Astro.props;
+const bars = [
+  { n: 'M&E', h: 34, g: true }, { n: 'Plaster', h: 20, g: false }, { n: 'Joinery', h: 48, g: true },
+  { n: 'Paint', h: 18, g: false }, { n: 'Tiling', h: 30, g: true }, { n: 'Glazing', h: 16, g: false },
+];
+---
+<div class={`bg-white rounded-[12px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.5)] ${cls}`}>
+  <div class="bg-[#EDEFF1] px-3 py-2 flex items-center gap-2 border-b border-[#DDE1E5]">
+    <div class="flex gap-1"><span class="w-2.5 h-2.5 rounded-full bg-[#C9CED3]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#C9CED3]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#C9CED3]"></span></div>
+    <div class="flex-1 bg-white rounded px-2 py-1 flex items-center gap-1.5"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="text-[10px] text-[#6B7280] font-mono">app.cleanruniq.com/dashboard</span></div>
+  </div>
+  <div class="flex">
+    <div class="w-11 bg-navy py-3 flex flex-col items-center gap-2.5 shrink-0">
+      <span class="w-6 h-6 rounded-md bg-brand"></span>
+      {[0, 1, 2].map(() => <span class="w-6 h-6 rounded-md bg-white/[0.07]"></span>)}
+    </div>
+    <div class="flex-1 p-4 min-w-0">
+      <div class="flex items-start justify-between mb-3.5">
+        <div><div class="font-heading text-[15px] font-extrabold text-[#1B2025]">Portfolio overview</div><div class="text-[10.5px] text-[#8A8F98]">3 active projects &middot; 251 defects</div></div>
+        <div class="flex items-center gap-2"><span class="bg-brand text-navy text-[10px] font-bold font-heading px-2.5 py-1 rounded-md">Export</span><span class="w-6 h-6 rounded-full bg-[#1B2025] text-white text-[9px] font-bold flex items-center justify-center">MR</span></div>
+      </div>
+      <div class="grid grid-cols-3 gap-2 mb-3.5">
+        <div class="border border-[#E2E5E9] rounded-lg px-2.5 py-2"><div class="text-[8.5px] font-bold text-[#8A8F98] uppercase tracking-wide mb-0.5">Open</div><div class="font-heading text-[20px] font-extrabold text-[#1B2025] leading-none">37</div></div>
+        <div class="border border-brand/30 bg-brand/[0.06] rounded-lg px-2.5 py-2"><div class="text-[8.5px] font-bold text-[#8A8F98] uppercase tracking-wide mb-0.5">Closed</div><div class="font-heading text-[20px] font-extrabold text-[#0C7733] leading-none">214</div></div>
+        <div class="border border-[#E2E5E9] rounded-lg px-2.5 py-2"><div class="text-[8.5px] font-bold text-[#8A8F98] uppercase tracking-wide mb-0.5">This week</div><div class="font-heading text-[20px] font-extrabold text-[#1B2025] leading-none">+18</div></div>
+      </div>
+      <div class="border border-[#E2E5E9] rounded-lg p-3 mb-2.5">
+        <div class="flex items-center justify-between mb-2.5"><span class="text-[11px] font-bold text-[#1B2025]">Defects by trade</span><span class="text-[9px] text-[#9CA3AF]">Last 30 days</span></div>
+        <div class="flex items-end justify-between gap-1.5 h-[52px]">
+          {bars.map((b) => (
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class={`w-full rounded-sm ${b.g ? 'bg-brand' : 'bg-[#D6DADE]'}`} style={`height:${b.h}px`}></div>
+              <span class="text-[7.5px] text-[#9CA3AF]">{b.n}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span class="text-[11px] font-bold text-[#1B2025] whitespace-nowrap">Handover readiness</span>
+        <div class="flex-1 h-2 rounded-full bg-[#E2E5E9] overflow-hidden"><div class="h-full bg-brand rounded-full" style="width:85%"></div></div>
+        <span class="text-[13px] font-extrabold font-heading text-[#0C7733]">85%</span>
+      </div>
+    </div>
+  </div>
+</div>

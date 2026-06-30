@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const useCases = [
+  {
+    icon: 'building',
+    label: 'Builders',
+    headline: 'Manage defects across every project without starting from scratch each time.',
+    body: 'Set up once, run the same process on every job. From a single home to a full apartment build, defects are captured, assigned and closed the same way — so quality and the handover record stay consistent.',
+    points: ['One process across all projects', 'Open items visible to the whole team', 'Handover pack ready when you need it'],
+    href: '/solutions/builders/',
+    img: '/images/app/app-desktop-setup.webp',
+    imgAlt: 'CleanRun IQ project setup desktop view',
+  },
+  {
+    icon: 'hardhat',
+    label: 'Site teams',
+    headline: 'Capture items quickly on site with a photo, location and trade — without stopping the walk.',
+    body: 'Open the app, photograph the defect, set the location and trade, and move on. Voices notes auto-fill the details. Nothing ends up scribbled on a clipboard or stuck in a camera roll with no context.',
+    points: ['Photo-first capture on any phone', 'Voice notes auto-fill item details', 'Image markup to pinpoint exactly what needs fixing'],
+    href: '/solutions/site-managers/',
+    img: '/images/app/app-capture.webp',
+    imgAlt: 'CleanRun IQ capture screen on mobile',
+  },
+  {
+    icon: 'tools',
+    label: 'Subcontractors',
+    headline: 'Receive assigned work, upload the rectification photo and close out without app friction.',
+    body: 'No download, no account setup. A link arrives, the trade sees exactly what is assigned to them, does the work, uploads the photo and sends it back. No digging through a full register to find their items.',
+    points: ['Works from a browser link — no app', 'See only the items assigned to your trade', 'Upload the rectification photo from any phone'],
+    href: '/solutions/subcontractors/',
+    img: '/images/app/app-items-browser.webp',
+    imgAlt: 'CleanRun IQ items list — subcontractor view',
+  },
+  {
+    icon: 'clipboard',
+    label: 'Project managers',
+    headline: 'Track overdue items, trade accountability and handover readiness across the project.',
+    body: 'See the full picture without ringing the site team. How many items are open, which trades are overdue, and whether the project is ready to hand over — from the same register the site team works from.',
+    points: ['Live status across the full register', 'Overdue items visible by trade', 'Handover readiness at a glance'],
+    href: '/solutions/project-managers/',
+    img: '/images/app/app-items.webp',
+    imgAlt: 'CleanRun IQ defect register — project manager view',
+  },
+  {
+    icon: 'shield',
+    label: 'Handover & DLP',
+    headline: 'Maintain a clear evidence trail for closeout, disputes and post-completion support.',
+    body: 'Every closed item carries its original photo, rectification photo and a timestamp. When a client raises something at handover or months later during the defects liability period, the record is there — no scrambling through old folders.',
+    points: ['Photo on every closed item', 'Full item history with timestamps', 'Defensible record for DLP and disputes'],
+    href: '/solutions/site-managers/',
+    img: '/images/app/app-home.webp',
+    imgAlt: 'CleanRun IQ app home — handover readiness view',
+  },
+];
+---
+<BaseLayout
+  title="Solutions — CleanRun IQ by role and use case"
+  description="CleanRun IQ for builders, site teams, subcontractors, project managers and handover teams. One defect register, every role on the project."
+>
+  <section class="bg-navy pt-[110px] pb-14 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[900px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Solutions' }]} /></div>
+      <h1 class="font-heading font-extrabold text-[34px] md:text-[44px] tracking-[-1.2px] text-white mb-4 leading-[1.06] max-w-[700px]">One register. Every role on the project.</h1>
+      <p class="text-[16px] text-[#A8B0BB] leading-relaxed max-w-[520px]">CleanRun IQ gives each person on the job exactly what they need — and nothing that gets in the way.</p>
+    </div>
+  </section>
+
+  <div class="bg-white">
+    {useCases.map((u, i) => (
+      <section class={`px-8 py-[60px] border-b border-[#E2E5E9] ${i % 2 === 1 ? 'bg-[#F3F4F6]' : 'bg-white'}`}>
+        <div class="max-w-[1100px] mx-auto grid lg:grid-cols-[1fr_0.85fr] gap-12 items-center">
+          <div class={i % 2 === 1 ? 'lg:order-2' : ''}>
+            <div class="inline-flex items-center gap-2 bg-navy/[0.06] border border-navy/10 rounded-full px-3 py-1 mb-4">
+              <Icon name={u.icon} size={12} class="text-navy" />
+              <span class="text-[10px] font-bold text-[#374151] tracking-wider uppercase font-heading">For {u.label}</span>
+            </div>
+            <h2 class="font-heading font-extrabold text-[24px] md:text-[28px] tracking-[-0.6px] text-[#1B2025] mb-3 leading-[1.15]">{u.headline}</h2>
+            <p class="text-[14px] leading-relaxed text-[#525A66] mb-5 max-w-[480px]">{u.body}</p>
+            <div class="flex flex-col gap-2 mb-5">
+              {u.points.map((p) => (
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-md bg-brand/[0.1] flex items-center justify-center shrink-0"><Icon name="check" size={11} class="text-[#0C7733]" width={2.4} /></div>
+                  <span class="text-[13px] text-[#374151]">{p}</span>
+                </div>
+              ))}
+            </div>
+            <a href={u.href} class="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#0C7733] font-heading">See the {u.label.toLowerCase()} workflow <Icon name="arrow" size={12} width={2} /></a>
+          </div>
+          <div class={`flex justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div class="w-[240px] bg-navy-card border border-white/[0.1] rounded-[28px] p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+              <img src={u.img} alt={u.imgAlt} loading="lazy" decoding="async" class="w-full rounded-[22px] block" />
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <CTASection
+    heading="See it on a real project."
+    body="Book a short walkthrough and we'll show you the role that matters most to you — capture, review, closeout or the handover pack."
+    note="No credit card. No hard sell. Just a practical walkthrough."
+  />
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+// Mobile defect-capture mockup: floor plan with status pins + snag list.
+import PhoneFrame from './PhoneFrame.astro';
+export interface Props { width?: number; class?: string; }
+const { width = 290, class: cls = '' } = Astro.props;
+const snags = [
+  { t: 'Cracked render', l: 'Grid C4', open: true },
+  { t: 'Sealant gap', l: 'Level 2 WC', open: false },
+  { t: 'Door misaligned', l: 'Room 214', open: true },
+  { t: 'Tile chip', l: 'Lobby', open: false },
+];
+---
+<PhoneFrame width={width} class={cls}>
+  <div class="px-4 pb-3 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <svg viewBox="0 0 100 100" width="15" height="15" aria-hidden="true"><path d="M26 28 L48 50 L26 72" fill="none" stroke="#6B7280" stroke-width="13" stroke-linecap="square"></path><path d="M50 28 L72 50 L50 72" fill="none" stroke="#20C55E" stroke-width="13" stroke-linecap="square"></path></svg>
+      <span class="font-heading text-[13px] font-bold text-white">Block A &middot; Level 2</span>
+    </div>
+    <span class="text-[10px] text-[#8A93A0]">12 snags</span>
+  </div>
+  <div class="mx-3 rounded-lg overflow-hidden relative bg-[#EDEBE6] h-[150px]">
+    <svg viewBox="0 0 240 150" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="240" height="150" fill="#EDEBE6"></rect>
+      <g stroke="#9A968C" stroke-width="1.2" fill="none" opacity="0.85">
+        <rect x="14" y="16" width="92" height="58"></rect>
+        <rect x="14" y="74" width="92" height="60"></rect>
+        <path d="M14 44 H106 M60 16 V134 M30 74 V100 H52"></path>
+        <rect x="120" y="16" width="106" height="118"></rect>
+        <path d="M120 60 H226 M120 96 H226 M168 16 V134"></path>
+        <circle cx="173" cy="116" r="13"></circle>
+      </g>
+    </svg>
+    <div class="absolute" style="left:30%;top:64%"><svg width="22" height="22" viewBox="0 0 24 24" fill="#1B2025" stroke="#fff" stroke-width="1.5"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4" fill="#fff" stroke="none"/></svg></div>
+    <div class="absolute" style="left:48%;top:46%"><svg width="22" height="22" viewBox="0 0 24 24" fill="#20C55E" stroke="#fff" stroke-width="1.5"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><path d="M9 9.6l2 2 4-4" stroke="#0C1115" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -0.5)"/></svg></div>
+    <div class="absolute" style="left:70%;top:24%"><svg width="22" height="22" viewBox="0 0 24 24" fill="#20C55E" stroke="#fff" stroke-width="1.5"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><path d="M9 9.6l2 2 4-4" stroke="#0C1115" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -0.5)"/></svg></div>
+  </div>
+  <div class="flex gap-1.5 px-3 py-3">
+    <span class="flex-1 text-center text-[11px] font-bold font-heading bg-[#1B2025] text-white rounded-lg py-1.5">All</span>
+    <span class="flex-1 text-center text-[11px] font-medium text-[#8A93A0] bg-white/[0.04] rounded-lg py-1.5">Open</span>
+    <span class="flex-1 text-center text-[11px] font-medium text-[#8A93A0] bg-white/[0.04] rounded-lg py-1.5">Closed</span>
+  </div>
+  <div class="px-3 flex flex-col gap-2">
+    {snags.map((s) => (
+      <div class="bg-white rounded-xl px-3 py-2.5 flex items-center gap-2.5">
+        {s.open
+          ? <svg width="16" height="16" viewBox="0 0 24 24" fill="#1B2025"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4" fill="#fff"/></svg>
+          : <span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center shrink-0"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1 5l2.5 2.5L9 2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>}
+        <div class="flex-1 min-w-0"><div class="text-[12px] font-bold text-[#1B2025] leading-tight">{s.t}</div><div class="text-[10px] text-[#8A8F98]">{s.l}</div></div>
+        {s.open && <span class="text-[8px] font-bold text-[#6B7280] bg-[#EEF0F2] px-1.5 py-0.5 rounded uppercase tracking-wide">Open</span>}
+      </div>
+    ))}
+  </div>
+  <div class="p-3 pt-3.5">
+    <div class="bg-brand text-navy text-center text-[12.5px] font-extrabold font-heading rounded-xl py-3">Generate handover</div>
+  </div>
+</PhoneFrame>

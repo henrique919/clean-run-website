@@ -1,0 +1,31 @@
+---
+import Schema from './Schema.astro';
+
+// Renders visual breadcrumb + BreadcrumbList structured data.
+export interface Props {
+  items: { label: string; href?: string }[];
+}
+const { items } = Astro.props;
+const site = (Astro.site ?? new URL('https://www.cleanruniq.com')).origin;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((it, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: it.label,
+    ...(it.href ? { item: site + it.href } : {}),
+  })),
+};
+---
+<nav class="flex items-center gap-2" aria-label="Breadcrumb">
+  {items.map((it, i) => (
+    <Fragment>
+      {it.href
+        ? <a href={it.href} class="text-xs text-[#8A93A0] hover:text-brand transition-colors">{it.label}</a>
+        : <span class="text-xs text-[#9CA3AF] font-medium">{it.label}</span>}
+      {i < items.length - 1 && <span class="text-xs text-[#374151]">/</span>}
+    </Fragment>
+  ))}
+</nav>
+<Schema schema={schema} />

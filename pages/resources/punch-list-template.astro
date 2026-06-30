@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+
+const DEMO_ENDPOINT = import.meta.env.PUBLIC_DEMO_FORM_ENDPOINT || '';
+const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL || 'hello@cleanruniq.com';
+
+const columns = ['Ref', 'Location', 'Description', 'Trade', 'Raised', 'Due', 'Status', 'Photo'];
+const tips = [
+  { icon: 'building', title: 'One row per item', body: 'Keep each defect to a single line with a clear location. A list that mixes two issues in one row is the first thing to fall apart.' },
+  { icon: 'tools', title: 'Name the trade, not the person', body: 'Assign by trade so the item survives someone leaving the job. The trade owns the fix, whoever turns up to do it.' },
+  { icon: 'camera', title: 'Leave a column for the photo', body: 'A punch list without a picture is hard to defend later. Even a file name or link beats nothing when a claim lands.' },
+];
+const inputCls = 'w-full bg-[#F9FAFB] border border-[#DDE1E5] rounded-md px-3 py-2.5 text-sm text-[#1B2025] placeholder:text-[#9CA3AF] focus:outline-none focus:border-brand';
+---
+<BaseLayout title="Construction Punch List Template" description="A free, practical construction punch list template — the columns that matter and how to run a final defect list before handover. Download it, or run it live in CleanRun IQ.">
+  <section class="bg-navy pt-[112px] pb-14 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[1000px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Resources', href: '/resources/' }, { label: 'Punch List Template' }]} /></div>
+      <div class="inline-flex items-center gap-2 bg-brand/[0.1] border border-brand/[0.25] rounded-full px-3 py-1 mb-4.5">
+        <Icon name="clipboard" size={12} class="text-brand" />
+        <span class="text-[10px] font-bold text-brand tracking-wider uppercase font-heading">Free template</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-[clamp(30px,3.4vw,44px)] tracking-[-1px] text-white mb-3.5 leading-[1.08] max-w-[640px]">Construction punch list template</h1>
+      <p class="text-[16px] text-[#A8B0BB] leading-relaxed max-w-[560px]">A simple, practical punch list for the final defect run before handover — with the columns that actually matter. Use it as-is, or move it into a live register when the paper version starts to creak.</p>
+    </div>
+  </section>
+
+  <div class="bg-[#F3F4F6] px-8 py-14">
+    <div class="max-w-[1000px] mx-auto grid lg:grid-cols-[1fr_320px] gap-9 items-start">
+      <div>
+        <div class="bg-white rounded-xl border border-[#E2E5E9] overflow-hidden mb-8">
+          <div class="bg-navy px-5 py-3"><span class="font-heading text-[12px] font-bold text-white">Punch list — column layout</span></div>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse min-w-[560px]">
+              <thead><tr class="bg-[#F9FAFB]">{columns.map((c) => <th class="text-left text-[10px] font-bold text-[#6B7280] uppercase tracking-wide px-3 py-2.5 border-b border-[#E2E5E9]">{c}</th>)}</tr></thead>
+              <tbody>
+                {[
+                  ['001', 'Unit 207 · Ensuite', 'Cracked floor tile', 'Tiler', '12 Jun', '19 Jun', 'Open'],
+                  ['002', 'L2 corridor', 'Paint bleed to skirting', 'Painter', '12 Jun', '18 Jun', 'Review'],
+                  ['003', 'Unit 204 · Bath', 'Sealant gap at hob', 'Waterproofer', '13 Jun', '20 Jun', 'Open'],
+                ].map((r) => (
+                  <tr class="border-b border-[#F3F4F6]">
+                    {r.map((cell, i) => <td class={`text-[12px] px-3 py-2.5 ${i === 0 ? 'font-extrabold font-heading text-[#1B2025]' : 'text-[#525A66]'}`}>{cell}</td>)}
+                    <td class="px-3 py-2.5"><span class="inline-block w-4 h-4 rounded border border-[#C9CFD6] bg-white"></span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h2 class="font-heading font-extrabold text-[24px] tracking-[-0.6px] text-[#1B2025] mb-6">How to run it well</h2>
+        <div class="flex flex-col gap-3 mb-8">
+          {tips.map((t) => (
+            <div class="bg-white rounded-xl border border-[#E2E5E9] p-5 flex gap-4">
+              <div class="w-9 h-9 rounded-lg bg-brand/[0.08] border border-brand/[0.16] flex items-center justify-center shrink-0 text-[#0C7733]"><Icon name={t.icon} size={17} /></div>
+              <div><h3 class="font-heading text-[14px] font-bold text-[#1B2025] mb-1">{t.title}</h3><p class="text-[13px] leading-relaxed text-[#6B7280]">{t.body}</p></div>
+            </div>
+          ))}
+        </div>
+
+        <div class="bg-navy rounded-xl px-6 py-5 flex items-center justify-between flex-wrap gap-4">
+          <div><div class="font-heading text-[14px] font-bold text-white mb-1">When the spreadsheet stops keeping up</div><p class="text-[13px] text-[#A8B0BB] leading-snug max-w-[420px]">CleanRun IQ runs this same list live — photo on every row, trades assigned, status updated as items close.</p></div>
+          <a href="/demo/" class="inline-flex items-center gap-1.5 bg-brand text-navy px-4 py-2.5 rounded-lg text-[13px] font-bold font-heading shrink-0">Book a walkthrough <Icon name="arrow" size={13} width={2} /></a>
+        </div>
+      </div>
+
+      <div class="lg:sticky lg:top-[84px]">
+        <div class="bg-white rounded-xl border border-[#E2E5E9] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
+          <div class="bg-navy px-5 py-4"><div class="font-heading text-[13px] font-bold text-white mb-0.5">Get the template</div><div class="text-[11px] text-[#8A93A0]">Free — sent to your inbox</div></div>
+          <div class="p-5">
+            <form id="lead-form" novalidate class="flex flex-col gap-2.5">
+              <input id="l-name" name="first_name" type="text" required placeholder="First name" class={inputCls} />
+              <input id="l-email" name="email" type="email" required placeholder="Work email" class={inputCls} />
+              <div id="lead-error" class="hidden text-[12px] leading-snug text-[#B42318] bg-[#FEE4E2] border border-[#F5B5AE] rounded-md px-3 py-2"></div>
+              <button type="submit" id="lead-submit" class="bg-brand text-navy rounded-lg py-3 text-sm font-bold font-heading disabled:opacity-60">Send me the template</button>
+              <p class="text-[11px] text-[#9CA3AF] text-center leading-snug">No spam. One follow-up about CleanRun IQ — unsubscribe anytime.</p>
+            </form>
+            <div id="lead-success" class="hidden text-center py-3">
+              <div class="w-11 h-11 bg-brand/[0.1] rounded-full flex items-center justify-center mx-auto mb-3"><Icon name="check" size={20} class="text-[#0C7733]" width={2.4} /></div>
+              <div class="font-heading text-[15px] font-bold text-[#1B2025] mb-1.5">Check your inbox</div>
+              <p class="text-[13px] text-[#6B7280] leading-snug">The template is on its way.</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3.5 bg-white rounded-xl border border-[#E2E5E9] p-4">
+          <div class="font-heading text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related</div>
+          <div class="flex flex-col gap-2.5">
+            <a href="/resources/defect-closeout-checklist/" class="flex items-center gap-2 text-[13px] text-[#374151] font-medium hover:text-[#0C7733] transition-colors"><Icon name="arrow" size={12} class="text-brand" width={2} />Defect closeout checklist</a>
+            <a href="/features/defect-management/" class="flex items-center gap-2 text-[13px] text-[#374151] font-medium hover:text-[#0C7733] transition-colors"><Icon name="arrow" size={12} class="text-brand" width={2} />Defect management feature</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ DEMO_ENDPOINT, CONTACT_EMAIL }}>
+    (function () {
+      var form = document.getElementById('lead-form');
+      if (!form) return;
+      var err = document.getElementById('lead-error');
+      var btn = document.getElementById('lead-submit');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        err.classList.add('hidden');
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        if (!DEMO_ENDPOINT) { err.textContent = 'Our download form isn’t connected yet. Email ' + CONTACT_EMAIL + ' and we’ll send the template across.'; err.classList.remove('hidden'); return; }
+        btn.disabled = true; btn.textContent = 'Sending…';
+        fetch(DEMO_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(Object.assign(Object.fromEntries(new FormData(form).entries()), { _resource: 'punch-list-template' })) })
+          .then(function (r) { if (!r.ok) throw new Error('bad'); form.classList.add('hidden'); document.getElementById('lead-success').classList.remove('hidden'); })
+          .catch(function () { btn.disabled = false; btn.textContent = 'Send me the template'; err.textContent = 'Something went wrong. Email ' + CONTACT_EMAIL + ' and we’ll send it across.'; err.classList.remove('hidden'); });
+      });
+    })();
+  </script>
+</BaseLayout>
