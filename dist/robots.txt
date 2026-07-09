@@ -2,4 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+Sitemap: https://www.cleanruniq.com/sitemap.xml
 Sitemap: https://www.cleanruniq.com/sitemap-index.xml
