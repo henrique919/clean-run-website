@@ -12,7 +12,10 @@ export default defineConfig({
     sitemap({
       // Keep app/internal routes out of the sitemap.
       filter: (page) => !page.includes('/api/'),
-      customPages: ['https://www.cleanruniq.com/sep.html'],
+      customPages: [
+        'https://www.cleanruniq.com/sep.html',
+        'https://www.cleanruniq.com/henry-sestak.html',
+      ],
     }),
     mdx(),
   ],

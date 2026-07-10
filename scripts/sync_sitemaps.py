@@ -29,7 +29,7 @@ def read_urls() -> list[str]:
 def priority_for(url: str) -> str:
     if url.rstrip("/") == SITE:
         return "1.0"
-    if url.endswith("/sep.html"):
+    if url.endswith("/sep.html") or url.endswith("/henry-sestak.html"):
         return "0.8"
     return "0.7"
 
