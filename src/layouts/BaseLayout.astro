@@ -60,6 +60,7 @@ const websiteSchema = {
   <Schema schema={orgSchema} />
   <Schema schema={websiteSchema} />
   {schema && <Schema schema={schema} />}
+  <slot name="head" />
 </head>
 <body class="bg-navy text-white font-sans antialiased overflow-x-hidden">
   <Header />
