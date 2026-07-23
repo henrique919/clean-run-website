@@ -155,7 +155,8 @@ const labelCls = 'text-[11px] font-bold text-[#6B7280] uppercase tracking-wide b
         fetch(DEMO_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
           .then(function (res) {
             if (!res.ok) throw new Error('bad');
-            if (window.gtag) window.gtag('event', 'generate_lead', { event_label: 'defect_closeout_checklist' });
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'generate_lead', event_label: 'defect_closeout_checklist' });
             form.classList.add('hidden');
             document.getElementById('lead-success').classList.remove('hidden');
           })
