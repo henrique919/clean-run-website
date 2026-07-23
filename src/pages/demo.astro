@@ -152,7 +152,8 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
         })
           .then(function (res) {
             if (!res.ok) throw new Error('bad status');
-            if (window.gtag) window.gtag('event', 'generate_lead', { event_category: 'demo', event_label: 'demo_walkthrough' });
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'generate_lead', event_category: 'demo', event_label: 'demo_walkthrough' });
             if (window.clarity) window.clarity('event', 'demo_booked');
             document.getElementById('demo-form-card').classList.add('hidden');
             var s = document.getElementById('demo-success');

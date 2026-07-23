@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && python scripts/sync_sitemaps.py",
+    "build": "astro build && node scripts/sync_sitemaps.mjs && node scripts/validate_seo.mjs",
+    "check:seo": "node scripts/validate_seo.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
