@@ -129,6 +129,35 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
 
       function showError(msg) { errBox.textContent = msg; errBox.classList.remove('hidden'); }
 
+      // The booking endpoint may be unset (not yet configured) or unreachable
+      // (network/server error). Either way, don't leave the visitor with a
+      // dead end — build a mailto: with their details already filled in so
+      // one click finishes what the form couldn't send.
+      function showMailtoFallback(introText) {
+        var data = Object.fromEntries(new FormData(form).entries());
+        var bodyLines = [
+          'Name: ' + (data.first_name || '') + ' ' + (data.last_name || ''),
+          'Company: ' + (data.company || ''),
+          'Role: ' + (data.role || ''),
+          'Active projects: ' + (data.active_projects || ''),
+          'Current tool: ' + (data.current_tool || ''),
+          'Main challenge: ' + (data.challenge || ''),
+          'Reply-to email: ' + (data.email || ''),
+        ];
+        var mailto = 'mailto:' + encodeURIComponent(CONTACT_EMAIL) +
+          '?subject=' + encodeURIComponent('Walkthrough request — ' + (data.company || data.first_name || '')) +
+          '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+        errBox.textContent = '';
+        errBox.appendChild(document.createTextNode(introText + ' '));
+        var link = document.createElement('a');
+        link.href = mailto;
+        link.className = 'underline font-semibold text-[#FCA5A5] hover:text-white';
+        link.textContent = 'Email us your details (' + CONTACT_EMAIL + ')';
+        errBox.appendChild(link);
+        errBox.classList.remove('hidden');
+      }
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         errBox.classList.add('hidden');
@@ -137,7 +166,7 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
 
         // No endpoint configured yet — be honest, don't fake a success.
         if (!DEMO_ENDPOINT) {
-          showError('Our booking form isn’t connected to our inbox yet. Please email ' + CONTACT_EMAIL + ' and we’ll set up your walkthrough.');
+          showMailtoFallback('Our booking form isn’t connected to our inbox yet.');
           return;
         }
 
@@ -163,7 +192,7 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
           .catch(function () {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Book my walkthrough';
-            showError('Something went wrong sending your request. Please email ' + CONTACT_EMAIL + ' and we’ll sort your walkthrough.');
+            showMailtoFallback('Something went wrong sending your request.');
           });
       });
     })();
