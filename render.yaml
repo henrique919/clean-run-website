@@ -7,6 +7,11 @@ services:
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: true
+    envVars:
+      - key: PUBLIC_DEMO_FORM_ENDPOINT
+        sync: false
+      - key: PUBLIC_CONTACT_EMAIL
+        sync: false
     headers:
       - path: /*
         name: X-Frame-Options

@@ -2,43 +2,108 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
+const LAST_UPDATED = '25 July 2026';
+// info@ is a real, monitored inbox (confirmed in production). A dedicated
+// privacy@ alias would be tidier but isn't set up yet — don't publish an
+// address that might not exist.
+const CONTACT_EMAIL = 'info@cleanruniq.com';
+
 const sections = [
-  { h: 'Who we are', p: 'CleanRun IQ provides construction defect, punch list, QA and handover software. This policy covers the marketing website at cleanruniq.com and enquiries made through it. Use of the application at app.cleanruniq.com is covered by your service agreement.' },
-  { h: 'What we collect', p: 'When you book a walkthrough, download a resource or contact us, we collect the details you provide — typically your name, work email, company, role and what you tell us about your projects. The website also collects standard analytics data (such as pages visited and approximate location) to understand how the site is used.' },
-  { h: 'How we use it', p: 'We use your details to respond to your enquiry, arrange a walkthrough, send a resource you requested, and — where relevant — follow up about CleanRun IQ. We use analytics to improve the website. We do not sell your personal information.' },
-  { h: 'Where it is stored', p: 'Enquiry details are held in the tools we use to run the business (for example our email, form and CRM providers). Analytics is processed by the providers named in our cookie/analytics setup. These providers may store data outside Australia.' },
-  { h: 'Your choices', p: 'You can ask us what we hold about you, ask us to correct it, or ask us to delete it. You can unsubscribe from any follow-up email at any time. To make a request, email us using the address on our contact page.' },
-  { h: 'Cookies and analytics', p: 'The site uses privacy-respecting analytics to measure traffic and improve content. We avoid unnecessary tracking and do not run advertising pixels by default.' },
+  {
+    h: '1. Who this policy covers',
+    p: [
+      'This policy is issued by [Legal entity name — insert ABN] trading as CleanRun IQ ("we", "us"). It covers the marketing website at cleanruniq.com and enquiries made through it (booking a walkthrough, downloading a resource, or contacting us), and the CleanRun IQ application at app.cleanruniq.com for anyone using it as part of an early-builder or customer engagement.',
+      'We handle personal information in line with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth).',
+    ],
+  },
+  {
+    h: '2. What we collect',
+    p: [
+      'Website enquiries: name, work email, company, role, and whatever you tell us about your projects when you book a walkthrough, download a resource, or contact us.',
+      'App accounts (once provisioned): your name and email, your company and project assignments, and the defect records you create — including photo evidence, location details (building/level/unit/room), descriptions, and, where your device provides it, the location the photo was captured at.',
+      'Website analytics: standard traffic data (pages visited, approximate location inferred from IP, device/browser type) collected automatically when you browse the site.',
+    ],
+  },
+  {
+    h: '3. How we use it',
+    p: [
+      'To respond to your enquiry, arrange a walkthrough, send a resource you requested, and follow up about CleanRun IQ.',
+      'To run the application for accounts we’ve provisioned: authenticating you, storing and displaying the defect records and evidence your project team captures, and generating reports and handover packs.',
+      'To understand how the website is used, so we can improve it.',
+      'We do not sell your personal information, and we do not use defect/project data captured in the app for any purpose beyond providing the service to the company that owns that project.',
+    ],
+  },
+  {
+    h: '4. Cookies and analytics',
+    p: [
+      'The marketing website loads Google Analytics and Google Tag Manager, and — on some feature pages — a Pinterest conversion tag, to measure traffic and campaign performance. These are third-party tools that may set cookies and process data outside Australia (see section 6).',
+      'We are working towards a cookie consent banner that lets you opt out of non-essential tracking before it loads; until that ships, you can block these scripts using your browser’s tracking-protection or ad-blocking settings. The CleanRun IQ application itself does not run advertising or marketing trackers.',
+    ],
+  },
+  {
+    h: '5. Where it is stored',
+    p: [
+      'Website enquiry details are held in the tools we use to run the business (email, form and CRM providers).',
+      'Application data — accounts, defect records and photo evidence — is stored with Supabase, our database and file storage provider.',
+      'Analytics is processed by Google (Analytics/Tag Manager) and, on some pages, Pinterest.',
+    ],
+  },
+  {
+    h: '6. Overseas disclosure',
+    p: [
+      'Some of the providers in section 5 store or process data on servers located outside Australia as part of their standard global infrastructure. Where this happens, we rely on the provider’s own security and privacy commitments as a condition of using their service. We do not currently maintain a country-by-country list of every sub-processor’s server location; if you need this for a specific compliance requirement, contact us and we’ll do our best to provide it.',
+    ],
+  },
+  {
+    h: '7. Data retention',
+    p: [
+      'Website enquiry details are kept for as long as reasonably needed to respond to you and, if you become a customer, to support that relationship — or until you ask us to delete them.',
+      'Application data (defect records, evidence, account details) is retained for the life of your company’s use of CleanRun IQ, plus a reasonable period afterwards in case it’s needed for a dispute, handover, or legal requirement, after which it is deleted on request.',
+    ],
+  },
+  {
+    h: '8. Your rights and choices',
+    p: [
+      'You can ask us what personal information we hold about you, ask us to correct it, or ask us to delete it (see section 9 for how). You can unsubscribe from any follow-up email at any time using the link in the email.',
+      'If you believe we’ve mishandled your personal information and you’re not satisfied with our response, you can complain to the Office of the Australian Information Commissioner (OAIC) at oaic.gov.au.',
+    ],
+  },
+  {
+    h: '9. Account and data deletion',
+    p: [
+      `To request deletion of your website enquiry details, your app account, or specific project data, email ${CONTACT_EMAIL} from the address the data is associated with, or use our contact page. We’ll confirm what will be deleted and action reasonable requests within 30 days — noting that project data your company relies on for an active defect closeout may need your project admin’s sign-off before we delete it, since it may not be solely yours to delete.`,
+    ],
+  },
 ];
 ---
 <BaseLayout
   title="Privacy Policy"
-  description="How CleanRun IQ handles enquiry details and website analytics. An early-stage policy provided as a starting point, pending formal legal review."
+  description="How CleanRun IQ handles enquiry details, application data and website analytics, in line with the Australian Privacy Principles."
   noindex={true}
 >
   <section class="bg-navy pt-[110px] pb-16 px-8 border-b border-white/[0.05]">
     <div class="max-w-[760px] mx-auto">
       <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} /></div>
       <h1 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-white mb-3">Privacy Policy</h1>
-      <p class="text-[15px] text-[#A8B0BB] leading-relaxed">How we handle the details you share with us through this website.</p>
+      <p class="text-[15px] text-[#A8B0BB] leading-relaxed">How we handle the details you share with us, and the data your team captures in the app. Last updated {LAST_UPDATED}.</p>
     </div>
   </section>
 
   <section class="bg-white px-8 py-16">
     <div class="max-w-[760px] mx-auto">
       <div class="bg-[#FFF7E6] border border-[#F0D9A8] rounded-xl px-5 py-4 mb-10">
-        <p class="text-[13px] text-[#7A5B1E] leading-relaxed"><strong>Note:</strong> This is a plain-English starting point for an early-stage business and is not legal advice. It should be reviewed and finalised by a qualified legal adviser before launch.</p>
+        <p class="text-[13px] text-[#7A5B1E] leading-relaxed"><strong>Note:</strong> This is a plain-English policy written to accurately describe what the site and app actually do today. It has not yet been reviewed by a qualified Australian legal adviser — that review, and filling in the registered entity name and ABN in section 1, are outstanding before this page is considered final and de-indexed from search.</p>
       </div>
       <div class="flex flex-col gap-8">
         {sections.map((s) => (
           <div>
             <h2 class="font-heading text-[18px] font-bold text-[#1B2025] mb-2.5">{s.h}</h2>
-            <p class="text-[14.5px] leading-relaxed text-[#525A66]">{s.p}</p>
+            {s.p.map((para) => <p class="text-[14.5px] leading-relaxed text-[#525A66] mb-2.5 last:mb-0">{para}</p>)}
           </div>
         ))}
         <div>
           <h2 class="font-heading text-[18px] font-bold text-[#1B2025] mb-2.5">Contact</h2>
-          <p class="text-[14.5px] leading-relaxed text-[#525A66]">Questions about this policy or your data? <a href="/contact/" class="text-[#0C7733] font-semibold">Get in touch</a>. This policy may be updated as the product and business develop.</p>
+          <p class="text-[14.5px] leading-relaxed text-[#525A66]">Questions about this policy or your data? Email <a href={`mailto:${CONTACT_EMAIL}`} class="text-[#0C7733] font-semibold">{CONTACT_EMAIL}</a> or <a href="/contact/" class="text-[#0C7733] font-semibold">get in touch</a>. This policy may be updated as the product and business develop — check back for the current version.</p>
         </div>
       </div>
     </div>

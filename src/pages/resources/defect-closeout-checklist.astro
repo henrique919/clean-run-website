@@ -110,7 +110,7 @@ const labelCls = 'text-[11px] font-bold text-[#6B7280] uppercase tracking-wide b
               </div>
               <div id="lead-error" class="hidden text-[12px] leading-snug text-[#B42318] bg-[#FEE4E2] border border-[#F5B5AE] rounded-md px-3 py-2"></div>
               <button type="submit" id="lead-submit" class="bg-brand text-navy rounded-lg py-3 text-sm font-bold font-heading mt-0.5 disabled:opacity-60">Send me the checklist</button>
-              <p class="text-[11px] text-[#9CA3AF] text-center leading-snug">No spam. We'll send one email about CleanRun IQ — unsubscribe anytime.</p>
+              <p class="text-[11px] text-[#9CA3AF] text-center leading-snug">No spam. We'll send one email about CleanRun IQ — unsubscribe anytime. By submitting, you agree to our <a href="/privacy/" class="underline">Privacy Policy</a>.</p>
             </form>
             <div id="lead-success" class="hidden text-center py-3">
               <div class="w-11 h-11 bg-brand/[0.1] rounded-full flex items-center justify-center mx-auto mb-3"><Icon name="check" size={20} class="text-[#0C7733]" width={2.4} /></div>
@@ -141,12 +141,26 @@ const labelCls = 'text-[11px] font-bold text-[#6B7280] uppercase tracking-wide b
       var err = document.getElementById('lead-error');
       var btn = document.getElementById('lead-submit');
       function showErr(m) { err.textContent = m; err.classList.remove('hidden'); }
+      function showMailtoFallback(introText, resourceLabel) {
+        var data = Object.fromEntries(new FormData(form).entries());
+        var mailto = 'mailto:' + encodeURIComponent(CONTACT_EMAIL) +
+          '?subject=' + encodeURIComponent('Send me the ' + resourceLabel) +
+          '&body=' + encodeURIComponent('Name: ' + (data.first_name || '') + '\nWork email: ' + (data.email || '') + '\nRole: ' + (data.role || ''));
+        err.textContent = '';
+        err.appendChild(document.createTextNode(introText + ' '));
+        var link = document.createElement('a');
+        link.href = mailto;
+        link.className = 'underline font-semibold';
+        link.textContent = 'Email us and we’ll send it (' + CONTACT_EMAIL + ')';
+        err.appendChild(link);
+        err.classList.remove('hidden');
+      }
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         err.classList.add('hidden');
         if (!form.checkValidity()) { form.reportValidity(); return; }
         if (!DEMO_ENDPOINT) {
-          showErr('Our download form isn’t connected yet. Please email ' + CONTACT_EMAIL + ' and we’ll send you the checklist.');
+          showMailtoFallback('Our download form isn’t connected yet.', 'defect closeout checklist');
           return;
         }
         btn.disabled = true; btn.textContent = 'Sending…';
@@ -162,7 +176,7 @@ const labelCls = 'text-[11px] font-bold text-[#6B7280] uppercase tracking-wide b
           })
           .catch(function () {
             btn.disabled = false; btn.textContent = 'Send me the checklist';
-            showErr('Something went wrong. Please email ' + CONTACT_EMAIL + ' and we’ll send it across.');
+            showMailtoFallback('Something went wrong.', 'defect closeout checklist');
           });
       });
     })();

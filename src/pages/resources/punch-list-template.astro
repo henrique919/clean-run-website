@@ -77,7 +77,7 @@ const inputCls = 'w-full bg-[#F9FAFB] border border-[#DDE1E5] rounded-md px-3 py
               <input id="l-email" name="email" type="email" required placeholder="Work email" class={inputCls} />
               <div id="lead-error" class="hidden text-[12px] leading-snug text-[#B42318] bg-[#FEE4E2] border border-[#F5B5AE] rounded-md px-3 py-2"></div>
               <button type="submit" id="lead-submit" class="bg-brand text-navy rounded-lg py-3 text-sm font-bold font-heading disabled:opacity-60">Send me the template</button>
-              <p class="text-[11px] text-[#9CA3AF] text-center leading-snug">No spam. One follow-up about CleanRun IQ — unsubscribe anytime.</p>
+              <p class="text-[11px] text-[#9CA3AF] text-center leading-snug">No spam. One follow-up about CleanRun IQ — unsubscribe anytime. By submitting, you agree to our <a href="/privacy/" class="underline">Privacy Policy</a>.</p>
             </form>
             <div id="lead-success" class="hidden text-center py-3">
               <div class="w-11 h-11 bg-brand/[0.1] rounded-full flex items-center justify-center mx-auto mb-3"><Icon name="check" size={20} class="text-[#0C7733]" width={2.4} /></div>
@@ -103,15 +103,29 @@ const inputCls = 'w-full bg-[#F9FAFB] border border-[#DDE1E5] rounded-md px-3 py
       if (!form) return;
       var err = document.getElementById('lead-error');
       var btn = document.getElementById('lead-submit');
+      function showMailtoFallback(introText) {
+        var data = Object.fromEntries(new FormData(form).entries());
+        var mailto = 'mailto:' + encodeURIComponent(CONTACT_EMAIL) +
+          '?subject=' + encodeURIComponent('Send me the punch list template') +
+          '&body=' + encodeURIComponent('Name: ' + (data.first_name || '') + '\nWork email: ' + (data.email || ''));
+        err.textContent = '';
+        err.appendChild(document.createTextNode(introText + ' '));
+        var link = document.createElement('a');
+        link.href = mailto;
+        link.className = 'underline font-semibold';
+        link.textContent = 'Email us and we’ll send it (' + CONTACT_EMAIL + ')';
+        err.appendChild(link);
+        err.classList.remove('hidden');
+      }
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         err.classList.add('hidden');
         if (!form.checkValidity()) { form.reportValidity(); return; }
-        if (!DEMO_ENDPOINT) { err.textContent = 'Our download form isn’t connected yet. Email ' + CONTACT_EMAIL + ' and we’ll send the template across.'; err.classList.remove('hidden'); return; }
+        if (!DEMO_ENDPOINT) { showMailtoFallback('Our download form isn’t connected yet.'); return; }
         btn.disabled = true; btn.textContent = 'Sending…';
         fetch(DEMO_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(Object.assign(Object.fromEntries(new FormData(form).entries()), { _resource: 'punch-list-template' })) })
           .then(function (r) { if (!r.ok) throw new Error('bad'); form.classList.add('hidden'); document.getElementById('lead-success').classList.remove('hidden'); })
-          .catch(function () { btn.disabled = false; btn.textContent = 'Send me the template'; err.textContent = 'Something went wrong. Email ' + CONTACT_EMAIL + ' and we’ll send it across.'; err.classList.remove('hidden'); });
+          .catch(function () { btn.disabled = false; btn.textContent = 'Send me the template'; showMailtoFallback('Something went wrong.'); });
       });
     })();
   </script>

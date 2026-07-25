@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const LAST_UPDATED = '25 July 2026';
+const CONTACT_EMAIL = 'info@cleanruniq.com';
+
+const sections = [
+  {
+    h: '1. Who these terms are with',
+    p: [
+      'These terms are between [Legal entity name — insert ABN] trading as CleanRun IQ ("we", "us") and the company or individual using the CleanRun IQ application at app.cleanruniq.com ("you", "your company"). By creating or using an account, you agree to these terms on behalf of your company.',
+      'These terms are governed by the laws of [State/Territory — insert], Australia, and any dispute is subject to the exclusive jurisdiction of the courts of that State/Territory.',
+    ],
+  },
+  {
+    h: '2. What CleanRun IQ is',
+    p: [
+      'CleanRun IQ is construction defect capture, punch list, quality-assurance and handover software: you capture defects with photo evidence, issue them to subcontractors, subcontractors upload rectification evidence, and a supervisor reviews and closes items, producing closeout and handover reports.',
+      'We are an early-stage product working closely with our first builders. Features, pricing and plans (see /pricing/) may change as we learn from real projects — we’ll tell you before a change materially affects your account.',
+    ],
+  },
+  {
+    h: '3. Your account and acceptable use',
+    p: [
+      'You’re responsible for the accuracy of the information your team enters, for keeping login credentials confidential, and for the actions taken under your team’s accounts.',
+      'Access is currently by invitation or approved request — there’s no public self-serve signup. We can suspend or decline access for misuse, non-payment, or activity that risks the security or integrity of the service or other customers’ data.',
+      'You may not use CleanRun IQ to store or transmit unlawful content, attempt to breach the security of the service, or use it in a way that infringes anyone else’s rights.',
+    ],
+  },
+  {
+    h: '4. Your data',
+    p: [
+      'The defect records, photos and project data your company captures in CleanRun IQ belong to you, not us. We hold and process it to provide the service to you — see our Privacy Policy for how we handle personal information within that data.',
+      'You can request an export of your project records at any time. If your account is closed, we’ll retain your data for a reasonable handover period before deletion, so you have time to export it — see the Privacy Policy for specifics.',
+      'You’re responsible for having the right to capture and store any personal information (including photos that may show people) that your team enters into the app, and for your own obligations under privacy and workplace law for the sites you operate.',
+    ],
+  },
+  {
+    h: '5. Fees and billing',
+    p: [
+      'While we’re working directly with early builders, pricing is set per engagement and invoiced directly rather than processed through automated billing — see /pricing/ for current indicative rates. We’ll agree the specifics with you before you’re charged anything.',
+      'As we formalise subscription billing, this section will be updated to describe the billing cycle, payment methods and cancellation process, and we’ll notify existing customers before it takes effect.',
+    ],
+  },
+  {
+    h: '6. Availability and support',
+    p: [
+      'We aim to keep CleanRun IQ available and responsive, but as an early-stage product we don’t currently offer a formal uptime service-level agreement. We’ll be upfront if you need guarantees we can’t yet meet for a commercial project — talk to us.',
+      'We provide support by email at the address below. Response times aren’t formally guaranteed at this stage but we aim to respond quickly, especially to anything blocking active site work.',
+    ],
+  },
+  {
+    h: '7. Liability',
+    p: [
+      'To the maximum extent permitted by law, our liability to you for any claim arising from your use of CleanRun IQ is limited to the fees you’ve paid us in the 12 months before the claim arose. We’re not liable for indirect or consequential loss, including lost profits or lost data, except where that loss arises from our failure to take reasonable care of data you’ve entrusted to us.',
+      'Nothing in these terms excludes, restricts or modifies any consumer guarantee, right or remedy under the Australian Consumer Law that cannot lawfully be excluded.',
+      'CleanRun IQ is a tool for recording and tracking defect closeout — it does not replace your company’s own quality-assurance, contractual or safety obligations, and you remain responsible for verifying rectification work meets the required standard.',
+    ],
+  },
+  {
+    h: '8. Suspension and termination',
+    p: [
+      'You can stop using CleanRun IQ at any time; let us know and we’ll help you export your data before closing the account.',
+      'We can suspend or terminate your access for breach of these terms, non-payment, or where continuing to provide the service would put other customers’ data or the platform at risk — we’ll give you notice and a chance to fix the issue where the situation isn’t urgent.',
+    ],
+  },
+  {
+    h: '9. Changes to these terms',
+    p: [
+      'We may update these terms as the product and business develop. For material changes, we’ll notify active accounts by email before the change takes effect. Continued use after a change takes effect means you accept the updated terms.',
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Terms of Service"
+  description="The terms governing use of the CleanRun IQ application."
+  noindex={true}
+>
+  <section class="bg-navy pt-[110px] pb-16 px-8 border-b border-white/[0.05]">
+    <div class="max-w-[760px] mx-auto">
+      <div class="mb-5"><Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Terms of Service' }]} /></div>
+      <h1 class="font-heading font-extrabold text-[40px] tracking-[-1px] text-white mb-3">Terms of Service</h1>
+      <p class="text-[15px] text-[#A8B0BB] leading-relaxed">The terms that apply when your company uses CleanRun IQ. Last updated {LAST_UPDATED}.</p>
+    </div>
+  </section>
+
+  <section class="bg-white px-8 py-16">
+    <div class="max-w-[760px] mx-auto">
+      <div class="bg-[#FFF7E6] border border-[#F0D9A8] rounded-xl px-5 py-4 mb-10">
+        <p class="text-[13px] text-[#7A5B1E] leading-relaxed"><strong>Note:</strong> This is a plain-English draft written to accurately describe how CleanRun IQ actually operates today, as an early-stage product. It has not yet been reviewed by a qualified Australian legal adviser — that review, and filling in the registered entity name, ABN and governing State/Territory in section 1, are outstanding before this page is considered final and de-indexed from search.</p>
+      </div>
+      <div class="flex flex-col gap-8">
+        {sections.map((s) => (
+          <div>
+            <h2 class="font-heading text-[18px] font-bold text-[#1B2025] mb-2.5">{s.h}</h2>
+            {s.p.map((para) => <p class="text-[14.5px] leading-relaxed text-[#525A66] mb-2.5 last:mb-0">{para}</p>)}
+          </div>
+        ))}
+        <div>
+          <h2 class="font-heading text-[18px] font-bold text-[#1B2025] mb-2.5">Contact</h2>
+          <p class="text-[14.5px] leading-relaxed text-[#525A66]">Questions about these terms? Email <a href={`mailto:${CONTACT_EMAIL}`} class="text-[#0C7733] font-semibold">{CONTACT_EMAIL}</a> or <a href="/contact/" class="text-[#0C7733] font-semibold">get in touch</a>. See also our <a href="/privacy/" class="text-[#0C7733] font-semibold">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

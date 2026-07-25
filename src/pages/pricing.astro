@@ -9,7 +9,7 @@ const productSchema = {
   '@type': 'SoftwareApplication',
   name: 'CleanRun IQ',
   applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web, iOS, Android',
+  operatingSystem: 'Web',
   offers: [
     { '@type': 'Offer', name: 'Pilot', price: '89', priceCurrency: 'AUD' },
     { '@type': 'Offer', name: 'Builder', price: '229', priceCurrency: 'AUD' },
@@ -49,7 +49,7 @@ const faqs = [
   { q: 'What counts as an active project?', a: 'An active project is one you’re currently raising and closing defects on. Once a project is handed over and archived, it no longer counts toward your active project limit.' },
   { q: 'How does subcontractor access work?', a: 'Subcontractors open a browser link — no app, no account setup. They only see the items assigned to them, and they upload rectification photos from any phone. Subcontractor access is included, not charged per user.' },
   { q: 'Are these prices final?', a: 'We’re launching with early builders, so pricing is deliberately simple while we work closely with the first teams. If your setup doesn’t fit a plan, talk to us and we’ll sort something sensible.' },
-  { q: 'Is there a lock-in contract?', a: 'No long lock-in. Annual is billed upfront at the lower rate; monthly can be stopped anytime. We’d rather earn the next month than trap you in a contract.' },
+  { q: 'Is there a lock-in contract?', a: 'No long lock-in. We’re invoicing early builders directly while we settle plans — annual gets the lower rate, monthly stays flexible. We’d rather earn the next month than trap you in a contract.' },
 ];
 ---
 <BaseLayout
@@ -67,7 +67,7 @@ const faqs = [
       <h1 class="font-heading font-extrabold text-[clamp(32px,3.6vw,52px)] tracking-[-1.5px] text-white mb-4 leading-[1.05]">Simple pricing while we launch with early builders.</h1>
       <p class="text-[17px] text-[#A8B0BB] mb-8 leading-relaxed">Start defect closeout on one project, then add more as it fits the way your teams work. Prices in AUD.</p>
       <div class="inline-flex items-center bg-white/[0.06] border border-white/[0.1] rounded-full p-1 gap-0.5">
-        <button id="bill-annual" class="text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors bg-brand text-navy">Annual <span class="text-[9px] font-bold px-1 py-px rounded-sm bg-navy/25 ml-1">Save 20%</span></button>
+        <button id="bill-annual" class="text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors bg-brand text-navy">Annual <span class="text-[9px] font-bold px-1 py-px rounded-sm bg-navy/25 ml-1">Save ~18%</span></button>
         <button id="bill-monthly" class="text-[13px] font-semibold px-4.5 py-1.5 rounded-full transition-colors text-[#A8B0BB]">Monthly</button>
       </div>
     </div>

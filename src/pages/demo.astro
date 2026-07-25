@@ -89,7 +89,7 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
             <div id="demo-error" class="hidden text-[12.5px] leading-snug text-[#FCA5A5] bg-[#B42318]/[0.1] border border-[#B42318]/25 rounded-md px-3 py-2.5"></div>
             <button type="submit" id="demo-submit" class="w-full bg-brand text-navy rounded-lg py-3.5 text-[15px] font-extrabold font-heading tracking-[-0.2px] mt-0.5 disabled:opacity-60">Book my walkthrough</button>
           </form>
-          <p class="text-[11px] text-[#7A828E] text-center mt-3.5">No spam, no hard sell — just a practical walkthrough.</p>
+          <p class="text-[11px] text-[#7A828E] text-center mt-3.5">No spam, no hard sell — just a practical walkthrough. By submitting, you agree to our <a href="/privacy/" class="underline hover:text-[#A8B0BB]">Privacy Policy</a>.</p>
         </div>
 
         {/* Success */}
@@ -129,6 +129,35 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
 
       function showError(msg) { errBox.textContent = msg; errBox.classList.remove('hidden'); }
 
+      // The booking endpoint may be unset (not yet configured) or unreachable
+      // (network/server error). Either way, don't leave the visitor with a
+      // dead end — build a mailto: with their details already filled in so
+      // one click finishes what the form couldn't send.
+      function showMailtoFallback(introText) {
+        var data = Object.fromEntries(new FormData(form).entries());
+        var bodyLines = [
+          'Name: ' + (data.first_name || '') + ' ' + (data.last_name || ''),
+          'Company: ' + (data.company || ''),
+          'Role: ' + (data.role || ''),
+          'Active projects: ' + (data.active_projects || ''),
+          'Current tool: ' + (data.current_tool || ''),
+          'Main challenge: ' + (data.challenge || ''),
+          'Reply-to email: ' + (data.email || ''),
+        ];
+        var mailto = 'mailto:' + encodeURIComponent(CONTACT_EMAIL) +
+          '?subject=' + encodeURIComponent('Walkthrough request — ' + (data.company || data.first_name || '')) +
+          '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+        errBox.textContent = '';
+        errBox.appendChild(document.createTextNode(introText + ' '));
+        var link = document.createElement('a');
+        link.href = mailto;
+        link.className = 'underline font-semibold text-[#FCA5A5] hover:text-white';
+        link.textContent = 'Email us your details (' + CONTACT_EMAIL + ')';
+        errBox.appendChild(link);
+        errBox.classList.remove('hidden');
+      }
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         errBox.classList.add('hidden');
@@ -137,7 +166,7 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
 
         // No endpoint configured yet — be honest, don't fake a success.
         if (!DEMO_ENDPOINT) {
-          showError('Our booking form isn’t connected to our inbox yet. Please email ' + CONTACT_EMAIL + ' and we’ll set up your walkthrough.');
+          showMailtoFallback('Our booking form isn’t connected to our inbox yet.');
           return;
         }
 
@@ -163,7 +192,7 @@ const labelCls = 'text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wide b
           .catch(function () {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Book my walkthrough';
-            showError('Something went wrong sending your request. Please email ' + CONTACT_EMAIL + ' and we’ll sort your walkthrough.');
+            showMailtoFallback('Something went wrong sending your request.');
           });
       });
     })();
