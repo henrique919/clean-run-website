@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+---
+<BaseLayout
+  title="Page not found"
+  description="This page doesn't exist — head back to CleanRun IQ."
+  noindex={true}
+>
+  <section class="bg-navy px-8 pt-[140px] pb-24 min-h-[70vh] flex items-center">
+    <div class="max-w-[560px] mx-auto text-center">
+      <div class="font-heading font-extrabold text-[15px] text-brand tracking-wider uppercase mb-4">404</div>
+      <h1 class="font-heading font-extrabold text-[clamp(28px,3.4vw,42px)] tracking-[-1px] text-white mb-4 leading-[1.1]">We couldn't find that page.</h1>
+      <p class="text-[15px] text-[#A8B0BB] leading-relaxed mb-8">The link might be out of date, or the page may have moved. Try the homepage, or book a walkthrough if you were looking for a demo.</p>
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <a href="/" class="inline-flex items-center gap-2 bg-brand text-navy px-6 py-3 rounded-lg text-[14px] font-bold font-heading">Back to home</a>
+        <a href="/demo/" class="inline-flex items-center gap-1.5 bg-white/[0.06] border border-white/[0.12] text-[#E5E7EB] px-6 py-3 rounded-lg text-sm font-medium hover:border-brand/40 transition-colors">Book a walkthrough <Icon name="arrow" size={14} width={2} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
